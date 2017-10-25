@@ -1,1 +1,1 @@
-include ':app', ':drivermodule'
+include ':app', ':drivermodule', ':datamodule'
