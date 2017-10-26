@@ -3,6 +3,7 @@ package hr.foi.air.trucktrack;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
@@ -33,6 +34,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static android.Manifest.permission.READ_CONTACTS;
+import static hr.foi.air.trucktrack.R.id.login;
 
 /**
  * A login screen that offers login via email/password.
@@ -74,7 +76,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
-                if (id == R.id.login || id == EditorInfo.IME_NULL) {
+                if (id == login || id == EditorInfo.IME_NULL) {
                     attemptLogin();
                     return true;
                 }
@@ -92,6 +94,12 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
+    }
+
+    public void sendMessage(View view)
+    {
+        Intent intent = new Intent(LoginActivity.this, Drivers.class);
+        startActivity(intent);
     }
 
     private void populateAutoComplete() {
@@ -345,6 +353,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             mAuthTask = null;
             showProgress(false);
         }
+
     }
 }
 
