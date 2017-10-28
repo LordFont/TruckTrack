@@ -3,12 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/TruckTrack.iml" filepath="$PROJECT_DIR$/TruckTrack.iml" />
-      <module fileurl="file://$PROJECT_DIR$/TruckTrack.iml" filepath="$PROJECT_DIR$/TruckTrack.iml" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/datamodule/datamodule.iml" filepath="$PROJECT_DIR$/datamodule/datamodule.iml" />
-      <module fileurl="file://$PROJECT_DIR$/datamodule/datamodule.iml" filepath="$PROJECT_DIR$/datamodule/datamodule.iml" />
-      <module fileurl="file://$PROJECT_DIR$/drivermodule/drivermodule.iml" filepath="$PROJECT_DIR$/drivermodule/drivermodule.iml" />
       <module fileurl="file://$PROJECT_DIR$/drivermodule/drivermodule.iml" filepath="$PROJECT_DIR$/drivermodule/drivermodule.iml" />
     </modules>
   </component>
