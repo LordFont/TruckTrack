@@ -12,25 +12,51 @@ import android.widget.TextView;
 import java.util.List;
 
 import static android.R.attr.button;
+import static android.R.attr.y;
 
 /**
  * Created by Ivan on 26.10.2017..
  */
 
 public class DriversAdapter extends RecyclerView.Adapter<DriversAdapter.ViewHolder> {
+    // ovdje se nalazi varijabla te interface za listener, ne moramo ga implementirati vec
+    //ga definiramo unuter driver adaptera
+    private OnItemClickListener listener;
+    // Define the listener interface
+    public interface OnItemClickListener {
+        void onItemClick(View itemView, int position);
+    }
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        this.listener = listener;
+    }
+
     // Omogućuje direktan pristup svakom pogledu zajedno sa članovima toga pogleda, odnosno itemima
     // Sprema poglede zajedno sa itemima i njihovim layoutom
     public class ViewHolder extends RecyclerView.ViewHolder {
         public ImageView nameImageView;
         public TextView infoAboutDriver;
 
-        public ViewHolder(View itemView) {
+        public ViewHolder(final View itemView) {
             // Stores the itemView in a public final member variable that can be used
             // to access the context from any ViewHolder instance.
             super(itemView);
 
             nameImageView = (ImageView) itemView.findViewById(R.id.driver_image);
             infoAboutDriver = (TextView) itemView.findViewById(R.id.info_text);
+
+            //ovdje smo dodali click listener za prepoznavanje klika
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    // Triggers click upwards to the adapter on click
+                    if (listener != null) {
+                        int position = getAdapterPosition();
+                        if (position != RecyclerView.NO_POSITION) {
+                            listener.onItemClick(itemView, position);
+                        }
+                    }
+                }
+            });
         }
     }
 
