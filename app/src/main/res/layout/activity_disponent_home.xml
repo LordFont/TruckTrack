@@ -9,16 +9,18 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="150dp"
+        android:layout_above="@+id/linearLayout"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
         android:background="@color/colorHome"
         android:orientation="vertical"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true"
-        android:layout_above="@+id/linearLayout">
+        android:weightSum="1">
 
         <ImageView
             android:id="@+id/imageView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_weight="0.33"
             android:padding="8dp"
             android:paddingBottom="8dp"
             android:paddingEnd="8dp"
@@ -33,23 +35,27 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
-            android:text="TextView" />
+            android:text="Lista vozača"
+            android:textColor="@color/textbody"
+            android:gravity="center"
+            android:textSize="18sp" />
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="250dp"
-        android:layout_marginBottom="25dp"
         android:orientation="vertical"
-        android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginEnd="7dp">
+        android:layout_marginEnd="7dp"
+        android:weightSum="1"
+        android:layout_alignParentBottom="true">
 
         <ImageView
             android:id="@+id/imageView2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_weight="0.26"
             android:padding="8dp"
             android:paddingBottom="8dp"
             android:paddingEnd="8dp"
@@ -64,6 +70,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
-            android:text="TextView" />
+            android:text="Lista poslova"
+            android:textColor="@color/colorHome"
+            android:gravity="center"
+            android:textSize="18sp" />
     </LinearLayout>
 </RelativeLayout>
