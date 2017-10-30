@@ -1,5 +1,6 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
@@ -7,7 +8,7 @@
         android:id="@+id/drivers_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?attr/colorPrimary"
+        android:background="@color/colorHome"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
         android:layout_alignParentTop="true"
@@ -17,9 +18,40 @@
         android:id="@+id/main_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/drivers_toolbar">
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true">
 
     </FrameLayout>
+
+    <ImageView
+        android:id="@+id/refreshIcon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginEnd="10dp"
+        android:layout_marginTop="10dp"
+        app:srcCompat="@drawable/ic_refresh"
+        android:tint="#ffffff"/>
+
+    <ImageView
+        android:id="@+id/viewIcon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/ic_grid_view"
+        android:tint="#ffffff"
+        android:layout_alignTop="@+id/refreshIcon"
+        android:layout_toStartOf="@+id/refreshIcon"
+        android:layout_marginEnd="12dp"/>
+
+    <ImageView
+        android:id="@+id/menuIcon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignTop="@+id/viewIcon"
+        android:layout_marginStart="12dp"
+        app:srcCompat="@drawable/ic_menu"
+        android:tint="#ffffff"/>
 
 </RelativeLayout>
