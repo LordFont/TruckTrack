@@ -3,6 +3,10 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="colorGreenLogin">#428E92</color>
+    <color name="colorGreyLogin">#EDEDED</color>
     <color name="colorHome">#006064</color>
     <color name="textbody">#fffffd</color>
+    <color name="crna">#131313</color>
+
 </resources>
