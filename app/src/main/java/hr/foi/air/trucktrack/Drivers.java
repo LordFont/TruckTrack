@@ -7,6 +7,9 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.util.Log;
+import android.view.View;
+import android.widget.ImageView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,9 +17,15 @@ import java.util.List;
 import hr.foi.air.drivermodule.DriversAdapter;
 import hr.foi.air.drivermodule.DriversRVFragment;
 
+import static android.R.attr.id;
+import static android.R.attr.tag;
+import static hr.foi.air.trucktrack.R.id.imageView;
+
 public class Drivers extends AppCompatActivity {
 
     ArrayList<String> a;
+    ImageView viewIcon;
+    int changeImage;
 
 
     @Override
@@ -50,6 +59,22 @@ public class Drivers extends AppCompatActivity {
 //        // That's all!
 
         displayView(0); // fragment at 0 position
+        viewIcon = (ImageView) findViewById(R.id.viewIcon);
+        changeImage = 0;
+        viewIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d("App", "Im here");
+                if (changeImage == 0) {
+                    viewIcon.setImageResource(R.drawable.ic_grid_view);
+                    changeImage = 1;
+                }
+                else {
+                    viewIcon.setImageResource(R.drawable.ic_list_view);
+                    changeImage = 0;
+                }
+            }
+        });
     }
 
     public void displayView(int position) {
