@@ -20,5 +20,3 @@ git push origin _prezime
 
 
 Prije svakog programiranja radite obavezno <b>git pull origin develop</b>
-
-
