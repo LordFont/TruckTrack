@@ -54,4 +54,18 @@
         app:srcCompat="@drawable/ic_menu"
         android:tint="#ffffff"/>
 
+    <TextView
+        android:id="@+id/toolbarText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/menuIcon"
+        android:layout_alignTop="@+id/menuIcon"
+        android:layout_marginStart="14dp"
+        android:layout_toEndOf="@+id/menuIcon"
+        android:gravity="center"
+        android:text="@string/toolbarVozaci"
+        android:textAlignment="center"
+        android:textColor="@color/textbody"
+        android:textSize="24dp"/>
+
 </RelativeLayout>

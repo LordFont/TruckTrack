@@ -57,10 +57,10 @@ public class Drivers extends AppCompatActivity {
 //        // Set layout manager to position the items
 //        rvContacts.setLayoutManager(new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL));
 //        // That's all!
-
         displayView(0); // fragment at 0 position
+
         viewIcon = (ImageView) findViewById(R.id.viewIcon);
-        changeImage = 0;
+        changeImage = 1; //kako bi se raspoznalo je li riječ o gridView-u ili lisView-u
         viewIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -68,10 +68,12 @@ public class Drivers extends AppCompatActivity {
                 if (changeImage == 0) {
                     viewIcon.setImageResource(R.drawable.ic_grid_view);
                     changeImage = 1;
+                    //ovdje jos treba ici novi displayView
                 }
                 else {
                     viewIcon.setImageResource(R.drawable.ic_list_view);
                     changeImage = 0;
+                    //ovdje jos treba ici novi displayView
                 }
             }
         });
