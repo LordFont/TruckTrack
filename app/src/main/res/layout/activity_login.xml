@@ -1,4 +1,5 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -8,6 +9,8 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+
+
     tools:context="hr.foi.air.trucktrack.LoginActivity">
 
     <!-- Login progress -->
@@ -19,16 +22,33 @@
         android:layout_marginBottom="8dp"
         android:visibility="gone" />
 
+
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="match_parent"
+        android:layout_height="238dp"
+        android:layout_marginBottom="32dp"
+        app:srcCompat="@drawable/logo" />
+
     <ScrollView
         android:id="@+id/login_form"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+
         <LinearLayout
+            android:background="@color/colorGreyLogin"
             android:id="@+id/email_login_form"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+
+
+            <TextView
+                android:id="@+id/txtEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="E-mail:" />
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
@@ -45,9 +65,17 @@
 
             </android.support.design.widget.TextInputLayout>
 
+            <TextView
+                android:id="@+id/txtPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Lozinka:"
+                android:paddingTop="@dimen/login_password_padding"/>
+
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+
 
                 <EditText
                     android:id="@+id/password"
@@ -59,7 +87,9 @@
                     android:imeOptions="actionUnspecified"
                     android:inputType="textPassword"
                     android:maxLines="1"
-                    android:singleLine="true" />
+                    android:singleLine="true"
+                    android:layout_marginBottom="40dp"/>
+
 
             </android.support.design.widget.TextInputLayout>
 
@@ -70,7 +100,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:text="@string/action_sign_in"
-                android:textStyle="bold"/>
+                android:textStyle="bold"
+                android:background="@color/colorGreenLogin"
+                android:textColor="@color/colorGreyLogin"
+                />
+
 
             <Button
                 android:id="@+id/testButton"
@@ -80,8 +114,11 @@
                 android:layout_marginTop="16dp"
                 android:text="@string/testApp"
                 android:onClick="sendMessage"
-                android:textStyle="bold"/>
+                android:textStyle="bold"
+                android:background="@color/colorGreenLogin"
+                android:textColor="@color/colorGreyLogin"/>
 
         </LinearLayout>
     </ScrollView>
+
 </LinearLayout>
