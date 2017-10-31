@@ -11,6 +11,7 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:background="@color/colorHome"
+        app:titleTextColor="@android:color/white"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"/>
 
@@ -23,54 +24,5 @@
         android:layout_below="@+id/drivers_toolbar">
 
     </FrameLayout>
-
-    <ImageView
-        android:id="@+id/refreshIcon"
-        android:layout_width="36dp"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/drivers_toolbar"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginEnd="10dp"
-        app:srcCompat="@drawable/ic_refresh_white_48px"/>
-
-    <ImageView
-        android:id="@+id/viewIcon"
-        android:layout_width="36dp"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/drivers_toolbar"
-        android:layout_alignParentTop="true"
-        android:layout_alignTop="@+id/drivers_toolbar"
-        android:layout_marginEnd="15dp"
-        android:layout_toStartOf="@+id/refreshIcon"
-        app:srcCompat="@drawable/ic_dashboard_white_48px"/>
-
-    <ImageView
-        android:id="@+id/menuIcon"
-        android:layout_width="36dp"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/drivers_toolbar"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignTop="@+id/drivers_toolbar"
-        android:layout_marginStart="10dp"
-        app:srcCompat="@drawable/ic_view_headline_white_48px"/>
-
-    <TextView
-        android:id="@+id/toolbarText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/drivers_toolbar"
-        android:layout_alignTop="@+id/drivers_toolbar"
-        android:layout_centerHorizontal="false"
-        android:layout_centerInParent="false"
-        android:layout_centerVertical="false"
-        android:layout_marginStart="15dp"
-        android:layout_toEndOf="@+id/menuIcon"
-        android:gravity="center"
-        android:text="@string/toolbarVozaci"
-        android:textAlignment="center"
-        android:textColor="@color/textbody"
-        android:textSize="24dp"/>
 
 </RelativeLayout>
