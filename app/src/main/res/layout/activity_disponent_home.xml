@@ -1,78 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="hr.foi.air.trucktrack.DisponentHome">
 
-    <LinearLayout
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_height="wrap_content"
         android:layout_above="@+id/linearLayout"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:background="@color/colorHome"
         android:orientation="vertical"
-        android:weightSum="1">
+        android:layout_weight="1">
 
         <ImageView
             android:id="@+id/imageView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.33"
-            android:padding="8dp"
-            android:paddingBottom="8dp"
-            android:paddingEnd="8dp"
-            android:paddingLeft="8dp"
-            android:paddingRight="8dp"
-            android:paddingStart="8dp"
-            android:paddingTop="8dp"
+            android:layout_height="80dp"
+            android:minWidth="150dp"
+            android:layout_gravity="center"
             app:srcCompat="@drawable/item_list" />
 
         <TextView
             android:id="@+id/textView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="50dp"
             android:text="Lista vozača"
             android:textColor="@color/textbody"
             android:gravity="center"
+            android:layout_gravity="center"
             android:textSize="18sp" />
-    </LinearLayout>
+    </FrameLayout>
 
-    <LinearLayout
+    <FrameLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
-        android:layout_height="250dp"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
+        android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginEnd="7dp"
-        android:weightSum="1"
-        android:layout_alignParentBottom="true">
+        android:layout_weight="1">
 
         <ImageView
             android:id="@+id/imageView2"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.26"
-            android:padding="8dp"
-            android:paddingBottom="8dp"
-            android:paddingEnd="8dp"
-            android:paddingLeft="8dp"
-            android:paddingRight="8dp"
-            android:paddingStart="8dp"
-            android:paddingTop="8dp"
+            android:layout_height="80dp"
+            android:layout_weight="1"
+            android:layout_gravity="center"
             app:srcCompat="@drawable/job_item_list" />
 
         <TextView
             android:id="@+id/textView2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="50dp"
             android:text="Lista poslova"
             android:textColor="@color/colorHome"
+            android:layout_gravity="center"
             android:gravity="center"
             android:textSize="18sp" />
-    </LinearLayout>
-</RelativeLayout>
+    </FrameLayout>
+</LinearLayout>
