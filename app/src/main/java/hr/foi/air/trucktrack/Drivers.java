@@ -7,6 +7,13 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.support.v7.widget.Toolbar;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,9 +21,15 @@ import java.util.List;
 import hr.foi.air.drivermodule.DriversAdapter;
 import hr.foi.air.drivermodule.DriversRVFragment;
 
+import static android.R.attr.id;
+import static android.R.attr.tag;
+import static hr.foi.air.trucktrack.R.id.imageView;
+
 public class Drivers extends AppCompatActivity {
 
     ArrayList<String> a;
+    ImageView viewIcon;
+    int changeImage;
 
 
     @Override
@@ -49,7 +62,35 @@ public class Drivers extends AppCompatActivity {
 //        rvContacts.setLayoutManager(new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL));
 //        // That's all!
 
+        //loading toolbar
+        initToolbar();
+
+
         displayView(0); // fragment at 0 position
+
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_drivers, menu);
+        changeImage = 1;
+        final MenuItem viewIcon = menu.findItem(R.id.viewIcon);
+        viewIcon.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                if (changeImage == 1) {
+                    item.setIcon(R.drawable.ic_view_list_white_48px);
+                    changeImage = 0;
+                }
+                else {
+                    item.setIcon(R.drawable.ic_dashboard_white_48px);
+                    changeImage = 1;
+                }
+                return false;
+            }
+        });
+        return true;
     }
 
     public void displayView(int position) {
@@ -66,5 +107,13 @@ public class Drivers extends AppCompatActivity {
 
         mTransactiont.replace(R.id.main_container, fragment, fragment.getClass().getName());
         mTransactiont.commit();
+    }
+
+    public void initToolbar() {
+        //loading toolbar
+        Toolbar toolbar = (Toolbar) findViewById(R.id.drivers_toolbar);
+        setSupportActionBar(toolbar);
+        toolbar.setNavigationIcon(R.drawable.ic_view_headline_white_48px);
+        getSupportActionBar().setTitle("Vozači");
     }
 }
