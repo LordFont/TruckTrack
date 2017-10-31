@@ -20,7 +20,7 @@ public class DisponentHome extends AppCompatActivity implements View.OnClickList
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.jobListContainer: 
+            case R.id.jobListContainer:
                 break;
             case R.id.driverListContainer:
                 startActivity(new Intent(getApplicationContext(), Drivers.class));
