@@ -66,12 +66,12 @@ public class Drivers extends AppCompatActivity {
             public void onClick(View v) {
                 Log.d("App", "Im here");
                 if (changeImage == 0) {
-                    viewIcon.setImageResource(R.drawable.ic_grid_view);
+                    viewIcon.setImageResource(R.drawable.ic_dashboard_white_48px);
                     changeImage = 1;
                     //ovdje jos treba ici novi displayView
                 }
                 else {
-                    viewIcon.setImageResource(R.drawable.ic_list_view);
+                    viewIcon.setImageResource(R.drawable.ic_view_list_white_48px);
                     changeImage = 0;
                     //ovdje jos treba ici novi displayView
                 }
