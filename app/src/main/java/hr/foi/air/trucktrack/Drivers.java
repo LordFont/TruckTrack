@@ -7,8 +7,12 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import java.util.ArrayList;
@@ -57,26 +61,36 @@ public class Drivers extends AppCompatActivity {
 //        // Set layout manager to position the items
 //        rvContacts.setLayoutManager(new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL));
 //        // That's all!
+
+        //loading toolbar
+        initToolbar();
+
+
         displayView(0); // fragment at 0 position
 
-        viewIcon = (ImageView) findViewById(R.id.viewIcon);
-        changeImage = 1; //kako bi se raspoznalo je li riječ o gridView-u ili lisView-u
-        viewIcon.setOnClickListener(new View.OnClickListener() {
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_drivers, menu);
+        changeImage = 1;
+        final MenuItem viewIcon = menu.findItem(R.id.viewIcon);
+        viewIcon.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
-            public void onClick(View v) {
-                Log.d("App", "Im here");
-                if (changeImage == 0) {
-                    viewIcon.setImageResource(R.drawable.ic_grid_view);
-                    changeImage = 1;
-                    //ovdje jos treba ici novi displayView
+            public boolean onMenuItemClick(MenuItem item) {
+                if (changeImage == 1) {
+                    item.setIcon(R.drawable.ic_view_list_white_48px);
+                    changeImage = 0;
                 }
                 else {
-                    viewIcon.setImageResource(R.drawable.ic_list_view);
-                    changeImage = 0;
-                    //ovdje jos treba ici novi displayView
+                    item.setIcon(R.drawable.ic_dashboard_white_48px);
+                    changeImage = 1;
                 }
+                return false;
             }
         });
+        return true;
     }
 
     public void displayView(int position) {
@@ -93,5 +107,13 @@ public class Drivers extends AppCompatActivity {
 
         mTransactiont.replace(R.id.main_container, fragment, fragment.getClass().getName());
         mTransactiont.commit();
+    }
+
+    public void initToolbar() {
+        //loading toolbar
+        Toolbar toolbar = (Toolbar) findViewById(R.id.drivers_toolbar);
+        setSupportActionBar(toolbar);
+        toolbar.setNavigationIcon(R.drawable.ic_view_headline_white_48px);
+        getSupportActionBar().setTitle("Vozači");
     }
 }
