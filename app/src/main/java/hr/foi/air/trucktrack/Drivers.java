@@ -50,6 +50,34 @@ public class Drivers extends AppCompatActivity {
 //        // That's all!
 
         displayView(0); // fragment at 0 position
+<<<<<<< Updated upstream
+=======
+
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_drivers, menu);
+        changeImage = 1;
+        final MenuItem viewIcon = menu.findItem(R.id.viewIcon);
+        viewIcon.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                if (changeImage == 1) {
+                    item.setIcon(R.drawable.ic_view_list_white_48px);
+                    changeImage = 0;
+
+                }
+                else {
+                    item.setIcon(R.drawable.ic_dashboard_white_48px);
+                    changeImage = 1;
+                }
+                return false;
+            }
+        });
+        return true;
+>>>>>>> Stashed changes
     }
 
     public void displayView(int position) {
