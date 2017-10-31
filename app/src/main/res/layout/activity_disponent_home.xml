@@ -8,6 +8,7 @@
     tools:context="hr.foi.air.trucktrack.DisponentHome">
 
     <FrameLayout
+        android:id="@+id/driverListContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@+id/linearLayout"
@@ -38,7 +39,7 @@
     </FrameLayout>
 
     <FrameLayout
-        android:id="@+id/linearLayout"
+        android:id="@+id/jobListContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
