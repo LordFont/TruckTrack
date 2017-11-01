@@ -11,6 +11,7 @@
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/datamodule" />
             <option value="$PROJECT_DIR$/drivermodule" />
+            <option value="$PROJECT_DIR$/webservice" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

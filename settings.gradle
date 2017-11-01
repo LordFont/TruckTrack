@@ -1,1 +1,1 @@
-include ':app', ':drivermodule', ':datamodule'
+include ':app', ':drivermodule', ':datamodule', ':webservice'

@@ -1,6 +1,7 @@
 package hr.foi.air.drivermodule;
 
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.Log;
@@ -11,33 +12,27 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 
 /**
- * Created by Ivan on 28.10.2017..
+ * Created by roman on 10/31/17.
  */
 
-public class DriversRVFragment extends android.support.v4.app.Fragment {
+public class DriversListViewFragment extends android.support.v4.app.Fragment {
     RecyclerView mRecyclerView;
     ArrayList<String> a;
 
-    public DriversRVFragment() {}
+    public DriversListViewFragment() {}
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_rv, container, false);
         // Initialize contacts
         a = new ArrayList<>();
         a.add("Ivan");
-        a.add("Pero");
-        a.add("Pero");
-        a.add("Pero");
-        a.add("Pero");
-        a.add("Pero");
-        a.add("Pero");
-        a.add("Pero");
-        a.add("Pero");
-        a.add("Pero");
-        a.add("Pero");
-        a.add("Pero");
-        a.add("Pero");
+        a.add("Marko");
+        a.add("Petar");
+        a.add("Mislav");
+        a.add("Matija");
+        a.add("Svemirko");
+
         // Replace 'android.R.id.list' with the 'id' of your RecyclerView
         mRecyclerView = (RecyclerView) view.findViewById(R.id.rvDrivers);
         Log.d("debugMode", "The application stopped after this");
@@ -45,8 +40,7 @@ public class DriversRVFragment extends android.support.v4.app.Fragment {
         // Attach the adapter to the recyclerview to populate items
         mRecyclerView.setAdapter(adapter);
         // Set layout manager to position the items
-        mRecyclerView.setLayoutManager(new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL));
-        //mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         // That's all!
         return view;
     }

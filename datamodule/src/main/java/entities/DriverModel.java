@@ -1,7 +1,6 @@
 package entities;
 
 import android.test.InstrumentationTestSuite;
-import android.util.Log;
 
 import com.google.gson.annotations.SerializedName;
 
@@ -10,17 +9,34 @@ import com.google.gson.annotations.SerializedName;
  */
 
 public class DriverModel {
+    @SerializedName("korisnikId")
     int id;
-    String ime;
-    String prezime;
-    String oib;
-    String email;
-    String lozinka;
-    int datum_zap;
-    String slika;
-    boolean tipKorisnika;
 
-    public DriverModel(int id, String ime, String prezime, String oib, String email, String lozinka, int datum_zap, String slika, boolean tipKorisnika) {
+    @SerializedName("ime")
+    String ime;
+
+    @SerializedName("prezime")
+    String prezime;
+
+    @SerializedName("oib")
+    String oib;
+
+    @SerializedName("email")
+    String email;
+
+    @SerializedName("lozinka")
+    String lozinka;
+
+    @SerializedName("datum_zap")
+    int datum_zap;
+
+    @SerializedName("slika")
+    String slika;
+
+    @SerializedName("vozac")
+    short tipKorisnika;
+
+    public DriverModel(int id, String ime, String prezime, String oib, String email, String lozinka, int datum_zap, String slika, short tipKorisnika) {
         this.id = id;
         this.ime = ime;
         this.prezime = prezime;
@@ -30,7 +46,6 @@ public class DriverModel {
         this.datum_zap = datum_zap;
         this.slika = slika;
         this.tipKorisnika = tipKorisnika;
-        Log.d("SSTELLA", "data"+this.oib+this.prezime+this.ime);
     }
 
     public int getId() {
@@ -97,11 +112,11 @@ public class DriverModel {
         this.slika = slika;
     }
 
-    public boolean getTipKorisnika() {
+    public short getTipKorisnika() {
         return tipKorisnika;
     }
 
-    public void setTipKorisnika(boolean tipKorisnika) {
+    public void setTipKorisnika(short tipKorisnika) {
         this.tipKorisnika = tipKorisnika;
     }
 }
