@@ -7,7 +7,6 @@
       <module fileurl="file://$PROJECT_DIR$/datamodule/datamodule.iml" filepath="$PROJECT_DIR$/datamodule/datamodule.iml" />
       <module fileurl="file://$PROJECT_DIR$/drivermodule/drivermodule.iml" filepath="$PROJECT_DIR$/drivermodule/drivermodule.iml" />
       <module fileurl="file://$PROJECT_DIR$/webservice/webservice.iml" filepath="$PROJECT_DIR$/webservice/webservice.iml" />
-      <module fileurl="file://$PROJECT_DIR$/webservice/webservice.iml" filepath="$PROJECT_DIR$/webservice/webservice.iml" />
     </modules>
   </component>
 </project>

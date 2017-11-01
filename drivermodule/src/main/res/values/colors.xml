@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="tilesColor">#80006064</color>
+    <color name="tilesColor">#006064</color>
     <color name="listColor">#bdc3c7</color>
+    <color name="addButton">#3F51B5</color>
 </resources>

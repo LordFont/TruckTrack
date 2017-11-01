@@ -4,7 +4,6 @@
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
               android:layout_margin="5dp">
-
     <ImageView
         android:id="@+id/driver_image"
         android:adjustViewBounds="true"
@@ -14,9 +13,9 @@
         android:id="@+id/info_text"
         android:layout_gravity="left"
         android:textStyle="bold"
+        android:textColor="#000"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/tilesColor"
         android:paddingBottom="5dp"
         android:paddingTop="5dp"
         android:paddingLeft="5dp"
