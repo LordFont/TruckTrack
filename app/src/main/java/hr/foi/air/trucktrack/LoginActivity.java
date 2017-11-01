@@ -49,7 +49,6 @@ public class LoginActivity extends AppCompatActivity {
                         if (response.code() == 400) {
                             Toast.makeText(getApplicationContext(), "Pogrešan unos!", Toast.LENGTH_SHORT).show();
                         } else {
-                            Toast.makeText(getApplicationContext(), "Preusmjeravanje...", Toast.LENGTH_SHORT).show();
                             startActivity(new Intent(getApplicationContext(), DisponentHome.class));
                         }
                     }
