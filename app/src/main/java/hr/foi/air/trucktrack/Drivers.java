@@ -65,9 +65,7 @@ public class Drivers extends AppCompatActivity {
         //loading toolbar
         initToolbar();
 
-
         displayView(0); // fragment at 0 position
-
     }
 
     @Override
