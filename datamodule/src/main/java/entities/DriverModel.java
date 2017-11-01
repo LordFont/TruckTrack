@@ -1,6 +1,9 @@
 package entities;
 
 import android.test.InstrumentationTestSuite;
+import android.util.Log;
+
+import com.google.gson.annotations.SerializedName;
 
 /**
  * Created by Marko on 28.10.2017..
@@ -15,9 +18,9 @@ public class DriverModel {
     String lozinka;
     int datum_zap;
     String slika;
-    short tipKorisnika;
+    boolean tipKorisnika;
 
-    public DriverModel(int id, String ime, String prezime, String oib, String email, String lozinka, int datum_zap, String slika, short tipKorisnika) {
+    public DriverModel(int id, String ime, String prezime, String oib, String email, String lozinka, int datum_zap, String slika, boolean tipKorisnika) {
         this.id = id;
         this.ime = ime;
         this.prezime = prezime;
@@ -27,6 +30,7 @@ public class DriverModel {
         this.datum_zap = datum_zap;
         this.slika = slika;
         this.tipKorisnika = tipKorisnika;
+        Log.d("SSTELLA", "data"+this.oib+this.prezime+this.ime);
     }
 
     public int getId() {
@@ -93,11 +97,11 @@ public class DriverModel {
         this.slika = slika;
     }
 
-    public short getTipKorisnika() {
+    public boolean getTipKorisnika() {
         return tipKorisnika;
     }
 
-    public void setTipKorisnika(short tipKorisnika) {
+    public void setTipKorisnika(boolean tipKorisnika) {
         this.tipKorisnika = tipKorisnika;
     }
 }

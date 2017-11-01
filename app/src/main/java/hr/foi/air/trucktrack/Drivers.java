@@ -1,23 +1,23 @@
 package hr.foi.air.trucktrack;
 
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.ImageView;
 
 import java.util.ArrayList;
-import java.util.List;
 
-import hr.foi.air.drivermodule.DriversAdapter;
 import hr.foi.air.drivermodule.DriversRVFragment;
 
 public class Drivers extends AppCompatActivity {
 
     ArrayList<String> a;
-
+    ImageView viewIcon;
+    int changeImage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,11 +49,14 @@ public class Drivers extends AppCompatActivity {
 //        rvContacts.setLayoutManager(new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL));
 //        // That's all!
 
+        //loading toolbar
+        initToolbar();
+
+
         displayView(0); // fragment at 0 position
-<<<<<<< Updated upstream
-=======
 
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -77,7 +80,6 @@ public class Drivers extends AppCompatActivity {
             }
         });
         return true;
->>>>>>> Stashed changes
     }
 
     public void displayView(int position) {
@@ -94,5 +96,13 @@ public class Drivers extends AppCompatActivity {
 
         mTransactiont.replace(R.id.main_container, fragment, fragment.getClass().getName());
         mTransactiont.commit();
+    }
+
+    public void initToolbar() {
+        //loading toolbar
+        Toolbar toolbar = (Toolbar) findViewById(R.id.drivers_toolbar);
+        setSupportActionBar(toolbar);
+        toolbar.setNavigationIcon(R.drawable.ic_view_headline_white_48px);
+        getSupportActionBar().setTitle("Vozači");
     }
 }

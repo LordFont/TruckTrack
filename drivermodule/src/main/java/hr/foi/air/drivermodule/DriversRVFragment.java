@@ -1,8 +1,6 @@
 package hr.foi.air.drivermodule;
 
-import android.app.Fragment;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.Log;
@@ -40,7 +38,6 @@ public class DriversRVFragment extends android.support.v4.app.Fragment {
         a.add("Pero");
         a.add("Pero");
         a.add("Pero");
-
         // Replace 'android.R.id.list' with the 'id' of your RecyclerView
         mRecyclerView = (RecyclerView) view.findViewById(R.id.rvDrivers);
         Log.d("debugMode", "The application stopped after this");
