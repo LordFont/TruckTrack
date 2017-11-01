@@ -2,7 +2,7 @@
       xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/viewIcon"
-        android:icon="@drawable/ic_dashboard_white_48px"
+        android:icon="@drawable/ic_view_list_white_48px"
         app:showAsAction="ifRoom"
         android:title="Promjena načina prikaza">
     </item>

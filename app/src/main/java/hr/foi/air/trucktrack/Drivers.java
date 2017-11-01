@@ -48,29 +48,6 @@ public class Drivers extends AppCompatActivity {
         setContentView(R.layout.activity_drivers);
 //        // Lookup the recyclerview in activity layout
 //        RecyclerView rvContacts = (RecyclerView) findViewById(R.id.rvDrivers);
-//
-//        // Initialize contacts
-//        a = new ArrayList<>();
-//        a.add("Ivan");
-//        a.add("Pero");
-//        a.add("Pero");
-//        a.add("Pero");
-//        a.add("Pero");
-//        a.add("Pero");
-//        a.add("Pero");
-//        a.add("Pero");
-//        a.add("Pero");
-//        a.add("Pero");
-//        a.add("Pero");
-//        a.add("Pero");
-//        a.add("Pero");
-//        // Create adapter passing in the sample user data
-//        DriversAdapter adapter = new DriversAdapter(this, a);
-//        // Attach the adapter to the recyclerview to populate items
-//        rvContacts.setAdapter(adapter);
-//        // Set layout manager to position the items
-//        rvContacts.setLayoutManager(new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL));
-//        // That's all!
 
         //loading toolbar
         initToolbar();
@@ -88,12 +65,12 @@ public class Drivers extends AppCompatActivity {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
                 if (changeImage == 1) {
-                    item.setIcon(R.drawable.ic_view_list_white_48px);
+                    item.setIcon(R.drawable.ic_dashboard_white_48px);
                     changeImage = 0;
                     displayView(1);
                 }
                 else {
-                    item.setIcon(R.drawable.ic_dashboard_white_48px);
+                    item.setIcon(R.drawable.ic_view_list_white_48px);
                     changeImage = 1;
                     displayView(0);
                 }

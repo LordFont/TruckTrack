@@ -111,11 +111,17 @@ public class DriversAdapter extends RecyclerView.Adapter<DriversAdapter.ViewHold
     // Metoda koja uključuje integraciju layouta iz xml-a te vraća instancu holdera
     @Override
     public DriversAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View driverView;
         Context context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
 
         // Integrira layout za item
-        View driverView = inflater.inflate(R.layout.item_driver_tile, parent, false);
+        if (mViewType == 0) {
+            driverView = inflater.inflate(R.layout.item_driver_tile, parent, false);
+        }
+        else {
+            driverView = inflater.inflate(R.layout.item_driver_list, parent, false);
+        }
 
         // Vraća novu instancu holdera.
         ViewHolder viewHolder = new ViewHolder(driverView);
