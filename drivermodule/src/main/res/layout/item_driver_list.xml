@@ -1,21 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        app:srcCompat="@drawable/test01" />
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingLeft="10dp"
+                android:paddingBottom="5dp"
+                android:background="@color/listColor">
 
     <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
+        android:id="@+id/info_text"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="TextView" />
+        android:layout_alignParentTop="true"
+        android:layout_toEndOf="@+id/driver_image"
+        android:layout_toRightOf="@+id/driver_image"
+        android:layout_gravity="left"
+        android:textSize="16dp"
+        android:textStyle="bold"
+        android:paddingLeft="5dp"/>
 
-</LinearLayout>
+    <ImageView
+        android:id="@+id/driver_image"
+        android:layout_width="75dp"
+        android:layout_height="75dp"/>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:id="@+id/addBox"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_add_box_black_48dp"
+        android:layout_toEndOf="@+id/info_text"
+        android:layout_toRightOf="@+id/info_text"
+        android:layout_gravity="right"/>
+
+
+</RelativeLayout>
