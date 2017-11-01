@@ -12,15 +12,6 @@
     tools:context="hr.foi.air.trucktrack.LoginActivity">
 
     <!-- Login progress -->
-    <ProgressBar
-        android:id="@+id/login_progress"
-        style="?android:attr/progressBarStyleLarge"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:visibility="gone" />
-
-
     <ImageView
         android:id="@+id/logo"
         android:layout_width="match_parent"
@@ -28,95 +19,69 @@
         android:layout_marginBottom="32dp"
         app:srcCompat="@drawable/logo" />
 
-    <ScrollView
-        android:id="@+id/login_form"
+    <LinearLayout
+        android:id="@+id/email_login_form"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/colorGreyLogin"
+        android:orientation="vertical"
+        android:weightSum="1">
 
 
-        <LinearLayout
-            android:background="@color/colorGreyLogin"
-            android:id="@+id/email_login_form"
+        <TextView
+            android:id="@+id/txtEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:text="E-mail:" />
+
+        <EditText
+            android:id="@+id/email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Upišite e-mail"
+            android:inputType="textEmailAddress" />
+
+        <TextView
+            android:id="@+id/txtLozinka"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/login_password_padding"
+            android:text="Lozinka:" />
+
+        <EditText
+            android:id="@+id/password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Upišite lozinku"
+            android:inputType="textPassword" />
+
+        <Button
+            android:id="@+id/loginButton"
+            style="?android:textAppearanceSmall"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:background="@color/colorGreenLogin"
+            android:text="@string/action_sign_in"
+            android:textColor="@color/colorGreyLogin"
+            android:textStyle="bold" />
 
 
-            <TextView
-                android:id="@+id/txtEmail"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="E-mail:" />
+        <Button
+            android:id="@+id/testButton"
+            style="?android:textAppearanceSmall"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:background="@color/colorGreenLogin"
+            android:onClick="sendMessage"
+            android:text="@string/testApp"
+            android:textColor="@color/colorGreyLogin"
+            android:textStyle="bold" />
 
-            <android.support.design.widget.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+    </LinearLayout>
 
-                <AutoCompleteTextView
-                    android:id="@+id/email"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/prompt_email"
-                    android:inputType="textEmailAddress"
-                    android:maxLines="1"
-                    android:singleLine="true" />
-
-            </android.support.design.widget.TextInputLayout>
-
-            <TextView
-                android:id="@+id/txtPassword"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Lozinka:"
-                android:paddingTop="@dimen/login_password_padding"/>
-
-            <android.support.design.widget.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-
-                <EditText
-                    android:id="@+id/password"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/prompt_password"
-                    android:imeActionId="@+id/login"
-                    android:imeActionLabel="@string/action_sign_in_short"
-                    android:imeOptions="actionUnspecified"
-                    android:inputType="textPassword"
-                    android:maxLines="1"
-                    android:singleLine="true"
-                    android:layout_marginBottom="40dp"/>
-
-
-            </android.support.design.widget.TextInputLayout>
-
-            <Button
-                android:id="@+id/email_sign_in_button"
-                style="?android:textAppearanceSmall"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="@string/action_sign_in"
-                android:textStyle="bold"
-                android:background="@color/colorGreenLogin"
-                android:textColor="@color/colorGreyLogin"
-                />
-
-
-            <Button
-                android:id="@+id/testButton"
-                style="?android:textAppearanceSmall"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="@string/testApp"
-                android:onClick="sendMessage"
-                android:textStyle="bold"
-                android:background="@color/colorGreenLogin"
-                android:textColor="@color/colorGreyLogin"/>
-
-        </LinearLayout>
-    </ScrollView>
 
 </LinearLayout>
