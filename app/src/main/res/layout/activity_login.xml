@@ -1,86 +1,95 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/coordinatorHolderLogin"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#EEEEEE"
     android:gravity="center_horizontal"
     android:orientation="vertical"
-    tools:context="hr.foi.air.trucktrack.LoginActivity"
-    android:background="#EEEEEE">
-
-    <!-- Login progress -->
-    <ImageView
-        android:id="@+id/logo"
-        android:layout_width="match_parent"
-        android:layout_height="238dp"
-        android:layout_marginBottom="32dp"
-        android:scaleType="fitXY"
-        app:srcCompat="@drawable/logo" />
+    tools:context="hr.foi.air.trucktrack.LoginActivity">
 
     <LinearLayout
-        android:id="@+id/email_login_form"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorGreyLogin"
-        android:orientation="vertical"
-        android:weightSum="1"
-        android:layout_margin="15dp">
+        android:orientation="vertical">
 
-
-        <TextView
-            android:id="@+id/txtEmail"
+        <!-- Login progress -->
+        <ImageView
+            android:id="@+id/logo"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="E-mail:" />
+            android:layout_height="238dp"
+            android:layout_marginBottom="32dp"
+            android:scaleType="fitXY"
+            app:srcCompat="@drawable/logo" />
 
-        <EditText
-            android:id="@+id/email"
+        <LinearLayout
+            android:id="@+id/email_login_form"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="Upišite e-mail"
-            android:inputType="textEmailAddress" />
-
-        <TextView
-            android:id="@+id/txtLozinka"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingTop="@dimen/login_password_padding"
-            android:text="Lozinka:" />
-
-        <EditText
-            android:id="@+id/password"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="Upišite lozinku"
-            android:inputType="textPassword" />
-
-        <Button
-            android:id="@+id/loginButton"
-            style="?android:textAppearanceSmall"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:background="@color/colorGreenLogin"
-            android:text="@string/action_sign_in"
-            android:textColor="@color/colorGreyLogin"
-            android:textStyle="bold" />
+            android:layout_height="match_parent"
+            android:layout_margin="15dp"
+            android:background="@color/colorGreyLogin"
+            android:orientation="vertical"
+            android:weightSum="1">
 
 
-        <Button
-            android:id="@+id/testButton"
-            style="?android:textAppearanceSmall"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:background="@color/colorGreenLogin"
-            android:onClick="sendMessage"
-            android:text="@string/testApp"
-            android:textColor="@color/colorGreyLogin"
-            android:textStyle="bold" />
+            <TextView
+                android:id="@+id/txtEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="E-mail:" />
+
+            <EditText
+                android:id="@+id/email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Upišite e-mail"
+                android:inputType="textEmailAddress" />
+
+            <TextView
+                android:id="@+id/txtLozinka"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/login_password_padding"
+                android:text="Lozinka:" />
+
+            <EditText
+                android:id="@+id/password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Upišite lozinku"
+                android:inputType="textPassword" />
+
+            <Button
+                android:id="@+id/loginButton"
+                style="?android:textAppearanceSmall"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@color/colorGreenLogin"
+                android:text="@string/action_sign_in"
+                android:textColor="@color/colorGreyLogin"
+                android:textStyle="bold" />
+
+
+            <Button
+                android:id="@+id/testButton"
+                style="?android:textAppearanceSmall"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@color/colorGreenLogin"
+                android:onClick="sendMessage"
+                android:text="@string/testApp"
+                android:textColor="@color/colorGreyLogin"
+                android:textStyle="bold" />
+
+
+        </LinearLayout>
 
     </LinearLayout>
 
 
-</LinearLayout>
+</android.support.design.widget.CoordinatorLayout>
