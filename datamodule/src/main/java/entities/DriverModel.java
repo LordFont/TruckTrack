@@ -2,19 +2,38 @@ package entities;
 
 import android.test.InstrumentationTestSuite;
 
+import com.google.gson.annotations.SerializedName;
+
 /**
  * Created by Marko on 28.10.2017..
  */
 
 public class DriverModel {
+    @SerializedName("korisnikId")
     int id;
+
+    @SerializedName("ime")
     String ime;
+
+    @SerializedName("prezime")
     String prezime;
+
+    @SerializedName("oib")
     String oib;
+
+    @SerializedName("email")
     String email;
+
+    @SerializedName("lozinka")
     String lozinka;
+
+    @SerializedName("datum_zap")
     int datum_zap;
+
+    @SerializedName("slika")
     String slika;
+
+    @SerializedName("vozac")
     short tipKorisnika;
 
     public DriverModel(int id, String ime, String prezime, String oib, String email, String lozinka, int datum_zap, String slika, short tipKorisnika) {
