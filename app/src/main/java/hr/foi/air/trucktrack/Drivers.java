@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import hr.foi.air.drivermodule.DriversAdapter;
+import hr.foi.air.drivermodule.DriversListViewFragment;
 import hr.foi.air.drivermodule.DriversRVFragment;
 
 import static android.R.attr.id;
@@ -65,9 +66,7 @@ public class Drivers extends AppCompatActivity {
         //loading toolbar
         initToolbar();
 
-
         displayView(0); // fragment at 0 position
-
     }
 
     @Override
@@ -82,10 +81,12 @@ public class Drivers extends AppCompatActivity {
                 if (changeImage == 1) {
                     item.setIcon(R.drawable.ic_view_list_white_48px);
                     changeImage = 0;
+                    displayView(1);
                 }
                 else {
                     item.setIcon(R.drawable.ic_dashboard_white_48px);
                     changeImage = 1;
+                    displayView(0);
                 }
                 return false;
             }
@@ -98,6 +99,10 @@ public class Drivers extends AppCompatActivity {
             case 0:
                 //tvTitle.setText(getResources().getString(R.string.signin_tile));
                 showFragment(new DriversRVFragment(), position);
+                break;
+            case 1:
+                //tvTitle.setText(getResources().getString(R.string.signin_tile));
+                showFragment(new DriversListViewFragment(), position);
                 break;
         }
     }
