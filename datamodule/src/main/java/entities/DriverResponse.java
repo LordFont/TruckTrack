@@ -7,5 +7,13 @@ import java.util.List;
  */
 
 public class DriverResponse {
+    public List<DriverModel> getResults() {
+        return results;
+    }
+
+    public void setResults(List<DriverModel> results) {
+        this.results = results;
+    }
+
     private List<DriverModel> results;
 }

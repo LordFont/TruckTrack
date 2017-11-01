@@ -1,5 +1,6 @@
 package hr.foi.air.trucktrack;
 
+import android.graphics.Movie;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
@@ -18,8 +19,15 @@ import android.widget.ImageView;
 import java.util.ArrayList;
 import java.util.List;
 
+import entities.DriverModel;
+import entities.DriverResponse;
 import hr.foi.air.drivermodule.DriversAdapter;
 import hr.foi.air.drivermodule.DriversRVFragment;
+import hr.foi.air.webservice.ApiClient;
+import hr.foi.air.webservice.ApiInterface;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 import static android.R.attr.id;
 import static android.R.attr.tag;
@@ -28,6 +36,7 @@ import static hr.foi.air.trucktrack.R.id.imageView;
 public class Drivers extends AppCompatActivity {
 
     ArrayList<String> a;
+    List <DriverModel> drivers;
     ImageView viewIcon;
     int changeImage;
 
@@ -113,5 +122,24 @@ public class Drivers extends AppCompatActivity {
         setSupportActionBar(toolbar);
         toolbar.setNavigationIcon(R.drawable.ic_view_headline_white_48px);
         getSupportActionBar().setTitle("Vozači");
+    }
+
+    private void testirajPoziv(ApiInterface apiService) {
+        Log.d("App", "Usao u funkciju");
+        Call<List<DriverModel>> call = apiService.getDrivers();
+        call.enqueue(new Callback<List<DriverModel>>() {
+            @Override
+            public void onResponse(Call<List<DriverModel>> call, Response<List<DriverModel>> response) {
+                drivers = response.body();
+                for (DriverModel f: drivers) {
+                    Log.d("App",f.getIme());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<DriverModel>> call, Throwable t) {
+                Log.d("Error", t.toString());
+            }
+        });
     }
 }

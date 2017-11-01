@@ -1,17 +1,19 @@
 package hr.foi.air.webservice;
 
+import android.graphics.Movie;
+import android.util.Log;
+
 import java.util.List;
 
-import entities.DriverModel;
 import entities.DriverResponse;
 import retrofit2.Call;
-import retrofit2.http.GET;
+
+import static android.content.ContentValues.TAG;
 
 /**
  * Created by Ivan on 1.11.2017..
  */
 
-public interface ApiInterface {
-    @GET("driver/all")
-    Call<List<DriverModel>> getDrivers();
+public class ServiceCaller {
+
 }
