@@ -1,8 +1,11 @@
 package hr.foi.air.trucktrack;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Movie;
+import android.net.ConnectivityManager;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -26,11 +29,26 @@ public class LoginActivity extends AppCompatActivity {
 
     EditText user, password;
 
+    private boolean isNetworkConnected() {
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        return cm.getActiveNetworkInfo() != null;
+    }
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        if(!isNetworkConnected()){
+            Snackbar mySnackbar = Snackbar.make(this.findViewById(R.id.loginButton), "Niste povezani na internet!", Snackbar.LENGTH_LONG )
+                    .setAction("Postavke", new View.OnClickListener(){
+                        @Override
+                        public void onClick(View view){
+                            startActivityForResult(new Intent(android.provider.Settings.ACTION_SETTINGS), 0);
+                        }
+                    });
+            mySnackbar.show();
+        }
         user = (EditText)findViewById(R.id.email);
         password = (EditText)findViewById(R.id.password);
         Button signInButton = (Button)findViewById(R.id.loginButton);
