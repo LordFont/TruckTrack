@@ -30,6 +30,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static android.R.attr.fragment;
 import static android.R.attr.id;
 import static android.R.attr.tag;
 import static hr.foi.air.trucktrack.R.id.imageView;
@@ -40,6 +41,7 @@ public class Drivers extends AppCompatActivity {
     List <DriverModel> drivers;
     ImageView viewIcon;
     int changeImage;
+    ApiInterface apiService;
 
 
     @Override
@@ -51,7 +53,6 @@ public class Drivers extends AppCompatActivity {
 
         //loading toolbar
         initToolbar();
-
         displayView(0); // fragment at 0 position
     }
 
@@ -81,14 +82,17 @@ public class Drivers extends AppCompatActivity {
     }
 
     public void displayView(int position) {
+        dohvatiVozace();
+        DriversRVFragment gridfragment;
+        DriversListViewFragment listfragment;
         switch (position) {
             case 0:
-                //tvTitle.setText(getResources().getString(R.string.signin_tile));
-                showFragment(new DriversRVFragment(), position);
+                gridfragment = new DriversRVFragment();
+                showFragment(gridfragment, position);
                 break;
             case 1:
-                //tvTitle.setText(getResources().getString(R.string.signin_tile));
-                showFragment(new DriversListViewFragment(), position);
+                listfragment = new DriversListViewFragment();
+                showFragment(listfragment, position);
                 break;
         }
     }
@@ -108,13 +112,15 @@ public class Drivers extends AppCompatActivity {
         getSupportActionBar().setTitle("Vozači");
     }
 
-    private void testirajPoziv(ApiInterface apiService) {
+    private void dohvatiVozace() {
         Log.d("App", "Usao u funkciju");
+        apiService = ApiClient.getClient().create(ApiInterface.class);
         Call<List<DriverModel>> call = apiService.getDrivers();
         call.enqueue(new Callback<List<DriverModel>>() {
             @Override
             public void onResponse(Call<List<DriverModel>> call, Response<List<DriverModel>> response) {
                 drivers = response.body();
+                Log.d("App",""+response.body());
                 for (DriverModel f: drivers) {
                     Log.d("App",f.getIme());
                 }

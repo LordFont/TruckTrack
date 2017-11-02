@@ -10,6 +10,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import entities.DriverModel;
 
 /**
  * Created by roman on 10/31/17.
@@ -18,6 +21,7 @@ import java.util.ArrayList;
 public class DriversListViewFragment extends android.support.v4.app.Fragment {
     RecyclerView mRecyclerView;
     ArrayList<String> a;
+    List<DriverModel> mListDrivers;
 
     public DriversListViewFragment() {}
 
@@ -44,4 +48,5 @@ public class DriversListViewFragment extends android.support.v4.app.Fragment {
         // That's all!
         return view;
     }
+
 }

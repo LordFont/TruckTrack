@@ -9,6 +9,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import entities.DriverModel;
 
 /**
  * Created by Ivan on 28.10.2017..
@@ -17,8 +20,11 @@ import java.util.ArrayList;
 public class DriversRVFragment extends android.support.v4.app.Fragment {
     RecyclerView mRecyclerView;
     ArrayList<String> a;
+    List<DriverModel> mListDrivers;
 
-    public DriversRVFragment() {}
+    public DriversRVFragment() {
+
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
