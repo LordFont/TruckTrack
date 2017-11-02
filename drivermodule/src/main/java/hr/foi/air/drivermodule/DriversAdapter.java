@@ -2,6 +2,7 @@ package hr.foi.air.drivermodule;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,7 +11,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.sql.Driver;
+import java.util.ArrayList;
 import java.util.List;
+
+import entities.DriverModel;
 
 import static android.R.attr.button;
 import static android.R.attr.y;
@@ -61,46 +65,20 @@ public class DriversAdapter extends RecyclerView.Adapter<DriversAdapter.ViewHold
         }
     }
 
-    public class ListViewHolder extends RecyclerView.ViewHolder {
-        public ImageView nameImageView;
-        public TextView infoAboutDriver;
-
-        public ListViewHolder(final View itemView) {
-            // Stores the itemView in a public final member variable that can be used
-            // to access the context from any ViewHolder instance.
-            super(itemView);
-
-            nameImageView = (ImageView) itemView.findViewById(R.id.driver_image);
-            infoAboutDriver = (TextView) itemView.findViewById(R.id.info_text);
-
-            //ovdje smo dodali click listener za prepoznavanje klika
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    // Triggers click upwards to the adapter on click
-                    if (listener != null) {
-                        int position = getAdapterPosition();
-                        if (position != RecyclerView.NO_POSITION) {
-                            listener.onItemClick(itemView, position);
-                        }
-                    }
-                }
-            });
-        }
-    }
 
     // Za lagano dohvaćanje liste vozača
-    private List<String> mDrivers;
+    private ArrayList<String> mDrivers;
     // Za lagano dohvaćanje konteksta
     private Context mContext;
     // Zastavica koja predstavlja layout prikaza - list(0) i grid(1)
     private int mViewType;
 
     // U konstruktoru adaptera se prosljeđuje lista vozača - za sada su testni primjeri
-    public DriversAdapter(Context context, List<String> drivers, int viewType) {
+    public DriversAdapter(Context context, ArrayList<String> drivers, int viewType) {
         mDrivers = drivers;
         mContext = context;
         mViewType = viewType;
+        Log.d("Number of drivers", ""+ drivers.size());
     }
 
     // Dohvat kontekst objekta u recyclerViewu - mozda ce trebati kasnije, za sad ne treba
