@@ -14,24 +14,21 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <!-- Login progress -->
         <ImageView
             android:id="@+id/logo"
             android:layout_width="match_parent"
-            android:layout_height="238dp"
-            android:layout_marginBottom="32dp"
+            android:layout_height="271dp"
             android:scaleType="fitXY"
-            app:srcCompat="@drawable/logo" />
+            app:srcCompat="@drawable/home_screen_pic" />
 
         <LinearLayout
             android:id="@+id/email_login_form"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_margin="15dp"
             android:background="@color/colorGreyLogin"
             android:orientation="vertical"
             android:weightSum="1">
-
 
             <TextView
                 android:id="@+id/txtEmail"
@@ -45,7 +42,8 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:hint="Upišite e-mail"
-                android:inputType="textEmailAddress" />
+                android:inputType="textEmailAddress"
+                android:text="stella@gmail.com" />
 
             <TextView
                 android:id="@+id/txtLozinka"
@@ -60,36 +58,21 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:hint="Upišite lozinku"
+                android:text="123456"
                 android:inputType="textPassword" />
-
-            <Button
-                android:id="@+id/loginButton"
-                style="?android:textAppearanceSmall"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:background="@color/colorGreenLogin"
-                android:text="@string/action_sign_in"
-                android:textColor="@color/colorGreyLogin"
-                android:textStyle="bold" />
-
-
-            <Button
-                android:id="@+id/testButton"
-                style="?android:textAppearanceSmall"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:background="@color/colorGreenLogin"
-                android:onClick="sendMessage"
-                android:text="@string/testApp"
-                android:textColor="@color/colorGreyLogin"
-                android:textStyle="bold" />
-
-
         </LinearLayout>
-
     </LinearLayout>
 
+    <Button
+        android:id="@+id/loginButton"
+        style="?android:textAppearanceSmall"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_margin="15dp"
+        android:background="@color/colorPrimary"
+        android:text="@string/action_sign_in"
+        android:textColor="@color/colorGreyLogin"
+        android:textStyle="bold" />
 
 </android.support.design.widget.CoordinatorLayout>
