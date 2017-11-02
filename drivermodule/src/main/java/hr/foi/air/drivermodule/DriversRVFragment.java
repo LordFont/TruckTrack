@@ -23,7 +23,7 @@ public class DriversRVFragment extends android.support.v4.app.Fragment {
     List<DriverModel> mListDrivers;
 
     public DriversRVFragment() {
-        
+
     }
 
     @Override
