@@ -10,9 +10,7 @@
     <string name="error_invalid_password">This password is too short</string>
     <string name="error_incorrect_password">This password is incorrect</string>
     <string name="error_field_required">This field is required</string>
-    <string name="permission_rationale">"Contacts permissions are needed for providing email
-        completions."
-    </string>
+    <string name="wrong_email_password">"Email adresa ili lozinka nisu točni!"</string>
     <string name="testApp">Testiraj Aplikaciju</string>
     <string name="toolbarVozaci">Vozači</string>
 </resources>
