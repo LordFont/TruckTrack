@@ -1,5 +1,6 @@
 package hr.foi.air.trucktrack;
 
+import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
@@ -90,16 +91,20 @@ public class Drivers extends AppCompatActivity {
         call.enqueue(new Callback<List<DriverModel>>() {
             @Override
             public void onResponse(Call<List<DriverModel>> call, Response<List<DriverModel>> response) {
-                drivers = response.body();
-                if(fragment instanceof ListViewFragment) fragment = ListViewFragment.getInstance(drivers);
-                else fragment = GridViewFragment.getInstance(drivers);
+                if(response.code() >= 400 && response.code() <= 499) {
+                    startActivity(new Intent(getApplicationContext(), NoContentActivity.class));
+                } else {
+                    drivers = response.body();
+                    if(fragment instanceof ListViewFragment) fragment = ListViewFragment.getInstance(drivers);
+                    else fragment = GridViewFragment.getInstance(drivers);
 
-                showFragment(fragment);
+                    showFragment(fragment);
+                }
             }
 
             @Override
             public void onFailure(Call<List<DriverModel>> call, Throwable t) {
-                Log.d("Error", t.toString());
+                startActivity(new Intent(getApplicationContext(), NoContentActivity.class));
             }
         });
     }
