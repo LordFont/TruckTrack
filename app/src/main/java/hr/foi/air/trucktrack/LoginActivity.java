@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 
 
+import android.graphics.Color;
 import android.graphics.Movie;
 import android.net.ConnectivityManager;
 
@@ -76,7 +77,8 @@ public class LoginActivity extends AppCompatActivity {
 
                     @Override
                     public void onFailure(Call<Void> call, Throwable t) {
-                        Toast.makeText(getApplicationContext(), "Problem sa serverom!", Toast.LENGTH_SHORT).show();
+                        Snackbar mySnackbar = Snackbar.make(findViewById(R.id.loginButton), "Problem sa serverom!", Snackbar.LENGTH_LONG );
+                        mySnackbar.show();
                     }
                 });
             }
@@ -93,6 +95,7 @@ public class LoginActivity extends AppCompatActivity {
                             startActivityForResult(new Intent(android.provider.Settings.ACTION_SETTINGS), 0);
                         }
                     });
+            mySnackbar.setActionTextColor(getResources().getColor(R.color.colorPrimary));
             mySnackbar.show();
         }
     }
