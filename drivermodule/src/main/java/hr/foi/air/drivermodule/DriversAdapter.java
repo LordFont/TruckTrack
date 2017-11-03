@@ -44,7 +44,7 @@ public class DriversAdapter extends RecyclerView.Adapter<ViewHolderTilesOfList> 
         View driverView;
 
         if (mViewType == 0) {
-            driverView = inflater.inflate(R.layout.item_driver_tile, parent, false);
+            driverView = inflater.inflate(R.layout.material_grid_item, parent, false);
         }
         else {
             driverView = inflater.inflate(R.layout.item_driver_list, parent, false);
