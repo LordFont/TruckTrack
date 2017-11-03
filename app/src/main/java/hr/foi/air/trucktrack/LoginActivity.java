@@ -42,17 +42,7 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
-        if(!isNetworkConnected()){
-            Snackbar mySnackbar = Snackbar.make(this.findViewById(R.id.loginButton), "Niste povezani na internet!", Snackbar.LENGTH_LONG )
-                    .setAction("Postavke", new View.OnClickListener(){
-                        @Override
-                        public void onClick(View view){
-                            startActivityForResult(new Intent(android.provider.Settings.ACTION_SETTINGS), 0);
-                        }
-                    });
-            mySnackbar.show();
-        }
+        
         user = (EditText)findViewById(R.id.email);
         password = (EditText)findViewById(R.id.password);
         Button signInButton = (Button)findViewById(R.id.loginButton);
