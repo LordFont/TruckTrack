@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="4dp">
+
+    <ImageView
+        android:id="@+id/driver_image"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/test01"
+        android:adjustViewBounds="true"/>
+
+    <TextView
+        android:id="@+id/info_text"
+        android:text="Truck"
+        android:textSize="16sp"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_centerHorizontal="true"
+        android:layout_alignBottom="@id/driver_image"
+        android:layout_alignEnd="@id/driver_image"
+        android:layout_alignRight="@id/driver_image"
+        android:background="#70000000"
+        android:gravity="center_vertical"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:textColor="#ffffff"/>
+
+</RelativeLayout>
