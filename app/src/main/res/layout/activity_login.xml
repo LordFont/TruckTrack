@@ -44,8 +44,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:hint="Upišite e-mail"
-                android:inputType="textEmailAddress" />
+                android:hint="@string/prompt_email"
+                android:inputType="textEmailAddress"
+                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/txtLozinka"
@@ -59,8 +60,22 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:hint="Upišite lozinku"
-                android:inputType="textPassword" />
+                android:hint="@string/prompt_password"
+                android:inputType="textPassword"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/txtWrongEmailOrPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/login_password_padding"
+                android:text="@string/wrong_email_password"
+                android:textAlignment="center"
+                android:textColor="@color/colorGreenLogin"
+                android:textSize="16dp"
+                android:textStyle="bold"
+                android:visibility="gone" />
+
 
             <Button
                 android:id="@+id/loginButton"

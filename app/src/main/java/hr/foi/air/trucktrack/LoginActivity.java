@@ -5,16 +5,20 @@ import android.content.Intent;
 
 
 import android.graphics.Movie;
+import android.graphics.Rect;
+import android.graphics.Typeface;
 import android.net.ConnectivityManager;
 
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.method.TransformationMethod;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import entities.UserModel;
@@ -31,6 +35,7 @@ public class LoginActivity extends AppCompatActivity {
 
     EditText user, password;
     ApiInterface apiService;
+    TextView wrongUserPass;
 
     private boolean isNetworkConnected() {
         ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -56,21 +61,30 @@ public class LoginActivity extends AppCompatActivity {
         password = (EditText)findViewById(R.id.password);
         Button signInButton = (Button)findViewById(R.id.loginButton);
         apiService = ApiClient.getClient().create(ApiInterface.class);
+        wrongUserPass = (TextView) findViewById(R.id.txtWrongEmailOrPassword);
+
+        password.setTypeface(Typeface.DEFAULT);
+        password.setTextSize(18);
+        user.setTypeface(Typeface.DEFAULT);
+        user.setTextSize(18);
 
         signInButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
                 String email = user.getText().toString();
                 String lozinka = password.getText().toString();
+
                 Call<Void> call = apiService.authUser(new UserModel(email,lozinka));
-                Log.d("Call", call.toString());
+                //Log.d("Call", call.toString());
+
                 call.enqueue(new Callback<Void>() {
                     @Override
                     public void onResponse(Call<Void> call, Response<Void> response) {
                         if (response.code() == 200) {
+                            wrongUserPass.setVisibility(View.GONE);
                             startActivity(new Intent(getApplicationContext(), DisponentHome.class));
                         } else {
-                            Toast.makeText(getApplicationContext(), "Pogrešan unos!", Toast.LENGTH_SHORT).show();
+                            wrongUserPass.setVisibility(View.VISIBLE);
                         }
                     }
 
@@ -85,6 +99,7 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     public void onResume(){
         super.onResume();
+
         if(!isNetworkConnected()){
             Snackbar mySnackbar = Snackbar.make(this.findViewById(R.id.loginButton), "Niste povezani na internet!", Snackbar.LENGTH_LONG )
                     .setAction("Postavke", new View.OnClickListener(){
