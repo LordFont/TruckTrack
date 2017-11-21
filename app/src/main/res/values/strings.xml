@@ -12,5 +12,7 @@
     <string name="error_field_required">This field is required</string>
     <string name="wrong_email_password">"Email adresa ili lozinka nisu točni!"</string>
     <string name="testApp">Testiraj Aplikaciju</string>
+    <string name="testDriverJobs">Testiraj Poslovi</string>
     <string name="toolbarVozaci">Vozači</string>
+    <string name="toolbarPoslovi">Poslovi</string>
 </resources>

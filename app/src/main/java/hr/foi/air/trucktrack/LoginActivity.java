@@ -36,6 +36,8 @@ public class LoginActivity extends AppCompatActivity {
     EditText user, password;
     ApiInterface apiService;
     TextView wrongUserPass;
+    //ovo je samo button za testiranje dijelova aplikacije, posto navigacija jos nije potpuna
+    Button test;
 
     private boolean isNetworkConnected() {
         ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -62,6 +64,9 @@ public class LoginActivity extends AppCompatActivity {
         Button signInButton = (Button)findViewById(R.id.loginButton);
         apiService = ApiClient.getClient().create(ApiInterface.class);
         wrongUserPass = (TextView) findViewById(R.id.txtWrongEmailOrPassword);
+
+        //inicijalizacija buttona za testiranje
+        test = (Button)findViewById(R.id.driverJobsTest);
 
         password.setTypeface(Typeface.DEFAULT);
         password.setTextSize(18);
@@ -93,6 +98,14 @@ public class LoginActivity extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(), "Problem sa serverom!", Toast.LENGTH_SHORT).show();
                     }
                 });
+            }
+        });
+
+        //samo za testiranje
+        test.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), DriverJobs.class));
             }
         });
     }
