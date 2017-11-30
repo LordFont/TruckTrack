@@ -18,11 +18,13 @@
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Drivers"></activity>
-        <activity android:name=".DisponentHome"></activity>
+        <activity android:name=".Drivers" />
+        <activity android:name=".DisponentHome" />
+        <activity android:name=".NewJob"></activity>
     </application>
 
 </manifest>

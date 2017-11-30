@@ -15,4 +15,12 @@
     </string>
     <string name="testApp">Testiraj Aplikaciju</string>
     <string name="toolbarVozaci">Vozači</string>
+
+    <string name="utovar">Poduzeće utovar</string>
+    <string name="istovar">Poduzeće istovar</string>
+    <string name="datum_utovara">Datum utovara</string>
+    <string name="datum_istovara">Datum istovara</string>
+    <string name="koordinate_utovara">Kordinate utovara</string>
+    <string name="koordinate_istovara">Koordinate istovara</string>
+    <string name="dodjeljeni_vozac">Dodjeljeni vozač</string>
 </resources>
