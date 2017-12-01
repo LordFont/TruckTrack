@@ -12,13 +12,45 @@ import java.util.List;
 public class JobModel {
     String mMjestoUtovara;
     String mMjestoIstovara;
-    Date mUtovarDatum;
-    Date mIstovarDatum;
+    String mUtovarDatum;
+    String mIstovarDatum;
 
-    JobModel(String mjestoUtovara, String mjestoIstovara, Date utovarDatum, Date istovarDatum) {
+    JobModel(String mjestoUtovara, String mjestoIstovara, String utovarDatum, String istovarDatum) {
         mMjestoUtovara = mjestoUtovara;
         mMjestoIstovara = mjestoIstovara;
         mUtovarDatum = utovarDatum;
+        mIstovarDatum = istovarDatum;
+    }
+
+    public String getMjestoUtovara() {
+        return mMjestoUtovara;
+    }
+
+    public void setMjestoUtovara(String mjestoUtovara) {
+        mMjestoUtovara = mjestoUtovara;
+    }
+
+    public String getMjestoIstovara() {
+        return mMjestoIstovara;
+    }
+
+    public void setMjestoIstovara(String mjestoIstovara) {
+        mMjestoIstovara = mjestoIstovara;
+    }
+
+    public String getUtovarDatum() {
+        return mUtovarDatum;
+    }
+
+    public void setUtovarDatum(String utovarDatum) {
+        mUtovarDatum = utovarDatum;
+    }
+
+    public String getIstovarDatum() {
+        return mIstovarDatum;
+    }
+
+    public void setIstovarDatum(String istovarDatum) {
         mIstovarDatum = istovarDatum;
     }
 }
