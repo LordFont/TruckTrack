@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 
 
+import android.graphics.Color;
 import android.graphics.Movie;
 import android.graphics.Rect;
 import android.graphics.Typeface;
@@ -36,6 +37,8 @@ public class LoginActivity extends AppCompatActivity {
     EditText user, password;
     ApiInterface apiService;
     TextView wrongUserPass;
+    //ovo je samo button za testiranje dijelova aplikacije, posto navigacija jos nije potpuna
+    Button test;
 
     private boolean isNetworkConnected() {
         ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -46,22 +49,15 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
-        if(!isNetworkConnected()){
-            Snackbar mySnackbar = Snackbar.make(this.findViewById(R.id.loginButton), "Niste povezani na internet!", Snackbar.LENGTH_LONG )
-                    .setAction("Postavke", new View.OnClickListener(){
-                        @Override
-                        public void onClick(View view){
-                            startActivityForResult(new Intent(android.provider.Settings.ACTION_SETTINGS), 0);
-                        }
-                    });
-            mySnackbar.show();
-        }
+        
         user = (EditText)findViewById(R.id.email);
         password = (EditText)findViewById(R.id.password);
         Button signInButton = (Button)findViewById(R.id.loginButton);
         apiService = ApiClient.getClient().create(ApiInterface.class);
         wrongUserPass = (TextView) findViewById(R.id.txtWrongEmailOrPassword);
+
+        //inicijalizacija buttona za testiranje
+        test = (Button)findViewById(R.id.driverJobsTest);
 
         password.setTypeface(Typeface.DEFAULT);
         password.setTextSize(18);
@@ -90,9 +86,18 @@ public class LoginActivity extends AppCompatActivity {
 
                     @Override
                     public void onFailure(Call<Void> call, Throwable t) {
-                        Toast.makeText(getApplicationContext(), "Problem sa serverom!", Toast.LENGTH_SHORT).show();
+                        Snackbar mySnackbar = Snackbar.make(findViewById(R.id.loginButton), "Problem sa serverom!", Snackbar.LENGTH_LONG );
+                        mySnackbar.show();
                     }
                 });
+            }
+        });
+
+        //samo za testiranje
+        test.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), DriverJobs.class));
             }
         });
     }
@@ -108,6 +113,7 @@ public class LoginActivity extends AppCompatActivity {
                             startActivityForResult(new Intent(android.provider.Settings.ACTION_SETTINGS), 0);
                         }
                     });
+            mySnackbar.setActionTextColor(getResources().getColor(R.color.colorPrimary));
             mySnackbar.show();
         }
     }

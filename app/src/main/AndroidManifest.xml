@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="hr.foi.air.trucktrack">
+          package="hr.foi.air.trucktrack">
 
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 
     <application
         android:allowBackup="true"
@@ -24,10 +24,15 @@
         </activity>
         <activity android:name=".Drivers" />
         <activity android:name=".DisponentHome" />
+<<<<<<< HEAD
         <activity
             android:name=".NoContentActivity"
             android:label="@string/title_activity_no_content"
             android:theme="@style/AppTheme"></activity>
+=======
+        <activity android:name=".DriverJobs"/>
+        <activity android:name=".NewJob"></activity>
+>>>>>>> 8d746692c7f3fb536812334440217a525feddd4f
     </application>
 
 </manifest>

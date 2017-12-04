@@ -12,6 +12,19 @@
     <string name="error_field_required">This field is required</string>
     <string name="wrong_email_password">"Email adresa ili lozinka nisu točni!"</string>
     <string name="testApp">Testiraj Aplikaciju</string>
+    <string name="testDriverJobs">Testiraj Poslovi</string>
     <string name="toolbarVozaci">Vozači</string>
+<<<<<<< HEAD
     <string name="title_activity_no_content">NoContentActivity</string>
+=======
+    <string name="toolbarPoslovi">Poslovi</string>
+
+    <string name="utovar">Poduzeće utovar</string>
+    <string name="istovar">Poduzeće istovar</string>
+    <string name="datum_utovara">Datum utovara</string>
+    <string name="datum_istovara">Datum istovara</string>
+    <string name="koordinate_utovara">Kordinate utovara</string>
+    <string name="koordinate_istovara">Koordinate istovara</string>
+    <string name="dodjeljeni_vozac">Dodjeljeni vozač</string>
+>>>>>>> 8d746692c7f3fb536812334440217a525feddd4f
 </resources>
