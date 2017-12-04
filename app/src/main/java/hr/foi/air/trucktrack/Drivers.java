@@ -10,7 +10,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import java.sql.Driver;
 import java.util.List;
 
 import entities.DriverModel;
@@ -85,6 +84,7 @@ public class Drivers extends AppCompatActivity {
         getSupportActionBar().setTitle(getResources().getString(R.string.toolbarVozaci));
     }
 
+
     private void getDrivers() {
         apiService = ApiClient.getClient().create(ApiInterface.class);
         Call<List<DriverModel>> call = apiService.getDrivers();
@@ -108,4 +108,5 @@ public class Drivers extends AppCompatActivity {
             }
         });
     }
+
 }
