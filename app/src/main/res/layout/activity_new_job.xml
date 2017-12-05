@@ -30,6 +30,10 @@
             android:layout_marginRight="5dp"
             android:layout_marginBottom="5dp"
             android:layout_below="@+id/drivers_toolbar">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="forma novog posla"/>
         </FrameLayout>
     </LinearLayout>
 
