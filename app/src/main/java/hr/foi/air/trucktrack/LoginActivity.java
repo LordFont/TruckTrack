@@ -18,6 +18,7 @@ import android.text.method.TransformationMethod;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -39,6 +40,7 @@ public class LoginActivity extends AppCompatActivity {
     TextView wrongUserPass;
     //ovo je samo button za testiranje dijelova aplikacije, posto navigacija jos nije potpuna
     Button test;
+    CheckBox isDriver;
 
     private boolean isNetworkConnected() {
         ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -55,6 +57,7 @@ public class LoginActivity extends AppCompatActivity {
         Button signInButton = (Button)findViewById(R.id.loginButton);
         apiService = ApiClient.getClient().create(ApiInterface.class);
         wrongUserPass = (TextView) findViewById(R.id.txtWrongEmailOrPassword);
+        isDriver = (CheckBox) findViewById(R.id.cbIsDriver);
 
         //inicijalizacija buttona za testiranje
         test = (Button)findViewById(R.id.driverJobsTest);
@@ -78,7 +81,11 @@ public class LoginActivity extends AppCompatActivity {
                     public void onResponse(Call<Void> call, Response<Void> response) {
                         if (response.code() == 200) {
                             wrongUserPass.setVisibility(View.GONE);
-                            startActivity(new Intent(getApplicationContext(), DisponentHome.class));
+                            Intent intent;
+                            if(isDriver.isChecked())  intent = new Intent(getApplicationContext(), DriverHome.class);
+                            else intent = new Intent(getApplicationContext(), DisponentHome.class);
+
+                            startActivity(intent);
                         } else {
                             wrongUserPass.setVisibility(View.VISIBLE);
                         }

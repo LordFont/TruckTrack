@@ -15,6 +15,7 @@ import java.util.List;
 import entities.DriverModel;
 import hr.foi.air.drivermodule.ListViewFragment;
 import hr.foi.air.drivermodule.GridViewFragment;
+import hr.foi.air.trucktrack.Callbacks.UserCallback;
 import hr.foi.air.webservice.ApiClient;
 import hr.foi.air.webservice.ApiInterface;
 import retrofit2.Call;
@@ -49,13 +50,15 @@ public class Drivers extends AppCompatActivity {
                     item.setIcon(R.drawable.ic_dashboard_white_48px);
                     changeImage = 0;
                     fragment = ListViewFragment.getInstance(drivers);
-                    showFragment(fragment);
+//                    showFragment(fragment);
+                    getDrivers();
                 }
                 else {
                     item.setIcon(R.drawable.ic_view_list_white_48px);
                     changeImage = 1;
                     fragment = GridViewFragment.getInstance(drivers);
-                    showFragment(fragment);
+//                    showFragment(fragment);
+                    getDrivers();
                 }
                 return true;
             }
@@ -87,20 +90,22 @@ public class Drivers extends AppCompatActivity {
     private void getDrivers() {
         apiService = ApiClient.getClient().create(ApiInterface.class);
         Call<List<DriverModel>> call = apiService.getDrivers();
-        call.enqueue(new Callback<List<DriverModel>>() {
-            @Override
-            public void onResponse(Call<List<DriverModel>> call, Response<List<DriverModel>> response) {
-                drivers = response.body();
-                if(fragment instanceof ListViewFragment) fragment = ListViewFragment.getInstance(drivers);
-                else fragment = GridViewFragment.getInstance(drivers);
-
-                showFragment(fragment);
-            }
-
-            @Override
-            public void onFailure(Call<List<DriverModel>> call, Throwable t) {
-                Log.d("Error", t.toString());
-            }
-        });
+        FragmentTransaction mTransactiont = getSupportFragmentManager().beginTransaction();
+        call.enqueue(new UserCallback(fragment,mTransactiont));
+//        call.enqueue(new Callback<List<DriverModel>>() {
+//            @Override
+//            public void onResponse(Call<List<DriverModel>> call, Response<List<DriverModel>> response) {
+//                drivers = response.body();
+//                if(fragment instanceof ListViewFragment) fragment = ListViewFragment.getInstance(drivers);
+//                else fragment = GridViewFragment.getInstance(drivers);
+//
+//                showFragment(fragment);
+//            }
+//
+//            @Override
+//            public void onFailure(Call<List<DriverModel>> call, Throwable t) {
+//                Log.d("Error", t.toString());
+//            }
+//        });
     }
 }
