@@ -23,4 +23,5 @@
     <string name="koordinate_utovara">Kordinate utovara</string>
     <string name="koordinate_istovara">Koordinate istovara</string>
     <string name="dodjeljeni_vozac">Dodjeljeni vozač</string>
+    <string name="title_activity_jobs">Jobs</string>
 </resources>

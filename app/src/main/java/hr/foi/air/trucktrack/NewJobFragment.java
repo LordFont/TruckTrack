@@ -13,6 +13,7 @@ import java.util.List;
 import entities.DriverModel;
 import hr.foi.air.drivermodule.GridViewFragment;
 import hr.foi.air.drivermodule.ListViewFragment;
+
 import hr.foi.air.webservice.ApiClient;
 import hr.foi.air.webservice.ApiInterface;
 import retrofit2.Call;
@@ -22,10 +23,10 @@ import retrofit2.Response;
 
 public class NewJobFragment extends android.support.v4.app.Fragment implements View.OnClickListener {
 
+    ImageView addDriver;
     Fragment fragment;
     private ApiInterface apiService;
     static NewJobFragment instance = null;
-    ImageView addDriver;
     private List<DriverModel> drivers = null;
 
     public static NewJobFragment getInstance(){
@@ -44,10 +45,14 @@ public class NewJobFragment extends android.support.v4.app.Fragment implements V
     }
     @Override
     public void onClick(View v) {
-        //Fragment nextFrag= new Fragment();
-        fragment = ListViewFragment.getInstance(drivers);
         getDrivers();
+        fragment = ListViewFragment.getInstance(drivers);
+        getActivity().getSupportFragmentManager().beginTransaction()
+            .replace(R.id.main_container, fragment, fragment.getClass().getName())
+            .addToBackStack(null)
+            .commit();
     }
+
 //sljedeca metoda(getDrivers) nesmije biti ovdje!
     private void getDrivers() {
         apiService = ApiClient.getClient().create(ApiInterface.class);
@@ -71,8 +76,6 @@ public class NewJobFragment extends android.support.v4.app.Fragment implements V
             }
         });
     }
-
-
 }
 
 

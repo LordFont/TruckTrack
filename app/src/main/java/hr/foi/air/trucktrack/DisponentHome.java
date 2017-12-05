@@ -23,8 +23,7 @@ public class DisponentHome extends AppCompatActivity implements View.OnClickList
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.jobListContainer:
-                Snackbar mySnackbar = Snackbar.make(this.findViewById(R.id.jobListContainer), "Trenutna funkcionalnost nije implementirana.", Snackbar.LENGTH_LONG );
-                mySnackbar.show();
+                startActivity(new Intent(getApplicationContext(), Jobs.class));
                 break;
             case R.id.driverListContainer:
                 startActivity(new Intent(getApplicationContext(), Drivers.class));
