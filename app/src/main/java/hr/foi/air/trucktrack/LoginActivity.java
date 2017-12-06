@@ -39,7 +39,6 @@ public class LoginActivity extends AppCompatActivity {
     ApiInterface apiService;
     TextView wrongUserPass;
     //ovo je samo button za testiranje dijelova aplikacije, posto navigacija jos nije potpuna
-    Button test;
     CheckBox isDriver;
 
     private boolean isNetworkConnected() {
@@ -58,9 +57,6 @@ public class LoginActivity extends AppCompatActivity {
         apiService = ApiClient.getClient().create(ApiInterface.class);
         wrongUserPass = (TextView) findViewById(R.id.txtWrongEmailOrPassword);
         isDriver = (CheckBox) findViewById(R.id.cbIsDriver);
-
-        //inicijalizacija buttona za testiranje
-        test = (Button)findViewById(R.id.driverJobsTest);
 
         password.setTypeface(Typeface.DEFAULT);
         password.setTextSize(18);
@@ -81,11 +77,8 @@ public class LoginActivity extends AppCompatActivity {
                     public void onResponse(Call<Void> call, Response<Void> response) {
                         if (response.code() == 200) {
                             wrongUserPass.setVisibility(View.GONE);
-                            Intent intent;
-                            if(isDriver.isChecked())  intent = new Intent(getApplicationContext(), DriverHome.class);
-                            else intent = new Intent(getApplicationContext(), DisponentHome.class);
-
-                            startActivity(intent);
+                            if(isDriver.isChecked()) startActivity(new Intent(getApplicationContext(), DriverJobs.class));
+                            else startActivity(new Intent(getApplicationContext(), DisponentHome.class));
                         } else {
                             wrongUserPass.setVisibility(View.VISIBLE);
                         }
@@ -100,13 +93,6 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        //samo za testiranje
-        test.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), DriverJobs.class));
-            }
-        });
     }
     @Override
     public void onResume(){
