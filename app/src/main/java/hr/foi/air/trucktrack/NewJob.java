@@ -16,7 +16,7 @@ import hr.foi.air.drivermodule.ListViewFragment;
 public class NewJob extends AppCompatActivity implements ListViewFragment.ToolbarListener {
 
     Fragment fragment;
-    Menu mainMenu;
+    boolean iNeedToChangeToolbar = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +39,6 @@ public class NewJob extends AppCompatActivity implements ListViewFragment.Toolba
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
-        mainMenu = menu;
         getMenuInflater().inflate(R.menu.menu_job, menu);
         menu.findItem(R.id.refreshIcon).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
@@ -48,6 +47,16 @@ public class NewJob extends AppCompatActivity implements ListViewFragment.Toolba
             }
         });
         return true;
+    }
+
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        if (iNeedToChangeToolbar) {
+            menu.clear();
+            getMenuInflater().inflate(R.menu.menu_drivers, menu);
+            getSupportActionBar().setTitle("Vozači");
+        }
+        return super.onPrepareOptionsMenu(menu);
     }
 
     private void showFragment(Fragment f) {
@@ -60,7 +69,6 @@ public class NewJob extends AppCompatActivity implements ListViewFragment.Toolba
     public void onFragmentAttached(boolean change) {
         Toast toast = Toast.makeText(getApplicationContext(),"text", Toast.LENGTH_LONG);
         toast.show();
-        getMenuInflater().inflate(R.menu.menu_drivers,mainMenu);
-
+        iNeedToChangeToolbar = change;
     }
 }

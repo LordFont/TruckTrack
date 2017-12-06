@@ -86,8 +86,6 @@ public class LoginActivity extends AppCompatActivity {
                             else intent = new Intent(getApplicationContext(), DisponentHome.class);
 
                             startActivity(intent);
-                           /* if(isDriver.isChecked()) startActivity(new Intent(getApplicationContext(), DriverJobs.class));
-                            else startActivity(new Intent(getApplicationContext(), DisponentHome.class));*/
                         } else {
                             wrongUserPass.setVisibility(View.VISIBLE);
                         }
