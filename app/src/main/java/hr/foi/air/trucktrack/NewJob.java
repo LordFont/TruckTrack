@@ -1,15 +1,19 @@
 package hr.foi.air.trucktrack;
 
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
+
+import hr.foi.air.trucktrack.Interface.InterfaceToolbarChange;
 
 
-public class NewJob extends AppCompatActivity {
+public class NewJob extends AppCompatActivity implements InterfaceToolbarChange{
 
     Fragment fragment;
 
@@ -51,4 +55,11 @@ public class NewJob extends AppCompatActivity {
     }
 
 
+    @Override
+    public void InterfaceToolbarChange(Boolean needToChangeToolbar) {
+        if(needToChangeToolbar) {
+            Toast.makeText(getApplicationContext(), "Toolbar", Toast.LENGTH_SHORT).show();
+            //promjena toolbara
+        }
+    }
 }

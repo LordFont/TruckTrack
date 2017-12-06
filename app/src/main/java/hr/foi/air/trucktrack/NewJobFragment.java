@@ -1,9 +1,8 @@
 package hr.foi.air.trucktrack;
 
+import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
-import android.support.v4.app.FragmentTransaction;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,16 +11,12 @@ import android.widget.ImageView;
 import java.util.List;
 
 import entities.DriverModel;
-import hr.foi.air.drivermodule.GridViewFragment;
 import hr.foi.air.drivermodule.ListViewFragment;
-import hr.foi.air.trucktrack.Callbacks.UserCallback;
+import hr.foi.air.trucktrack.Callbacks.CallbackDriverList;
+import hr.foi.air.trucktrack.Interface.InterfaceToolbarChange;
 import hr.foi.air.webservice.ApiClient;
 import hr.foi.air.webservice.ApiInterface;
 import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-
-import static java.sql.DriverManager.getDrivers;
 
 
 public class NewJobFragment extends android.support.v4.app.Fragment implements View.OnClickListener {
@@ -30,6 +25,7 @@ public class NewJobFragment extends android.support.v4.app.Fragment implements V
     private ApiInterface apiService;
     static NewJobFragment instance = null;
     ImageView addDriver;
+
     private List<DriverModel> drivers = null;
 
     public static NewJobFragment getInstance(){
@@ -52,9 +48,8 @@ public class NewJobFragment extends android.support.v4.app.Fragment implements V
         fragment = ListViewFragment.getInstance(drivers);
         apiService = ApiClient.getClient().create(ApiInterface.class);
         Call<List<DriverModel>> call = apiService.getDrivers();
-        call.enqueue(new UserCallback(this,fragment));
+        call.enqueue(new CallbackDriverList(this,fragment));
     }
-
 }
 
 
