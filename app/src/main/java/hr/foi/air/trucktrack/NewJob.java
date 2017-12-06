@@ -7,11 +7,17 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
+
+import hr.foi.air.drivermodule.ListViewFragment;
+
+import static android.R.attr.duration;
 
 
-public class NewJob extends AppCompatActivity {
+public class NewJob extends AppCompatActivity implements ListViewFragment.ToolbarListener {
 
     Fragment fragment;
+    Menu mainMenu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +40,7 @@ public class NewJob extends AppCompatActivity {
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
+        mainMenu = menu;
         getMenuInflater().inflate(R.menu.menu_job, menu);
         menu.findItem(R.id.refreshIcon).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
@@ -50,5 +57,10 @@ public class NewJob extends AppCompatActivity {
         myTransaction.commit();
     }
 
-
+    @Override
+    public void onFragmentAttached(boolean change) {
+        Toast toast = Toast.makeText(getApplicationContext(),"text", Toast.LENGTH_LONG);
+        toast.show();
+        getMenuInflater().inflate(R.menu.menu_drivers,mainMenu);
+    }
 }

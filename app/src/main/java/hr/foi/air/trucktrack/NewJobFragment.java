@@ -1,10 +1,14 @@
 package hr.foi.air.trucktrack;
 
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -40,6 +44,12 @@ public class NewJobFragment extends android.support.v4.app.Fragment implements V
     }
 
     @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_new_job, container, false);
         addDriver = (ImageView) view.findViewById(R.id.addDriverIcon);
@@ -54,7 +64,6 @@ public class NewJobFragment extends android.support.v4.app.Fragment implements V
         Call<List<DriverModel>> call = apiService.getDrivers();
         call.enqueue(new UserCallback(this,fragment));
     }
-
 }
 
 
