@@ -14,24 +14,21 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <!-- Login progress -->
         <ImageView
             android:id="@+id/logo"
             android:layout_width="match_parent"
-            android:layout_height="238dp"
-            android:layout_marginBottom="32dp"
+            android:layout_height="271dp"
             android:scaleType="fitXY"
-            app:srcCompat="@drawable/logo" />
+            app:srcCompat="@drawable/home_screen_pic" />
 
         <LinearLayout
             android:id="@+id/email_login_form"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_margin="15dp"
             android:background="@color/colorGreyLogin"
             android:orientation="vertical"
             android:weightSum="1">
-
 
             <TextView
                 android:id="@+id/txtEmail"
@@ -44,8 +41,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:hint="Upišite e-mail"
-                android:inputType="textEmailAddress" />
+                android:inputType="textEmailAddress"
+                android:text="stella@gmail.com"
+                android:hint="@string/prompt_email"
+                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/txtLozinka"
@@ -59,37 +58,55 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:hint="Upišite lozinku"
-                android:inputType="textPassword" />
+                android:hint="@string/prompt_password"
+                android:inputType="textPassword"
+                android:text="123456"
+                android:textSize="16sp" />
 
-            <Button
-                android:id="@+id/loginButton"
-                style="?android:textAppearanceSmall"
+            <CheckBox
+                android:id="@+id/cbIsDriver"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:background="@color/colorGreenLogin"
-                android:text="@string/action_sign_in"
-                android:textColor="@color/colorGreyLogin"
-                android:textStyle="bold" />
+                android:paddingTop="10dp"
+                android:text="Vozac ? " />
 
-
-            <Button
-                android:id="@+id/testButton"
-                style="?android:textAppearanceSmall"
+            <TextView
+                android:id="@+id/txtWrongEmailOrPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:background="@color/colorGreenLogin"
-                android:onClick="sendMessage"
-                android:text="@string/testApp"
-                android:textColor="@color/colorGreyLogin"
-                android:textStyle="bold" />
-
-
-        </LinearLayout>
+                android:paddingTop="@dimen/login_password_padding"
+                android:text="@string/wrong_email_password"
+                android:textAlignment="center"
+                android:textColor="@color/colorGreenLogin"
+                android:textSize="16dp"
+                android:textStyle="bold"
+                android:visibility="gone" />
+       </LinearLayout>
 
     </LinearLayout>
 
+    <Button
+        android:id="@+id/loginButton"
+        style="?android:textAppearanceSmall"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_margin="15dp"
+        android:background="@color/colorPrimary"
+        android:text="@string/action_sign_in"
+        android:textColor="@color/colorGreyLogin"
+        android:textStyle="bold"/>
+
+    <Button
+        android:id="@+id/driverJobsTest"
+        style="?android:textAppearanceSmall"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:background="@color/colorPrimary"
+        android:text="@string/testDriverJobs"
+        android:textColor="@color/colorGreyLogin"
+        android:textStyle="bold"
+        android:layout_above="@+id/loginButton"/>
 
 </android.support.design.widget.CoordinatorLayout>

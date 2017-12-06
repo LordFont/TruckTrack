@@ -2,10 +2,9 @@
 <resources>
     <color name="colorPrimary">#00838F</color>
     <color name="colorPrimaryDark">#006064</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorAccent">#3F51B5</color>
     <color name="colorGreenLogin">#428E92</color>
     <color name="colorGreyLogin">#ededed</color>
-    <color name="colorHome">#00838F</color>
     <color name="textbody">#fffffd</color>
     <color name="crna">#131313</color>
 

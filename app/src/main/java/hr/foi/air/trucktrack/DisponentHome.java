@@ -9,12 +9,10 @@ import android.widget.LinearLayout;
 
 public class DisponentHome extends AppCompatActivity implements View.OnClickListener {
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_disponent_home);
-
         findViewById(R.id.jobListContainer).setOnClickListener(this);
         findViewById(R.id.driverListContainer).setOnClickListener(this);
     }
@@ -23,8 +21,7 @@ public class DisponentHome extends AppCompatActivity implements View.OnClickList
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.jobListContainer:
-                Snackbar mySnackbar = Snackbar.make(this.findViewById(R.id.jobListContainer), "Trenutna funkcionalnost nije implementirana.", Snackbar.LENGTH_LONG );
-                mySnackbar.show();
+                startActivity(new Intent(getApplicationContext(), DisponentJobs.class));
                 break;
             case R.id.driverListContainer:
                 startActivity(new Intent(getApplicationContext(), Drivers.class));
