@@ -5,22 +5,18 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import java.sql.Driver;
 import java.util.List;
 
 import entities.DriverModel;
 import hr.foi.air.drivermodule.ListViewFragment;
 import hr.foi.air.drivermodule.GridViewFragment;
-import hr.foi.air.trucktrack.Callbacks.UserCallback;
+import hr.foi.air.trucktrack.Callbacks.CallbackDriverList;
 import hr.foi.air.webservice.ApiClient;
 import hr.foi.air.webservice.ApiInterface;
 import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class Drivers extends AppCompatActivity implements ListViewFragment.ToolbarListener {
 
@@ -90,7 +86,7 @@ public class Drivers extends AppCompatActivity implements ListViewFragment.Toolb
     private void getDrivers() {
         apiService = ApiClient.getClient().create(ApiInterface.class);
         Call<List<DriverModel>> call = apiService.getDrivers();
-        call.enqueue(new UserCallback(this,fragment));
+        call.enqueue(new CallbackDriverList(this,fragment));
     }
 
     @Override

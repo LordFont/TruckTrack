@@ -1,6 +1,7 @@
 package hr.foi.air.trucktrack;
 
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -10,8 +11,6 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import hr.foi.air.drivermodule.ListViewFragment;
-
-import static android.R.attr.duration;
 
 
 public class NewJob extends AppCompatActivity implements ListViewFragment.ToolbarListener {
@@ -62,5 +61,6 @@ public class NewJob extends AppCompatActivity implements ListViewFragment.Toolba
         Toast toast = Toast.makeText(getApplicationContext(),"text", Toast.LENGTH_LONG);
         toast.show();
         getMenuInflater().inflate(R.menu.menu_drivers,mainMenu);
+
     }
 }
