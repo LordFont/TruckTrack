@@ -90,22 +90,6 @@ public class Drivers extends AppCompatActivity {
     private void getDrivers() {
         apiService = ApiClient.getClient().create(ApiInterface.class);
         Call<List<DriverModel>> call = apiService.getDrivers();
-        FragmentTransaction mTransactiont = getSupportFragmentManager().beginTransaction();
-        call.enqueue(new UserCallback(fragment,mTransactiont));
-//        call.enqueue(new Callback<List<DriverModel>>() {
-//            @Override
-//            public void onResponse(Call<List<DriverModel>> call, Response<List<DriverModel>> response) {
-//                drivers = response.body();
-//                if(fragment instanceof ListViewFragment) fragment = ListViewFragment.getInstance(drivers);
-//                else fragment = GridViewFragment.getInstance(drivers);
-//
-//                showFragment(fragment);
-//            }
-//
-//            @Override
-//            public void onFailure(Call<List<DriverModel>> call, Throwable t) {
-//                Log.d("Error", t.toString());
-//            }
-//        });
+        call.enqueue(new UserCallback(this,fragment));
     }
 }
