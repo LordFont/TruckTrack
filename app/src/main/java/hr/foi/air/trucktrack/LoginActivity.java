@@ -38,8 +38,6 @@ public class LoginActivity extends AppCompatActivity {
     EditText user, password;
     ApiInterface apiService;
     TextView wrongUserPass;
-    //ovo je samo button za testiranje dijelova aplikacije, posto navigacija jos nije potpuna
-    CheckBox isDriver;
 
     private boolean isNetworkConnected() {
         ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -56,7 +54,6 @@ public class LoginActivity extends AppCompatActivity {
         Button signInButton = (Button)findViewById(R.id.loginButton);
         apiService = ApiClient.getClient().create(ApiInterface.class);
         wrongUserPass = (TextView) findViewById(R.id.txtWrongEmailOrPassword);
-        isDriver = (CheckBox) findViewById(R.id.cbIsDriver);
 
         password.setTypeface(Typeface.DEFAULT);
         password.setTextSize(18);
@@ -68,6 +65,10 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String email = user.getText().toString();
                 String lozinka = password.getText().toString();
+                if(((CheckBox)findViewById(R.id.cbIsDriver)).isChecked()) {
+                    email = "pperic@gmail.com";
+                    lozinka = "peric";
+                }
 
                 Call<Void> call = apiService.authUser(new UserModel(email,lozinka));
                 //Log.d("Call", call.toString());
@@ -77,8 +78,8 @@ public class LoginActivity extends AppCompatActivity {
                     public void onResponse(Call<Void> call, Response<Void> response) {
                         if (response.code() == 200) {
                             wrongUserPass.setVisibility(View.GONE);
-                            if(isDriver.isChecked()) startActivity(new Intent(getApplicationContext(), DriverJobs.class));
-                            else startActivity(new Intent(getApplicationContext(), DisponentHome.class));
+                           /* if(isDriver.isChecked()) startActivity(new Intent(getApplicationContext(), DriverJobs.class));
+                            else startActivity(new Intent(getApplicationContext(), DisponentHome.class));*/
                         } else {
                             wrongUserPass.setVisibility(View.VISIBLE);
                         }
