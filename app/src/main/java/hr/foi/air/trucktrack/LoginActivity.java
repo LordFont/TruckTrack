@@ -70,23 +70,29 @@ public class LoginActivity extends AppCompatActivity {
                     lozinka = "peric";
                 }
 
-                Call<Void> call = apiService.authUser(new UserModel(email,lozinka));
+                Call<Boolean> call = apiService.authUser(new UserModel(email,lozinka));
                 //Log.d("Call", call.toString());
 
-                call.enqueue(new Callback<Void>() {
+                call.enqueue(new Callback<Boolean>() {
                     @Override
-                    public void onResponse(Call<Void> call, Response<Void> response) {
+                    public void onResponse(Call<Boolean> call, Response<Boolean> response) {
                         if (response.code() == 200) {
                             wrongUserPass.setVisibility(View.GONE);
-                           /* if(isDriver.isChecked()) startActivity(new Intent(getApplicationContext(), DriverJobs.class));
-                            else startActivity(new Intent(getApplicationContext(), DisponentHome.class));*/
+                            Intent intent;
+                            boolean rjesenje = response.body();
+                            if (rjesenje) {
+                                intent = new Intent(getApplicationContext(), DriverJobs.class);
+                            }
+                            else intent = new Intent(getApplicationContext(), DisponentHome.class);
+
+                            startActivity(intent);
                         } else {
                             wrongUserPass.setVisibility(View.VISIBLE);
                         }
                     }
 
                     @Override
-                    public void onFailure(Call<Void> call, Throwable t) {
+                    public void onFailure(Call<Boolean> call, Throwable t) {
                         Snackbar mySnackbar = Snackbar.make(findViewById(R.id.loginButton), "Problem sa serverom!", Snackbar.LENGTH_LONG );
                         mySnackbar.show();
                     }

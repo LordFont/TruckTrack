@@ -18,7 +18,7 @@ import hr.foi.air.webservice.ApiClient;
 import hr.foi.air.webservice.ApiInterface;
 import retrofit2.Call;
 
-public class Drivers extends AppCompatActivity {
+public class Drivers extends AppCompatActivity implements ListViewFragment.ToolbarListener {
 
     private List<DriverModel> drivers = null;
     private int changeImage = 1;
@@ -87,5 +87,10 @@ public class Drivers extends AppCompatActivity {
         apiService = ApiClient.getClient().create(ApiInterface.class);
         Call<List<DriverModel>> call = apiService.getDrivers();
         call.enqueue(new CallbackDriverList(this,fragment));
+    }
+
+    @Override
+    public void onFragmentAttached(boolean change) {
+
     }
 }

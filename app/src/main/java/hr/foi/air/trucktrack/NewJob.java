@@ -10,12 +10,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-import hr.foi.air.trucktrack.Interface.InterfaceToolbarChange;
+import hr.foi.air.drivermodule.ListViewFragment;
 
 
-public class NewJob extends AppCompatActivity implements InterfaceToolbarChange{
+public class NewJob extends AppCompatActivity implements ListViewFragment.ToolbarListener {
 
     Fragment fragment;
+    boolean iNeedToChangeToolbar = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,18 +49,26 @@ public class NewJob extends AppCompatActivity implements InterfaceToolbarChange{
         return true;
     }
 
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        if (iNeedToChangeToolbar) {
+            menu.clear();
+            getMenuInflater().inflate(R.menu.menu_drivers, menu);
+            getSupportActionBar().setTitle("Vozači");
+        }
+        return super.onPrepareOptionsMenu(menu);
+    }
+
     private void showFragment(Fragment f) {
         FragmentTransaction myTransaction = getSupportFragmentManager().beginTransaction();
         myTransaction.replace(R.id.main_container, f, f.getClass().getName());
         myTransaction.commit();
     }
 
-
     @Override
-    public void InterfaceToolbarChange(Boolean needToChangeToolbar) {
-        if(needToChangeToolbar) {
-            Toast.makeText(getApplicationContext(), "Toolbar", Toast.LENGTH_SHORT).show();
-            //promjena toolbara
-        }
+    public void onFragmentAttached(boolean change) {
+        Toast toast = Toast.makeText(getApplicationContext(),"text", Toast.LENGTH_LONG);
+        toast.show();
+        iNeedToChangeToolbar = change;
     }
 }

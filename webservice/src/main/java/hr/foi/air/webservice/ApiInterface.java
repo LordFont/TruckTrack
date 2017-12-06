@@ -18,5 +18,5 @@ public interface ApiInterface {
     Call<List<DriverModel>> getDrivers();
 
     @POST("user/auth")
-    Call<Void> authUser(@Body UserModel body);
+    Call<Boolean> authUser(@Body UserModel body);
 }

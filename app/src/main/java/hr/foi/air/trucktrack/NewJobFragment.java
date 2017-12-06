@@ -1,9 +1,16 @@
 package hr.foi.air.trucktrack;
 
+import android.view.View;
+
+import hr.foi.air.webservice.ApiInterface;
+import android.support.annotation.Nullable;
 import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -33,6 +40,12 @@ public class NewJobFragment extends android.support.v4.app.Fragment implements V
             instance = new NewJobFragment();
         }
         return instance;
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
     }
 
     @Override
