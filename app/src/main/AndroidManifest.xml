@@ -24,12 +24,15 @@
         </activity>
         <activity android:name=".Drivers" />
         <activity android:name=".DisponentHome" />
+        <activity
+            android:name=".NoContentActivity"
+            android:label="@string/title_activity_no_content"
+            android:theme="@style/AppTheme" />
         <activity android:name=".DriverJobs" />
         <activity android:name=".NewJob" />
-        <activity
-            android:name=".Jobs"
-            android:label="@string/title_activity_jobs"
-            android:theme="@style/AppTheme"></activity>
+        <activity android:name=".DriverHome" />
+        <activity android:name=".DisponentJobs" />
+        <activity android:name=".NewJobForm"></activity>
     </application>
 
 </manifest>

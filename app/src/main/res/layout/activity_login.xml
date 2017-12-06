@@ -58,10 +58,17 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:text="123456"
                 android:hint="@string/prompt_password"
                 android:inputType="textPassword"
+                android:text="123456"
                 android:textSize="16sp" />
+
+            <CheckBox
+                android:id="@+id/cbIsDriver"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="10dp"
+                android:text="Vozac ? " />
 
             <TextView
                 android:id="@+id/txtWrongEmailOrPassword"
@@ -75,6 +82,7 @@
                 android:textStyle="bold"
                 android:visibility="gone" />
        </LinearLayout>
+
     </LinearLayout>
 
     <Button
