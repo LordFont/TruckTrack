@@ -39,7 +39,6 @@ public class LoginActivity extends AppCompatActivity {
     ApiInterface apiService;
     TextView wrongUserPass;
     //ovo je samo button za testiranje dijelova aplikacije, posto navigacija jos nije potpuna
-    Button test;
     CheckBox isDriver;
 
     private boolean isNetworkConnected() {
@@ -58,9 +57,6 @@ public class LoginActivity extends AppCompatActivity {
         apiService = ApiClient.getClient().create(ApiInterface.class);
         wrongUserPass = (TextView) findViewById(R.id.txtWrongEmailOrPassword);
         isDriver = (CheckBox) findViewById(R.id.cbIsDriver);
-
-        //inicijalizacija buttona za testiranje
-        test = (Button)findViewById(R.id.driverJobsTest);
 
         password.setTypeface(Typeface.DEFAULT);
         password.setTextSize(18);

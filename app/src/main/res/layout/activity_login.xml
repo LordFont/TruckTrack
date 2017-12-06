@@ -97,16 +97,4 @@
         android:textColor="@color/colorGreyLogin"
         android:textStyle="bold"/>
 
-    <Button
-        android:id="@+id/driverJobsTest"
-        style="?android:textAppearanceSmall"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="15dp"
-        android:background="@color/colorPrimary"
-        android:text="@string/testDriverJobs"
-        android:textColor="@color/colorGreyLogin"
-        android:textStyle="bold"
-        android:layout_above="@+id/loginButton"/>
-
 </android.support.design.widget.CoordinatorLayout>
