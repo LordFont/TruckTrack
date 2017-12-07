@@ -8,10 +8,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import entities.RouteModel;
-import hr.foi.air.drivermodule.ListViewFragment;
 
 public class DriverJobs extends AppCompatActivity {
     @Override

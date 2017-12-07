@@ -23,15 +23,23 @@ import hr.foi.air.trucktrack.ViewHolders.ParentViewHolder;
 
 public class DriverJobsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     ArrayList<Object> dataOfTheList = null;
+    String mTipPrikaza = "";
 
-    public DriverJobsAdapter(ArrayList<Object> data) {
+    public DriverJobsAdapter(ArrayList<Object> data, String tip) {
         dataOfTheList = data;
+        mTipPrikaza = tip;
     }
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if (viewType == 1) {
-            View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.parent_driver_job, parent, false);
+            View v;
+            if (mTipPrikaza == "Vozac") {
+                v = LayoutInflater.from(parent.getContext()).inflate(R.layout.parent_driver_job, parent, false);
+            }
+            else {
+                v = LayoutInflater.from(parent.getContext()).inflate(R.layout.parent_disponent_job, parent, false);
+            }
             return new ParentViewHolder(v);
         } else {
             View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.child_driver_job, parent, false);
