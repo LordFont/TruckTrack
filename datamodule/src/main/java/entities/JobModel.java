@@ -1,6 +1,8 @@
 package entities;
 
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -10,9 +12,15 @@ import java.util.List;
  */
 
 public class JobModel {
+    @SerializedName("adresa_utovara")
     String mMjestoUtovara;
+
+    @SerializedName("adresa_primatelja")
     String mMjestoIstovara;
-    String mUtovarDatum;
+
+    transient String mUtovarDatum = "Datum";
+
+    @SerializedName("datum_isporuke")
     String mIstovarDatum;
 
     JobModel(String mjestoUtovara, String mjestoIstovara, String utovarDatum, String istovarDatum) {

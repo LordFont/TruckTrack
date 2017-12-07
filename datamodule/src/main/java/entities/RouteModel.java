@@ -1,8 +1,11 @@
 package entities;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -10,11 +13,13 @@ import java.util.Random;
  */
 
 public class RouteModel {
-    String mMjestoUtovara;
-    String mMjestoIstovara;
-    String mUtovarDatum;
-    String mIstovarDatum;
-    String mStatus;
+    transient String  mMjestoUtovara;
+    transient String mMjestoIstovara;
+    transient String mUtovarDatum;
+    transient String mIstovarDatum;
+    transient String mStatus;
+
+    @SerializedName("3")
     ArrayList<JobModel> poslovi;
 
     public RouteModel() {
