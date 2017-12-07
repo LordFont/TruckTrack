@@ -25,9 +25,10 @@ import static android.R.attr.fragment;
  * Created by Ivan on 4.12.2017..
  */
 
-public class UserCallback extends FragmentManager implements Callback<List<DriverModel>> {
+public class CallbackDriverList extends FragmentManager implements Callback<List<DriverModel>> {
     List<DriverModel> drivers;
-    public UserCallback(Object curr, Fragment next) {
+
+    public CallbackDriverList(Object curr, Fragment next) {
         if (curr instanceof Fragment) {
             mCurrent = ((Fragment) curr).getActivity();
         }
@@ -36,6 +37,7 @@ public class UserCallback extends FragmentManager implements Callback<List<Drive
         }
         mNnext = next;
     }
+
     @Override
     public void onResponse(Call<List<DriverModel>> call, Response<List<DriverModel>> response) {
         drivers = response.body();
