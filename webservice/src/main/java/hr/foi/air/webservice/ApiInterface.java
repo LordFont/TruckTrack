@@ -3,6 +3,7 @@ package hr.foi.air.webservice;
 import java.util.List;
 
 import entities.DriverModel;
+import entities.NewJobRequest;
 import entities.UserModel;
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -19,4 +20,7 @@ public interface ApiInterface {
 
     @POST("user/auth")
     Call<Void> authUser(@Body UserModel body);
+
+    @POST("job/new")
+    Call<Void> newJob(@Body NewJobRequest body);
 }

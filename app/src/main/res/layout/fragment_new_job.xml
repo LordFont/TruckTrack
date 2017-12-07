@@ -57,13 +57,13 @@
                     app:srcCompat="@drawable/ic_date_range_black_24dp" />
 
                 <android.support.design.widget.TextInputLayout
-                    android:id="@+id/input_layout_datumUtovaraa"
+                    android:id="@+id/input_layout_datumUtovara"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal" >
 
                     <EditText
-                        android:id="@+id/input_datumUtovaraa"
+                        android:id="@+id/input_datumUtovara"
                         android:layout_width="150dp"
                         android:layout_height="wrap_content"
                         android:hint="@string/datum_utovara"
@@ -222,7 +222,7 @@
             android:gravity="bottom">
 
             <Button
-                android:id="@+id/btn_accept"
+                android:id="@+id/btn_cancel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -232,7 +232,7 @@
             </Button>
 
             <Button
-                android:id="@+id/btn_cancel"
+                android:id="@+id/btn_accept"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
