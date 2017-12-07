@@ -10,12 +10,24 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import java.util.List;
+
+import entities.DriverModel;
+import hr.foi.air.drivermodule.GridViewFragment;
 import hr.foi.air.drivermodule.ListViewFragment;
+import hr.foi.air.trucktrack.Callbacks.CallbackDriverList;
+import hr.foi.air.webservice.ApiClient;
+import hr.foi.air.webservice.ApiInterface;
+import retrofit2.Call;
+
+import static java.sql.DriverManager.getDrivers;
 
 
 public class NewJob extends AppCompatActivity implements ListViewFragment.ToolbarListener {
 
     Fragment fragment;
+    private ApiInterface apiService;
+    int changeImage;
     boolean iNeedToChangeToolbar = false;
 
     @Override
@@ -26,9 +38,6 @@ public class NewJob extends AppCompatActivity implements ListViewFragment.Toolba
 
         fragment = NewJobFragment.getInstance();
         showFragment(fragment);
-        //fragment = ListViewFragment.getInstance(drivers);
-        //showFragment(fragment);
-
     }
 
     public void initToolbar() {
@@ -55,6 +64,33 @@ public class NewJob extends AppCompatActivity implements ListViewFragment.Toolba
             menu.clear();
             getMenuInflater().inflate(R.menu.menu_drivers, menu);
             getSupportActionBar().setTitle("Vozači");
+
+            menu.findItem(R.id.viewIcon).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+                @Override
+                public boolean onMenuItemClick(MenuItem item) {
+                    if (changeImage == 1) {
+                        item.setIcon(R.drawable.ic_dashboard_white_48px);
+                        changeImage = 0;
+                        fragment = new ListViewFragment();
+                        getDrivers();
+                    }
+                    else {
+                        item.setIcon(R.drawable.ic_view_list_white_48px);
+                        changeImage = 1;
+                        fragment = new GridViewFragment();
+                        getDrivers();
+                    }
+                    return true;
+                }
+            });
+
+            menu.findItem(R.id.refreshIcon).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+                @Override
+                public boolean onMenuItemClick(MenuItem menuItem) {
+                    getDrivers();
+                    return true;
+                }
+            });
         }
         return super.onPrepareOptionsMenu(menu);
     }
@@ -67,8 +103,13 @@ public class NewJob extends AppCompatActivity implements ListViewFragment.Toolba
 
     @Override
     public void onFragmentAttached(boolean change) {
-        Toast toast = Toast.makeText(getApplicationContext(),"text", Toast.LENGTH_LONG);
-        toast.show();
         iNeedToChangeToolbar = change;
+        changeImage = 0;
+    }
+
+    private void getDrivers() {
+        apiService = ApiClient.getClient().create(ApiInterface.class);
+        Call<List<DriverModel>> call = apiService.getDrivers();
+        call.enqueue(new CallbackDriverList(this,fragment));
     }
 }
