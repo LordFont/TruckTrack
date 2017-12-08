@@ -1,9 +1,9 @@
-package hr.foi.air.trucktrack;
+package hr.foi.air.trucktrack.ViewHolders;
 
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,22 +13,20 @@ import java.util.List;
 
 import entities.RouteModel;
 import hr.foi.air.trucktrack.Adapters.DriverJobsAdapter;
+import hr.foi.air.trucktrack.R;
 
 /**
- * Created by Ivan on 1.12.2017..
+ * Created by Ivan on 7.12.2017..
  */
 
-public class DriverJobsFragment extends android.support.v4.app.Fragment {
+public class DisponentJobsFragment extends Fragment {
     RecyclerView mRecyclerView;
-    static DriverJobsFragment instance = null;
+    static DisponentJobsFragment instance = null;
     static List<RouteModel> data = null;
 
-    public static DriverJobsFragment getInstance(List<RouteModel> dataJobs) {
+    public static DisponentJobsFragment getInstance(List<RouteModel> dataJobs) {
         if(instance == null) {
-            instance = new DriverJobsFragment();
-        }
-        if (dataJobs == null) {
-            Log.d("ISITNULL","ISNULL");
+            instance = new DisponentJobsFragment();
         }
         data = dataJobs;
         return instance;
@@ -36,16 +34,15 @@ public class DriverJobsFragment extends android.support.v4.app.Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_driver_jobs, container, false);
+        View view = inflater.inflate(R.layout.fragment_disponent_jobs, container, false);
         mRecyclerView = view.findViewById(R.id.rvDriverJobs);
         ArrayList<Object> arrayData = new ArrayList<Object>(data);
         showRecycleView(arrayData);
         return view;
     }
 
-
     private void showRecycleView(ArrayList<Object> data) {
-        DriverJobsAdapter adapter = new DriverJobsAdapter(data,"Vozac");
+        DriverJobsAdapter adapter = new DriverJobsAdapter(data,"Disponent");
         mRecyclerView.setAdapter(adapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
     }

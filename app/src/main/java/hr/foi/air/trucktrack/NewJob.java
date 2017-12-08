@@ -64,6 +64,7 @@ public class NewJob extends AppCompatActivity implements ListViewFragment.Toolba
             menu.clear();
             getMenuInflater().inflate(R.menu.menu_drivers, menu);
             getSupportActionBar().setTitle("Vozači");
+            menu.findItem(R.id.viewIcon).setIcon(R.drawable.ic_dashboard_white_48px);
 
             menu.findItem(R.id.viewIcon).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
                 @Override
