@@ -25,4 +25,5 @@
     <string name="koordinate_istovara">Koordinate istovara</string>
     <string name="dodjeljeni_vozac">Dodjeljeni vozač</string>
     <string name="title_activity_new_job_form">NewJobForm</string>
+    <string name="title_activity_map_job">Map</string>
 </resources>
