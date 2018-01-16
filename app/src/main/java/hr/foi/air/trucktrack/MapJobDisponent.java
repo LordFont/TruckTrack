@@ -15,7 +15,7 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-public class MapJob extends FragmentActivity implements OnMapReadyCallback {
+public class MapJobDisponent extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
     private String start, end;

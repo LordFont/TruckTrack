@@ -53,8 +53,11 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".MapJob"
-            android:label="@string/title_activity_map_job"></activity>
+            android:name=".MapJobDisponent"
+            android:label="@string/title_activity_map_job" />
+        <activity
+            android:name=".MapsJobDriver"
+            android:label="@string/title_activity_maps_job_driver"></activity>
     </application>
 
 </manifest>

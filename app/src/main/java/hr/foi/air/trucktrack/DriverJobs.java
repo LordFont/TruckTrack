@@ -1,7 +1,11 @@
 package hr.foi.air.trucktrack;
 
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.net.Uri;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -15,12 +19,16 @@ import entities.DriverModel;
 import entities.RouteModel;
 import hr.foi.air.trucktrack.Callbacks.CallbackDriverJobs;
 import hr.foi.air.trucktrack.Callbacks.CallbackDriverList;
+import hr.foi.air.trucktrack.Interface.CustomDialog;
 import hr.foi.air.webservice.ApiClient;
 import hr.foi.air.webservice.ApiInterface;
 import retrofit2.Call;
 
-public class DriverJobs extends AppCompatActivity {
+public class DriverJobs extends AppCompatActivity implements CustomDialog{
     private ApiInterface apiService;
+    final int DIALOG_SET_DONE = 400;
+    final int DIALOG_ACK_TO_JOB = 500;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,5 +69,56 @@ public class DriverJobs extends AppCompatActivity {
         setSupportActionBar(toolbar);
         toolbar.setNavigationIcon(R.drawable.ic_view_headline_white_48px);
         getSupportActionBar().setTitle(getResources().getString(R.string.toolbarPoslovi));
+    }
+
+    @Override
+    public void showCustomDialog(int type) {
+        if(type == DIALOG_SET_DONE) {
+            AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+            dialog.setNegativeButton("Odustani", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                }
+            });
+            dialog.setPositiveButton("Potvrdi", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    //google api za GMAIL - STELLA
+
+                    //AŽURIRANJE POSLA U BAZI - API POZIV
+
+
+                }
+            });
+            dialog.setTitle("Potvrditi odrađeni posao?");
+            dialog.setMessage("Potvrdom odrađenog posla, potvrda se šalje vašem disponentu kao dokaz istoga. Potvrdom posao nestaje s vaše liste i u mogućnosti ste prihvatiti idući posao.");
+            dialog.show();
+        } else if (type == DIALOG_ACK_TO_JOB) {
+            AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+            dialog.setNegativeButton("Odustani", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                }
+            });
+            dialog.setPositiveButton("Potvrdi", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    Intent intent = new Intent(Intent.ACTION_SENDTO); // it's not ACTION_SEND
+                    intent.setType("text/plain");
+                    intent.putExtra(Intent.EXTRA_SUBJECT, "POTVRDA POSLA");
+                    intent.putExtra(Intent.EXTRA_TEXT, "Posao je odrađen od strane vozača Pero Perić");
+                    intent.setData(Uri.parse("mailto:stellyrepsolka@gmail.com")); // or just "mailto:" for blank
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK); // this will make such that when user returns to your app, your app is displayed, instead of the email app.
+                    startActivity(intent);
+
+                    //AŽURIRANJE POSLA U BAZI - API POZIV
+                }
+            });
+            dialog.setTitle("Prihvatiti posao?");
+            dialog.setMessage("Potvrdom novog dodijeljenog posla od strane disponenta isti će se pozivionirati na vrhu liste. Potvrdom dodijele novog posla potvrda se šalje vašem disponentu.");
+            dialog.show();
+        }
     }
 }

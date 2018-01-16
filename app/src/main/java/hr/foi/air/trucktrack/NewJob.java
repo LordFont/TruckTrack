@@ -3,7 +3,6 @@ package hr.foi.air.trucktrack;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -23,22 +22,26 @@ import entities.DriverModel;
 import hr.foi.air.drivermodule.GridViewFragment;
 import hr.foi.air.drivermodule.ListViewFragment;
 import hr.foi.air.trucktrack.Callbacks.CallbackDriverList;
-import hr.foi.air.trucktrack.Interface.ClickedOnMap;
+import hr.foi.air.drivermodule.DriverSelectFromList;
 import hr.foi.air.webservice.ApiClient;
 import hr.foi.air.webservice.ApiInterface;
 import retrofit2.Call;
 
-import static java.sql.DriverManager.getDrivers;
 
-
-public class NewJob extends AppCompatActivity implements ListViewFragment.ToolbarListener, NewJobFragment.ClickedOnMap, NewJobFragment.CalendarClicked {
+public class NewJob extends AppCompatActivity implements
+        ListViewFragment.ToolbarListener,
+        NewJobFragment.ClickedOnMap,
+        NewJobFragment.CalendarClicked,
+        NewJobFragment.DriverForJob,
+        NewJobFragment.PreviousActivity,
+        DriverSelectFromList {
 
     Fragment fragment;
-    private ApiInterface apiService;
     int changeImage;
     boolean iNeedToChangeToolbar = false;
-    ClickedOnMap clickedOnMapInterface;
     final Integer ENTER_IN_MAP = 3003;
+    private ApiInterface apiService;
+    private List<DriverModel> drivers = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -126,7 +129,7 @@ public class NewJob extends AppCompatActivity implements ListViewFragment.Toolba
 
     @Override
     public void ClickedOnMap(String coordinatesStart, String coordinatesEnd) {
-        Intent intent = new Intent(getApplicationContext(), MapJob.class);
+        Intent intent = new Intent(getApplicationContext(), MapJobDisponent.class);
         intent.putExtra("Start", coordinatesStart);
         intent.putExtra("End", coordinatesEnd);
         startActivityForResult(intent, ENTER_IN_MAP);
@@ -163,4 +166,35 @@ public class NewJob extends AppCompatActivity implements ListViewFragment.Toolba
         dialog.show();
     }
 
+    @Override
+    public void setDriverForJob() {
+        fragment = ListViewFragment.getInstance(drivers);
+        apiService = ApiClient.getClient().create(ApiInterface.class);
+        Call<List<DriverModel>> call = apiService.getDrivers();
+        call.enqueue(new CallbackDriverList(this, fragment));
+    }
+
+
+
+    @Override
+    public void driverSelected(DriverModel driver) {
+        fragment = NewJobFragment.getInstance();
+        showFragment(fragment);
+       ////STELLA TU DOBIJEM PODATKE - > KAKO FRAGMENT INPUT (ID: input_vozac) UPDATE-ati??
+    }
+
+    @Override
+    public void cancelCurrent() {
+        onBackPressed();
+    }
+
+    @Override
+    public void saveNewJob() {
+
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+    }
 }
