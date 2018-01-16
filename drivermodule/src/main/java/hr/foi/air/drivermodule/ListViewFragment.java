@@ -22,6 +22,8 @@ import entities.DriverModel;
 
 public class ListViewFragment extends android.support.v4.app.Fragment {
     ToolbarListener mCallback;
+        DriverSelectFromList interfaceSelectedDriver;
+
     public interface ToolbarListener {
         public void onFragmentAttached(boolean change);
     }
@@ -52,6 +54,8 @@ public class ListViewFragment extends android.support.v4.app.Fragment {
         super.onAttach(context);
         try {
             mCallback = (ToolbarListener) context;
+            interfaceSelectedDriver = (DriverSelectFromList) context;
+
         } catch (ClassCastException e) {
             throw new ClassCastException(context.toString()
                     + " must implement ToolbarListener");
@@ -59,9 +63,10 @@ public class ListViewFragment extends android.support.v4.app.Fragment {
     }
 
     private void showRecycleView(List<DriverModel> data) {
-        DriversAdapter adapter = new DriversAdapter(getContext(),data, 1);
+        DriversAdapter adapter = new DriversAdapter(getContext(),data, 1, interfaceSelectedDriver);
         mRecyclerView.setAdapter(adapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
     }
+
 
 }

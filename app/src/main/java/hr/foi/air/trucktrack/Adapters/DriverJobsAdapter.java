@@ -1,6 +1,6 @@
 package hr.foi.air.trucktrack.Adapters;
 
-import android.graphics.Movie;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,8 +13,11 @@ import java.util.List;
 
 import entities.JobModel;
 import entities.RouteModel;
+import hr.foi.air.trucktrack.DriverJobsFragment;
+import hr.foi.air.trucktrack.Interface.CustomDialog;
 import hr.foi.air.trucktrack.R;
 import hr.foi.air.trucktrack.ViewHolders.ChildViewHolder;
+import hr.foi.air.trucktrack.ViewHolders.DisponentJobsFragment;
 import hr.foi.air.trucktrack.ViewHolders.ParentViewHolder;
 
 /**
@@ -24,10 +27,19 @@ import hr.foi.air.trucktrack.ViewHolders.ParentViewHolder;
 public class DriverJobsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     ArrayList<Object> dataOfTheList = null;
     String mTipPrikaza = "";
+    Fragment contextAct;
+    CustomDialog customDialog;
+    final int DIALOG_DELETE_JOB = 100;
+    final int DIALOG_SAVE_JOB = 200;
+    final int DIALOG_SET_DONE = 400;
+    final int DIALOG_ACK_TO_JOB = 500;
 
-    public DriverJobsAdapter(ArrayList<Object> data, String tip) {
+
+    public DriverJobsAdapter(ArrayList<Object> data, String tip, Fragment context, CustomDialog customDialog) {
         dataOfTheList = data;
         mTipPrikaza = tip;
+        contextAct = context;
+        this.customDialog = customDialog;
     }
 
     @Override
@@ -36,8 +48,7 @@ public class DriverJobsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             View v;
             if (mTipPrikaza == "Vozac") {
                 v = LayoutInflater.from(parent.getContext()).inflate(R.layout.parent_driver_job, parent, false);
-            }
-            else {
+            } else {
                 v = LayoutInflater.from(parent.getContext()).inflate(R.layout.parent_disponent_job, parent, false);
             }
             return new ParentViewHolder(v);
@@ -63,7 +74,7 @@ public class DriverJobsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                 @Override
                 public void onClick(View view) {
                     List<JobModel> jobs = ((RouteModel) dataOfTheList.get(position)).getPoslovi();
-                    if(parent.isActivated()) {
+                    if (parent.isActivated()) {
                         removeFrom(position, jobs.size());
                     } else {
                         addInFrontOf(position, jobs);
@@ -75,6 +86,46 @@ public class DriverJobsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         } else {
             ((TextView) parent.findViewById(R.id.poslovi)).setText(((JobModel) dataOfTheList.get(position)).getMjestoIstovara());
         }
+
+        if (contextAct instanceof DriverJobsFragment) {
+            ((ImageView) parent.findViewById(R.id.btnMapShow)).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    ((DriverJobsFragment) contextAct).clickedOnMap(3);
+                }
+            });
+
+            parent.findViewById(R.id.btnSetDoneJob).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    customDialog.showCustomDialog(DIALOG_SET_DONE);
+                }
+            });
+
+            parent.findViewById(R.id.btnACKJob).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    customDialog.showCustomDialog(DIALOG_ACK_TO_JOB);
+                }
+            });
+
+        } else {
+            ((ImageView) parent.findViewById(R.id.btnDeleteJob)).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    customDialog.showCustomDialog(DIALOG_DELETE_JOB);
+                }
+            });
+
+            ((ImageView) parent.findViewById(R.id.btnEditJob)).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    customDialog.showCustomDialog(DIALOG_SAVE_JOB);
+                }
+            });
+        }
+
+
     }
 
     @Override
@@ -90,14 +141,14 @@ public class DriverJobsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         else return 0;
     }
 
-    public void addInFrontOf(int position, List<JobModel> jobs){
-        for(int i = 0; i < jobs.size(); i++)
-            dataOfTheList.add(position+i+1, jobs.get(i));
+    public void addInFrontOf(int position, List<JobModel> jobs) {
+        for (int i = 0; i < jobs.size(); i++)
+            dataOfTheList.add(position + i + 1, jobs.get(i));
     }
 
-    public void removeFrom(int position, int numOfJobs){
-        for(int i = 0; i < numOfJobs; i++)
-            dataOfTheList.remove(position+1);
+    public void removeFrom(int position, int numOfJobs) {
+        for (int i = 0; i < numOfJobs; i++)
+            dataOfTheList.remove(position + 1);
     }
 }
 
