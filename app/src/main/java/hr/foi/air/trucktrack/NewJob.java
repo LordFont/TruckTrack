@@ -180,7 +180,8 @@ public class NewJob extends AppCompatActivity implements
     public void driverSelected(DriverModel driver) {
         fragment = NewJobFragment.getInstance();
         showFragment(fragment);
-       ////STELLA TU DOBIJEM PODATKE - > KAKO FRAGMENT INPUT (ID: input_vozac) UPDATE-ati??
+        /*DISPONENT-CLICKED
+        * STELLA TU DOBIJEM PODATKE - > KAKO FRAGMENT INPUT (ID: input_vozac) UPDATE-ati??*/
     }
 
     @Override
@@ -190,7 +191,13 @@ public class NewJob extends AppCompatActivity implements
 
     @Override
     public void saveNewJob() {
-
+        /*DISPONENT-JOB-SAVE
+        * metoda kao parametar mora dobiti instancu klase koja će spremati sve podatke forme posla.
+        * nakon uspješnog spremanja prikazati SnackBar sa porukom "Uspješno spremanje" u protivnom
+        * "Neuspješno spremanje". Nakon spremanja pogled se mora prikazati na listi poslova. Moguće je
+        * koristiti metodu cancelCurrent koja poziva prethodnu aktivnost koja je upravo DisponentJobs.class
+        * koja nam i treba.
+        * KOORDINATE MORAJU BITI SPREMLJENE KAO STRING (TEXT)*/
     }
 
     @Override
