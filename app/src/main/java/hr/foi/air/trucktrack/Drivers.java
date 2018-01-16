@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import java.util.List;
 
 import entities.DriverModel;
+import hr.foi.air.drivermodule.DriverSelectFromList;
 import hr.foi.air.drivermodule.ListViewFragment;
 import hr.foi.air.drivermodule.GridViewFragment;
 import hr.foi.air.trucktrack.Callbacks.CallbackDriverList;
@@ -18,7 +19,7 @@ import hr.foi.air.webservice.ApiClient;
 import hr.foi.air.webservice.ApiInterface;
 import retrofit2.Call;
 
-public class Drivers extends AppCompatActivity implements ListViewFragment.ToolbarListener {
+public class Drivers extends AppCompatActivity implements ListViewFragment.ToolbarListener, DriverSelectFromList{
 
     private List<DriverModel> drivers = null;
     private int changeImage = 1;
@@ -92,5 +93,10 @@ public class Drivers extends AppCompatActivity implements ListViewFragment.Toolb
     @Override
     public void onFragmentAttached(boolean change) {
         //needs to be implemented
+    }
+
+    @Override
+    public void driverSelected(DriverModel driver) {
+
     }
 }
