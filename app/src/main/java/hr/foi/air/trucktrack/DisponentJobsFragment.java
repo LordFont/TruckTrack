@@ -1,4 +1,4 @@
-package hr.foi.air.trucktrack.ViewHolders;
+package hr.foi.air.trucktrack;
 
 import android.content.Context;
 import android.content.Intent;
@@ -14,11 +14,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import entities.RouteModel;
-import hr.foi.air.trucktrack.Adapters.DriverJobsAdapter;
+import hr.foi.air.trucktrack.Adapters.JobListAdapter;
 import hr.foi.air.trucktrack.Interface.ClickedOnMap;
 import hr.foi.air.trucktrack.Interface.CustomDialog;
-import hr.foi.air.trucktrack.MapsJobDriver;
-import hr.foi.air.trucktrack.R;
 
 /**
  * Created by Ivan on 7.12.2017..
@@ -49,7 +47,7 @@ public class DisponentJobsFragment extends Fragment implements ClickedOnMap{
     }
 
     private void showRecycleView(ArrayList<Object> data) {
-        DriverJobsAdapter adapter = new DriverJobsAdapter(data,"Disponent", instance, customDialog);
+        JobListAdapter adapter = new JobListAdapter(data,"Disponent", instance, customDialog);
         mRecyclerView.setAdapter(adapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
     }

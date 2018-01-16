@@ -17,14 +17,13 @@ import hr.foi.air.trucktrack.DriverJobsFragment;
 import hr.foi.air.trucktrack.Interface.CustomDialog;
 import hr.foi.air.trucktrack.R;
 import hr.foi.air.trucktrack.ViewHolders.ChildViewHolder;
-import hr.foi.air.trucktrack.ViewHolders.DisponentJobsFragment;
 import hr.foi.air.trucktrack.ViewHolders.ParentViewHolder;
 
 /**
  * Created by Ivan on 1.12.2017..
  */
 
-public class DriverJobsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class JobListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     ArrayList<Object> dataOfTheList = null;
     String mTipPrikaza = "";
     Fragment contextAct;
@@ -35,7 +34,7 @@ public class DriverJobsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     final int DIALOG_ACK_TO_JOB = 500;
 
 
-    public DriverJobsAdapter(ArrayList<Object> data, String tip, Fragment context, CustomDialog customDialog) {
+    public JobListAdapter(ArrayList<Object> data, String tip, Fragment context, CustomDialog customDialog) {
         dataOfTheList = data;
         mTipPrikaza = tip;
         contextAct = context;
@@ -61,6 +60,10 @@ public class DriverJobsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     @Override
     public void onBindViewHolder(final RecyclerView.ViewHolder holder, final int position) {
         final View parent = holder.itemView;
+         /*DISPONENT-1JOB
+        * ako se radi o prvom poslu koji je prihvaćen tada mora promjeniti background - dokumentacija za detalje
+        * Čekanje potvrde mora biti boldano
+        * */
 
         if (holder instanceof ParentViewHolder) {
             String datum1 = ((RouteModel) dataOfTheList.get(position)).getUtovarDatum().toString();
@@ -88,7 +91,7 @@ public class DriverJobsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         }
 
         if (contextAct instanceof DriverJobsFragment) {
-            ((ImageView) parent.findViewById(R.id.btnMapShow)).setOnClickListener(new View.OnClickListener() {
+            parent.findViewById(R.id.btnMapShow).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     ((DriverJobsFragment) contextAct).clickedOnMap(3);

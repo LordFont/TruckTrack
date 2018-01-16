@@ -15,7 +15,6 @@ import java.util.ArrayList;
 
 import entities.RouteModel;
 import hr.foi.air.trucktrack.Interface.CustomDialog;
-import hr.foi.air.trucktrack.ViewHolders.DisponentJobsFragment;
 
 public class DisponentJobs extends AppCompatActivity implements CustomDialog{
     final int DIALOG_DELETE_JOB = 100;
@@ -65,7 +64,6 @@ public class DisponentJobs extends AppCompatActivity implements CustomDialog{
         mTransactiont.commit();
     }
 
-
     @Override
     public void showCustomDialog(int type) {
         if(type == DIALOG_DELETE_JOB) {
@@ -79,14 +77,19 @@ public class DisponentJobs extends AppCompatActivity implements CustomDialog{
             dialog.setPositiveButton("Obriši", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-                    //BRISANJE API POZIV
+                    /* DISPONENT-DELETE
+                        Na temelju ID posla slati api poziv za brisanje istog
+                        Ako je response api poziva uspješan otvoriti SnackBar s porukom "Uspješno obrisano" u protivnom "Neuspješno poslano"
+                    */
                 }
             });
             dialog.setTitle("Brisanje posla");
             dialog.setMessage("Potvrdom brisanja posla će rezultirati brisanjem istog iz baze podataka i kao takav više neće postojati za editiranje ili dodjeljivanje posla vozaču");
             dialog.show();
         } else if (type == DIALOG_SAVE_JOB){
-            //SPREMANJE POSLA API POZIV
+            /* DISPONENT-SAVE
+                Spremanje tako što se poziva api poziv i uspješnim spremanjem se otvara SnackBar sa porukom : "Uspješno spremljeno" u protivnom "Neuspješno spremljeno".
+            */
         }
     }
 }

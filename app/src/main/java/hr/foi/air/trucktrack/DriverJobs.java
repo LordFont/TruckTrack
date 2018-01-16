@@ -84,11 +84,13 @@ public class DriverJobs extends AppCompatActivity implements CustomDialog{
             dialog.setPositiveButton("Potvrdi", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-                    //google api za GMAIL - STELLA
-
-                    //AŽURIRANJE POSLA U BAZI - API POZIV
-
-
+                    /*DRIVER-DONE
+                    * Klikom na ikonu done otvara se dialog. Pritiskom na “potvrdi” mora se pozvati
+                    * api poziv za slanje id posla  koji je odrađen. Kada se vrati uspješan response
+                    * vratiti će se email disponenta koji je nadređen vozaču koji će služiti za GMAIL
+                    * api za slanje emaila. Nakon što se email bude poslao prikazat će se SnackBar
+                    * poruka “Uspješno poslano” u protivnom “Neuspješno poslano”. Prije nego GMAIL
+                    * API bude gotov, nakon dolaska prvog response-a refreshati listu poslova vozača !*/
                 }
             });
             dialog.setTitle("Potvrditi odrađeni posao?");
@@ -105,15 +107,9 @@ public class DriverJobs extends AppCompatActivity implements CustomDialog{
             dialog.setPositiveButton("Potvrdi", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-                    Intent intent = new Intent(Intent.ACTION_SENDTO); // it's not ACTION_SEND
-                    intent.setType("text/plain");
-                    intent.putExtra(Intent.EXTRA_SUBJECT, "POTVRDA POSLA");
-                    intent.putExtra(Intent.EXTRA_TEXT, "Posao je odrađen od strane vozača Pero Perić");
-                    intent.setData(Uri.parse("mailto:stellyrepsolka@gmail.com")); // or just "mailto:" for blank
-                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK); // this will make such that when user returns to your app, your app is displayed, instead of the email app.
-                    startActivity(intent);
-
-                    //AŽURIRANJE POSLA U BAZI - API POZIV
+                   /*DRIVER-ACK
+                   * Otvara se dialog. klikom na potvrdi se šalje api poziv za ažuriranje statusa na temelju id posla.
+                   * te se mora ažutirati lista poslova ! */
                 }
             });
             dialog.setTitle("Prihvatiti posao?");
