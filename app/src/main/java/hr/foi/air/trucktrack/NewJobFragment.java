@@ -2,6 +2,7 @@ package hr.foi.air.trucktrack;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -11,6 +12,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import org.w3c.dom.Text;
 
@@ -30,6 +33,7 @@ public class NewJobFragment extends Fragment {
     private List<DriverModel> drivers = null;
     Button clearCoordinates;
     EditText input_vozac;
+    View view;
 
     public static NewJobFragment getInstance() {
         if (instance == null) {
@@ -46,7 +50,7 @@ public class NewJobFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_new_job, container, false);
+        view = inflater.inflate(R.layout.fragment_new_job, container, false);
 
         addDriver = view.findViewById(R.id.addDriverIcon);
         addDriver.setOnClickListener(new View.OnClickListener() {
@@ -141,4 +145,20 @@ public class NewJobFragment extends Fragment {
         void cancelCurrent();
     }
 
+    //IVAN - ova metoda ažurira u ui threadu edittext, i zbog toga sada mozemo vidjeti na ekranu ažurirani box
+    public void setDriverOnScreen(final DriverModel driver){
+        Log.d("Prezime u fragmentu",driver.getPrezime());
+        Thread timer = new Thread() {
+            @Override
+            public void run() {
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        input_vozac.setText(driver.getIme() + " " + driver.getPrezime());
+                    }
+                });
+            }
+        };
+        timer.start();
+    }
 }
