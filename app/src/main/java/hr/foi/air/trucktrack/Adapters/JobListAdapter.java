@@ -68,7 +68,7 @@ public class JobListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         if (holder instanceof ParentViewHolder) {
             String datum1 = "Nema ga";
             String datum2 = ((RouteModel) dataOfTheList.get(position)).getIstovarDatum().toString();
-            ((TextView) parent.findViewById(R.id.datumi)).setText(datum2);
+            ((TextView) parent.findViewById(R.id.datumi)).setText("Datum rute: " + datum2);
             ((TextView) parent.findViewById(R.id.utovar)).setText(((RouteModel) dataOfTheList.get(position)).getMjestoUtovara().toString());
             ((TextView) parent.findViewById(R.id.istovar)).setText(((RouteModel) dataOfTheList.get(position)).getMjestoIstovara());
             ((TextView) parent.findViewById(R.id.status)).setText(((RouteModel) dataOfTheList.get(position)).getStatus().toString());

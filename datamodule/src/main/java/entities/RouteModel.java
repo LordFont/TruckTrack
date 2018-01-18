@@ -7,7 +7,9 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.Random;
+import java.util.TimeZone;
 
 /**
  * Created by Ivan on 21.11.2017..
@@ -87,8 +89,12 @@ public class RouteModel {
     }
 
     public String getIstovarDatum() {
-        SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-DD");
-        Date date = new Date(Integer.parseInt(mIstovarDatum));
+        if (mIstovarDatum == null) {
+            mIstovarDatum = "0";
+        }
+        SimpleDateFormat sf = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
+        sf.setTimeZone(TimeZone.getTimeZone("UTC"));
+        Date date = new Date(Long.parseLong(mIstovarDatum)*1000);
         return sf.format(date);
     }
 
