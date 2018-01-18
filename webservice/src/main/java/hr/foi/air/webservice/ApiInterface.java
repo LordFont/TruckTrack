@@ -1,14 +1,11 @@
 package hr.foi.air.webservice;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import entities.DriverJobsResponse;
 import entities.DriverModel;
-
-import entities.NewJobRequest;
-
 import entities.RouteModel;
-
 import entities.UserModel;
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -30,13 +27,9 @@ public interface ApiInterface {
     @POST("user/auth")
     Call<Boolean> authUser(@Body UserModel body);
 
-    @POST("job/new")
-    Call<Void> newJob(@Body NewJobRequest body);
+    @GET("route/{id}")
+    Call <ArrayList<RouteModel>> getDriverJobs(@Path("id") String id);
 
-    @GET("driver/{id}")
-    Call<List<DriverJobsResponse>> getDriverJobs(@Path("id") String id);
-
-    @POST("job/assign")
-    Call<Boolean> jobAssign(@Body int idRuta);
-
+    @GET("route/all")
+    Call <ArrayList<RouteModel>> getAllRoutes();
 }
