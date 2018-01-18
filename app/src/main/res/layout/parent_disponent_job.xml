@@ -50,11 +50,11 @@
         android:gravity="right">
 
         <ImageView
-            android:id="@+id/btnMapShow"
+            android:id="@+id/btnEditJob"
             android:layout_width="32dp"
             android:layout_height="32dp"
             android:layout_marginTop="5dp"
-            app:srcCompat="@drawable/ic_map_black_24dp"
+            app:srcCompat="@drawable/ic_edit_black_24dp"
             android:tint="#7d7d7d"/>
 
         <Space
@@ -63,20 +63,11 @@
             android:layout_weight="1"/>
 
         <ImageView
-            android:id="@+id/btnSetDoneJob"
+            android:id="@+id/btnDeleteJob"
             android:layout_width="32dp"
             android:layout_height="32dp"
             android:adjustViewBounds="false"
-            app:srcCompat="@drawable/ic_done_all_black_24dp"
-            android:tint="#7d7d7d"/>
-
-        <ImageView
-            android:id="@+id/btnACKJob"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:visibility="gone"
-            android:adjustViewBounds="false"
-            app:srcCompat="@drawable/ic_done_black_24dp"
+            app:srcCompat="@drawable/ic_delete_black_24dp"
             android:tint="#7d7d7d"/>
 
     </LinearLayout>

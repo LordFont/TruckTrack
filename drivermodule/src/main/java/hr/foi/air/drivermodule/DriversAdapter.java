@@ -30,12 +30,14 @@ public class DriversAdapter extends RecyclerView.Adapter<ViewHolderTilesOfList> 
     private Context mContext;
     // Zastavica koja predstavlja layout prikaza - list(0) i grid(1)
     private int mViewType;
+    DriverSelectFromList interfaceSelectedDriver = null;
 
     // U konstruktoru adaptera se prosljeđuje lista vozača - za sada su testni primjeri
-    public DriversAdapter(Context context,  List<DriverModel> drivers, int viewType) {
+    public DriversAdapter(Context context,  List<DriverModel> drivers, int viewType, DriverSelectFromList interfaceSelectedDriver) {
         mDrivers = drivers;
         mContext = context;
         mViewType = viewType;
+        this.interfaceSelectedDriver = interfaceSelectedDriver;
     }
 
     @Override
@@ -49,17 +51,18 @@ public class DriversAdapter extends RecyclerView.Adapter<ViewHolderTilesOfList> 
         else {
             driverView = inflater.inflate(R.layout.item_driver_list, parent, false);
         }
+
         return new ViewHolderTilesOfList(driverView);
     }
 
     @Override
-    public void onBindViewHolder(ViewHolderTilesOfList holder, int position) {
+    public void onBindViewHolder(final ViewHolderTilesOfList holder, int position) {
         holder.driverName.setText(mDrivers.get(position).getIme()+" "+mDrivers.get(position).getPrezime());
         holder.driverImage.setImageResource(R.drawable.test01);
         holder.dView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.d("App", "clicked");
+                interfaceSelectedDriver.driverSelected(mDrivers.get(holder.getAdapterPosition()));
             }
         });
     }
@@ -67,7 +70,8 @@ public class DriversAdapter extends RecyclerView.Adapter<ViewHolderTilesOfList> 
     @Override
     public int getItemCount() {
         if(mDrivers == null) return 0;
-
         return mDrivers.size();
     }
+
+
 }

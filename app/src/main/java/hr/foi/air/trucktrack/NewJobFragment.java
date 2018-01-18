@@ -1,47 +1,42 @@
 package hr.foi.air.trucktrack;
 
-import android.view.View;
-
-import entities.NewJobRequest;
-import hr.foi.air.webservice.ApiInterface;
-import android.support.annotation.Nullable;
-import android.content.Context;
-import android.support.v4.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import org.w3c.dom.Text;
 
 import java.util.List;
 
 import entities.DriverModel;
-import hr.foi.air.drivermodule.ListViewFragment;
-import hr.foi.air.trucktrack.Callbacks.CallbackDriverList;
-import hr.foi.air.trucktrack.Interface.InterfaceToolbarChange;
-import hr.foi.air.webservice.ApiClient;
 import hr.foi.air.webservice.ApiInterface;
-import retrofit2.Call;
 
 
-public class NewJobFragment extends android.support.v4.app.Fragment implements View.OnClickListener {
+public class NewJobFragment extends Fragment {
 
-    Fragment fragment;
-    private ApiInterface apiService;
     static NewJobFragment instance = null;
-    ImageView addDriver;
-    Button btnCancel, btnAccept;
+    Fragment fragment;
+    ImageView addDriver, addStart, addEnd;
+    EditText inputStart, inputEnd, datumUtovara, datumIstovara;
+    private ApiInterface apiService;
     private List<DriverModel> drivers = null;
+    Button clearCoordinates;
+    EditText input_vozac;
+    View view;
 
-    EditText utovar, istovar, dutovar, distovar, kutovar, kistovar, vozac;
-
-    public static NewJobFragment getInstance(){
-        if(instance == null){
+    public static NewJobFragment getInstance() {
+        if (instance == null) {
             instance = new NewJobFragment();
         }
         return instance;
@@ -55,55 +50,115 @@ public class NewJobFragment extends android.support.v4.app.Fragment implements V
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_new_job, container, false);
-        addDriver = (ImageView) view.findViewById(R.id.addDriverIcon);
-        addDriver.setOnClickListener(this);
+        view = inflater.inflate(R.layout.fragment_new_job, container, false);
 
-        btnCancel = (Button) view.findViewById(R.id.btn_cancel);
-        btnCancel.setOnClickListener(this);
+        addDriver = view.findViewById(R.id.addDriverIcon);
+        addDriver.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((DriverForJob) getActivity()).setDriverForJob();
+            }
+        });
 
-        btnAccept = (Button) view.findViewById(R.id.btn_accept);
-        btnAccept.setOnClickListener(this);
+        inputStart = view.findViewById(R.id.input_kordinateUtovara);
+        inputEnd = view.findViewById(R.id.input_kordinateIstovara);
 
-        utovar = (EditText)view.findViewById(R.id.input_utovar);
-        istovar = (EditText) view.findViewById(R.id.input_istovar);
-        dutovar = (EditText) view.findViewById(R.id.input_datumUtovara);
-        distovar = (EditText) view.findViewById(R.id.input_datumIstovara);
-        kutovar = (EditText) view.findViewById(R.id.input_kordinateUtovara);
-        kistovar = (EditText) view.findViewById(R.id.input_kordinateIstovara);
-        vozac = (EditText) view.findViewById(R.id.input_vozac);
+        clearCoordinates = view.findViewById(R.id.btnClearCoordinates);
+        clearCoordinates.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                inputStart.setText("");
+                inputEnd.setText("");
+            }
+        });
 
+        addStart = view.findViewById(R.id.btnStartMap);
+        addStart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ((ClickedOnMap) getActivity()).ClickedOnMap(inputStart.getText().toString(), inputEnd.getText().toString());
+            }
+        });
+
+        addEnd = view.findViewById(R.id.btnStartMap);
+        addEnd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ((ClickedOnMap) getActivity()).ClickedOnMap(inputStart.getText().toString(), inputEnd.getText().toString());
+            }
+        });
+
+        datumUtovara = view.findViewById(R.id.input_datumUtovara);
+        datumIstovara = view.findViewById(R.id.input_datumIstovara);
+
+        datumUtovara.setInputType(0);
+        datumIstovara.setInputType(0);
+
+        datumUtovara.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                if(b) ((CalendarClicked) getActivity()).calendarClicked(view);
+
+            }
+        });
+
+        datumIstovara.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                if(b) ((CalendarClicked) getActivity()).calendarClicked(view);
+
+            }
+        });
+
+        input_vozac = view.findViewById(R.id.input_vozac);
+
+        view.findViewById(R.id.btn_accept).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((DriverForJob) getActivity()).saveNewJob();
+            }
+        });
+
+        view.findViewById(R.id.btn_cancel).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((PreviousActivity) getActivity()).cancelCurrent();
+            }
+        });
         return view;
     }
 
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.btn_accept:
-                String Utovar = utovar.getText().toString();
-                String Istovar = istovar.getText().toString();
-                String Dutovar = dutovar.getText().toString();
-                String Distovar = distovar.getText().toString();
-                String Kutovar = kutovar.getText().toString();
-                String Kistovar = kistovar.getText().toString();
-                String Vozac = vozac.getText().toString();
+    public interface ClickedOnMap {
+        void ClickedOnMap(String coordinatesStart, String coordinatesEnd);
+    }
 
-                apiService = ApiClient.getClient().create(ApiInterface.class);
-                Call<Void> call2 = apiService.newJob(new NewJobRequest(Utovar, Istovar, Dutovar, Distovar, Kutovar, Kistovar, Vozac));
-                break;
-            case R.id.btn_cancel:
-                getActivity().finish();
-                break;
-            case R.id.addDriverIcon:
-                fragment = ListViewFragment.getInstance(drivers);
-                apiService = ApiClient.getClient().create(ApiInterface.class);
-                Call<List<DriverModel>> call = apiService.getDrivers();
-                call.enqueue(new CallbackDriverList(this,fragment));
-                break;
-        }
+    public interface CalendarClicked {
+        void calendarClicked(View input);
+    }
+
+    public interface DriverForJob {
+        void setDriverForJob();
+        void saveNewJob();
+    }
+
+    public interface PreviousActivity {
+        void cancelCurrent();
+    }
+
+    //IVAN - ova metoda ažurira u ui threadu edittext, i zbog toga sada mozemo vidjeti na ekranu ažurirani box
+    public void setDriverOnScreen(final DriverModel driver){
+        Log.d("Prezime u fragmentu",driver.getPrezime());
+        Thread timer = new Thread() {
+            @Override
+            public void run() {
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        input_vozac.setText(driver.getIme() + " " + driver.getPrezime());
+                    }
+                });
+            }
+        };
+        timer.start();
     }
 }
-
-
-
-
