@@ -19,6 +19,12 @@ public class RouteModel {
     transient String mIstovarDatum;
     transient String mStatus;
 
+    public int getmIdRute() {
+        return mIdRute;
+    }
+
+    transient int mIdRute;
+
     @SerializedName("3")
     ArrayList<JobModel> poslovi;
 

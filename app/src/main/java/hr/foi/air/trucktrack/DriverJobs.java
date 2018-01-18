@@ -2,7 +2,9 @@ package hr.foi.air.trucktrack;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.media.Image;
 import android.net.Uri;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
@@ -10,6 +12,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +28,8 @@ import hr.foi.air.trucktrack.Interface.CustomDialog;
 import hr.foi.air.webservice.ApiClient;
 import hr.foi.air.webservice.ApiInterface;
 import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class DriverJobs extends AppCompatActivity implements CustomDialog{
     private ApiInterface apiService;
@@ -72,7 +79,8 @@ public class DriverJobs extends AppCompatActivity implements CustomDialog{
     }
 
     @Override
-    public void showCustomDialog(int type) {
+    public void showCustomDialog(int type, final int idRute) {
+        Toast.makeText(this, "Ruta: "+ idRute, Toast.LENGTH_SHORT).show();
         if(type == DIALOG_SET_DONE) {
             AlertDialog.Builder dialog = new AlertDialog.Builder(this);
             dialog.setNegativeButton("Odustani", new DialogInterface.OnClickListener() {
@@ -91,6 +99,7 @@ public class DriverJobs extends AppCompatActivity implements CustomDialog{
                     * api za slanje emaila. Nakon što se email bude poslao prikazat će se SnackBar
                     * poruka “Uspješno poslano” u protivnom “Neuspješno poslano”. Prije nego GMAIL
                     * API bude gotov, nakon dolaska prvog response-a refreshati listu poslova vozača !*/
+
                 }
             });
             dialog.setTitle("Potvrditi odrađeni posao?");
@@ -110,6 +119,30 @@ public class DriverJobs extends AppCompatActivity implements CustomDialog{
                    /*DRIVER-ACK
                    * Otvara se dialog. klikom na potvrdi se šalje api poziv za ažuriranje statusa na temelju id posla.
                    * te se mora ažutirati lista poslova ! */
+
+                    Call<Boolean> call = apiService.jobAssign(idRute);
+                    call.enqueue(new Callback<Boolean>() {
+                        @Override
+                        public void onResponse(Call<Boolean> call, Response<Boolean> response) {
+                            ImageView dvijeKvake = (ImageView) findViewById(R.id.btnSetDoneJob);
+                            ImageView jednaKvaka = (ImageView) findViewById(R.id.btnACKJob);
+                            if (response.code() == 200) {
+                                dvijeKvake.setVisibility(View.VISIBLE);
+                                jednaKvaka.setVisibility(View.GONE);
+                                Snackbar mySnackbar = Snackbar.make(findViewById(R.id.driver_jobs_toolbar), "Posao je uspješno potvrđen!", Snackbar.LENGTH_LONG );
+                                mySnackbar.show();
+                            } else {
+                                jednaKvaka.setVisibility(View.VISIBLE);
+                                dvijeKvake.setVisibility(View.GONE);
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<Boolean> call, Throwable t) {
+                            //nemam ideje stacu "onFailure"
+                        }
+                    });
+
                 }
             });
             dialog.setTitle("Prihvatiti posao?");

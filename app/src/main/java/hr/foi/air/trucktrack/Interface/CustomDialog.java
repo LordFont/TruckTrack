@@ -5,5 +5,5 @@ package hr.foi.air.trucktrack.Interface;
  */
 
 public interface CustomDialog {
-    void showCustomDialog(int type);
+    void showCustomDialog(int type, int idrute);
 }

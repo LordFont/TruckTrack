@@ -101,14 +101,16 @@ public class JobListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             parent.findViewById(R.id.btnSetDoneJob).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    customDialog.showCustomDialog(DIALOG_SET_DONE);
+                    int idRute = ((RouteModel)dataOfTheList.get(position)).getmIdRute();
+                    customDialog.showCustomDialog(DIALOG_SET_DONE, idRute);
                 }
             });
 
             parent.findViewById(R.id.btnACKJob).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    customDialog.showCustomDialog(DIALOG_ACK_TO_JOB);
+                    int idRute = ((RouteModel)dataOfTheList.get(position)).getmIdRute();
+                    customDialog.showCustomDialog(DIALOG_ACK_TO_JOB,idRute);
                 }
             });
 
@@ -116,19 +118,19 @@ public class JobListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             ((ImageView) parent.findViewById(R.id.btnDeleteJob)).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    customDialog.showCustomDialog(DIALOG_DELETE_JOB);
+                    int idRute = ((RouteModel)dataOfTheList.get(position)).getmIdRute();
+                    customDialog.showCustomDialog(DIALOG_DELETE_JOB,idRute);
                 }
             });
 
             ((ImageView) parent.findViewById(R.id.btnEditJob)).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    customDialog.showCustomDialog(DIALOG_SAVE_JOB);
+                    int idRute = ((RouteModel)dataOfTheList.get(position)).getmIdRute();
+                    customDialog.showCustomDialog(DIALOG_SAVE_JOB,idRute);
                 }
             });
         }
-
-
     }
 
     @Override

@@ -30,11 +30,13 @@ public interface ApiInterface {
     @POST("user/auth")
     Call<Boolean> authUser(@Body UserModel body);
 
-
     @POST("job/new")
     Call<Void> newJob(@Body NewJobRequest body);
 
     @GET("driver/{id}")
     Call<List<DriverJobsResponse>> getDriverJobs(@Path("id") String id);
+
+    @POST("job/assign")
+    Call<Boolean> jobAssign(@Body int idRuta);
 
 }
