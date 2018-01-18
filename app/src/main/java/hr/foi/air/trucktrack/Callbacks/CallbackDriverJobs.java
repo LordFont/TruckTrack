@@ -44,24 +44,8 @@ public class CallbackDriverJobs extends FragmentManager implements Callback<Arra
         //mRouteModel = new RouteModel();
         listOfRoutes = response.body();
         Log.d("body",listOfRoutes.get(0).getMjestoUtovara());
-//        for (int i = 0; i < djResponse.size(); i++) {
-//            if (i == 0) {
-//                String mjestoIstovara = djResponse.get(i).getDriverRoutes().getPoslovi().get(0).getMjestoIstovara();
-//                String mjestoUtovara = djResponse.get(i).getDriverRoutes().getPoslovi().get(0).getMjestoUtovara();
-//                String istovarDatum = djResponse.get(i).getDriverRoutes().getPoslovi().get(0).getIstovarDatum();
-//                if (istovarDatum == null) {
-//                    istovarDatum = "Datum2";
-//                }
-//                String utovarDatum = "Datum1";
-//                mRouteModel.AddJob(mjestoUtovara,mjestoIstovara,utovarDatum,istovarDatum);
-//                mRouteModel.setPoslovi(djResponse.get(i).getDriverRoutes().getPoslovi());
-//                Log.d("sss",mjestoIstovara); //ovo ispisuje
-//            }
-//        }
-        //listOfRoutes = djResponse.getDriverRoutes();
-        //listOfRoutes.add(mRouteModel);
-        mNnext = DriverJobsFragment.getInstance(listOfRoutes);
 
+        mNnext = DriverJobsFragment.getInstance(listOfRoutes);
         showFragment();
     }
 

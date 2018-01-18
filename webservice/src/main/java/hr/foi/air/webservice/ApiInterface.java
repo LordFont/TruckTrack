@@ -29,4 +29,7 @@ public interface ApiInterface {
 
     @GET("route/{id}")
     Call <ArrayList<RouteModel>> getDriverJobs(@Path("id") String id);
+
+    @GET("route/all")
+    Call <ArrayList<RouteModel>> getAllRoutes();
 }
