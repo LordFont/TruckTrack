@@ -12,30 +12,15 @@ import java.util.List;
  */
 
 public class JobModel {
-    @SerializedName("adresa_utovara")
-    String mMjestoUtovara;
-
     @SerializedName("adresa_primatelja")
     String mMjestoIstovara;
-
-    transient String mUtovarDatum = "Datum";
 
     @SerializedName("datum_isporuke")
     String mIstovarDatum;
 
-    JobModel(String mjestoUtovara, String mjestoIstovara, String utovarDatum, String istovarDatum) {
-        mMjestoUtovara = mjestoUtovara;
+    JobModel(String mjestoIstovara, String istovarDatum) {
         mMjestoIstovara = mjestoIstovara;
-        mUtovarDatum = utovarDatum;
         mIstovarDatum = istovarDatum;
-    }
-
-    public String getMjestoUtovara() {
-        return mMjestoUtovara;
-    }
-
-    public void setMjestoUtovara(String mjestoUtovara) {
-        mMjestoUtovara = mjestoUtovara;
     }
 
     public String getMjestoIstovara() {
@@ -44,14 +29,6 @@ public class JobModel {
 
     public void setMjestoIstovara(String mjestoIstovara) {
         mMjestoIstovara = mjestoIstovara;
-    }
-
-    public String getUtovarDatum() {
-        return mUtovarDatum;
-    }
-
-    public void setUtovarDatum(String utovarDatum) {
-        mUtovarDatum = utovarDatum;
     }
 
     public String getIstovarDatum() {

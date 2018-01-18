@@ -1,5 +1,6 @@
 package hr.foi.air.webservice;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import entities.DriverJobsResponse;
@@ -26,6 +27,6 @@ public interface ApiInterface {
     @POST("user/auth")
     Call<Boolean> authUser(@Body UserModel body);
 
-    @GET("driver/{id}")
-    Call<List<DriverJobsResponse>> getDriverJobs(@Path("id") String id);
+    @GET("route/{id}")
+    Call <ArrayList<RouteModel>> getDriverJobs(@Path("id") String id);
 }
