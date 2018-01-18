@@ -2,6 +2,7 @@ package entities;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.text.Format;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -13,13 +14,20 @@ import java.util.Random;
  */
 
 public class RouteModel {
-    transient String  mMjestoUtovara;
-    transient String mMjestoIstovara;
-    transient String mUtovarDatum;
-    transient String mIstovarDatum;
-    transient String mStatus;
+    @SerializedName("rutaID")
+    int mIdRuta;
 
-    @SerializedName("3")
+    @SerializedName("adresa_utovara")
+    String  mMjestoUtovara;
+    @SerializedName("endAdresa")
+    String mMjestoIstovara;
+    String mUtovarDatum;
+    @SerializedName("endIsporuka")
+    String mIstovarDatum;
+    @SerializedName("status")
+    String mStatus;
+
+    @SerializedName("poslovi")
     ArrayList<JobModel> poslovi;
 
     public RouteModel() {
@@ -31,9 +39,9 @@ public class RouteModel {
         mMjestoIstovara = mjestoIstovara;
         mUtovarDatum = utovarDatum;
         mIstovarDatum = istovarDatum;
-        mStatus = "Čekanje Potvrde";
+        //mStatus = "Čekanje Potvrde";
 
-        JobModel job = new JobModel(mjestoUtovara,mjestoIstovara,utovarDatum,istovarDatum);
+        JobModel job = new JobModel(mjestoIstovara, istovarDatum);
         poslovi.add(job);
     }
 
@@ -44,6 +52,14 @@ public class RouteModel {
         Date date2 = new Date(Math.abs(System.currentTimeMillis() - rnd.nextLong()));
         AddJob("Mjesto A", "Mjesto B", "12.10.2017","14.10.2017");
         AddJob("Mjesto C", "Mjesto D", "12.10.2017","14.10.2017");
+    }
+
+    public int getIdRuta() {
+        return mIdRuta;
+    }
+
+    public void setIdRuta(int idRuta) {
+        mIdRuta = idRuta;
     }
 
     public String getMjestoUtovara() {
@@ -71,11 +87,28 @@ public class RouteModel {
     }
 
     public String getIstovarDatum() {
-        return mIstovarDatum;
+        SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-DD");
+        Date date = new Date(Integer.parseInt(mIstovarDatum));
+        return sf.format(date);
     }
 
     public void setIstovarDatum(String istovarDatum) {
         mIstovarDatum = istovarDatum;
+    }
+
+    public String getStatus() {
+        String result = "";
+        if (mStatus == "1") {
+            result = "Posao prihvaćen";
+        }
+        else {
+            result = "Čeka se potvrda";
+        }
+        return result;
+    }
+
+    public void setStatus(String status) {
+        mStatus = status;
     }
 
     public ArrayList<JobModel> getPoslovi() {
@@ -84,13 +117,5 @@ public class RouteModel {
 
     public void setPoslovi(ArrayList<JobModel> poslovi) {
         this.poslovi = poslovi;
-    }
-
-    public String getStatus() {
-        return mStatus;
-    }
-
-    public void setStatus(String status) {
-        mStatus = status;
     }
 }

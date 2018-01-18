@@ -10,14 +10,13 @@ import java.util.List;
  */
 
 public class DriverJobsResponse {
-    @SerializedName("jobs")
-    RouteModel driverRoutes;
+    ArrayList<RouteModel> driverRoutes;
 
-    public RouteModel getDriverRoutes() {
+    public ArrayList<RouteModel> getDriverRoutes() {
         return driverRoutes;
     }
 
-    public void setDriverRoutes(RouteModel driverRoutes) {
+    public void setDriverRoutes(ArrayList<RouteModel> driverRoutes) {
         this.driverRoutes = driverRoutes;
     }
 }
