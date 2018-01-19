@@ -7,6 +7,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -25,6 +26,9 @@ import hr.foi.air.webservice.ApiClient;
 import hr.foi.air.webservice.ApiInterface;
 import retrofit2.Call;
 
+import static android.R.attr.id;
+import static hr.foi.air.trucktrack.R.id.input_vozac;
+
 
 public class NewJob extends AppCompatActivity implements
         ListViewFragment.ToolbarListener,
@@ -35,6 +39,7 @@ public class NewJob extends AppCompatActivity implements
         DriverSelectFromListInterface {
 
     Fragment fragment;
+    NewJobFragment firstFragment;
     int changeImage;
     boolean iNeedToChangeToolbar = false;
     final Integer ENTER_IN_MAP = 3003;
@@ -47,8 +52,8 @@ public class NewJob extends AppCompatActivity implements
         setContentView(R.layout.activity_new_job);
         initToolbar();
 
-        fragment = NewJobFragment.getInstance();
-        showFragment(fragment);
+        firstFragment = NewJobFragment.getInstance();
+        showFragment(firstFragment);
     }
 
     public void initToolbar() {
@@ -176,8 +181,9 @@ public class NewJob extends AppCompatActivity implements
 
     @Override
     public void driverSelected(DriverModel driver) {
-        fragment = NewJobFragment.getInstance();
-        showFragment(fragment);
+        showFragment(firstFragment);
+        firstFragment.setDriverOnScreen(driver);
+        Log.d("Prezime",driver.getPrezime()); //IVAN KOMENTAR - ISPISUJE ISPRAVNO PREZIME, ZNACI DA GA JE TU USPIO DOHVATITI
         /*DISPONENT-CLICKED
         * STELLA TU DOBIJEM PODATKE - > KAKO FRAGMENT INPUT (ID: input_vozac) UPDATE-ati??*/
     }
