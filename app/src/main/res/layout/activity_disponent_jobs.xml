@@ -26,9 +26,6 @@
             android:layout_height="match_parent"
             android:layout_alignParentBottom="true"
             android:layout_alignParentStart="true"
-            android:layout_marginTop="5dp"
-            android:layout_marginRight="5dp"
-            android:layout_marginBottom="5dp"
             android:layout_below="@+id/drivers_toolbar">
 
             <com.wang.avi.AVLoadingIndicatorView
