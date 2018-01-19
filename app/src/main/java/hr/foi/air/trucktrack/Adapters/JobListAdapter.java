@@ -1,16 +1,17 @@
 package hr.foi.air.trucktrack.Adapters;
 
-import android.media.Image;
-import android.support.design.widget.Snackbar;
+import android.graphics.Color;
+import android.graphics.Typeface;
+import android.os.Build;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,7 +37,7 @@ public class JobListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     final int DIALOG_SAVE_JOB = 200;
     final int DIALOG_SET_DONE = 400;
     final int DIALOG_ACK_TO_JOB = 500;
-
+    final int JOB_ACK = 1;
 
     public JobListAdapter(ArrayList<Object> data, String tip, Fragment context, CustomDialog customDialog) {
         dataOfTheList = data;
@@ -73,21 +74,31 @@ public class JobListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             if (mTipPrikaza == "Vozac") {
                 ImageView button1 = (ImageView) parent.findViewById(R.id.btnACKJob);
                 ImageView button2 = (ImageView) parent.findViewById(R.id.btnSetDoneJob);
-                if(((RouteModel) dataOfTheList.get(position)).getButton() == DIALOG_SET_DONE) {
+                if (((RouteModel) dataOfTheList.get(position)).getButton() == DIALOG_SET_DONE) {
                     button1.setVisibility(View.GONE);
                     button2.setVisibility(View.VISIBLE);
-                } else{
+                } else {
                     button1.setVisibility(View.VISIBLE);
                     button2.setVisibility(View.GONE);
                 }
             }
 
-            String datum1 = "Nema ga";
             String datum2 = ((RouteModel) dataOfTheList.get(position)).getIstovarDatum().toString();
-            ((TextView) parent.findViewById(R.id.datumi)).setText("Datum rute: " + datum2);
+            ((TextView) parent.findViewById(R.id.datumi)).setText(datum2);
+            ((TextView) parent.findViewById(R.id.datumi)).setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
             ((TextView) parent.findViewById(R.id.utovar)).setText(((RouteModel) dataOfTheList.get(position)).getMjestoUtovara().toString());
             ((TextView) parent.findViewById(R.id.istovar)).setText(((RouteModel) dataOfTheList.get(position)).getMjestoIstovara());
             ((TextView) parent.findViewById(R.id.status)).setText(((RouteModel) dataOfTheList.get(position)).getStatus().toString());
+
+             if (((RouteModel) dataOfTheList.get(position)).getStatusId() == JOB_ACK) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    parent.setBackgroundColor(contextAct.getResources().getColor(R.color.colorACK, contextAct.getContext().getTheme()));
+                } else {
+                    parent.setBackgroundColor(contextAct.getResources().getColor(R.color.colorACK));
+                }
+
+                setColorWhite((ViewGroup) parent);
+            }
 
             parent.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -102,51 +113,52 @@ public class JobListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                     notifyDataSetChanged();
                 }
             });
+
+            if (contextAct instanceof DriverJobsFragment) {
+                parent.findViewById(R.id.btnMapShow).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        ((DriverJobsFragment) contextAct).clickedOnMap(3);
+                    }
+                });
+
+                parent.findViewById(R.id.btnSetDoneJob).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        int idRute = ((RouteModel) dataOfTheList.get(position)).getIdRuta();
+                        customDialog.showCustomDialog(DIALOG_SET_DONE, idRute);
+                    }
+                });
+
+                parent.findViewById(R.id.btnACKJob).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                        int idRute = ((RouteModel) dataOfTheList.get(position)).getIdRuta();
+                        customDialog.showCustomDialog(DIALOG_ACK_TO_JOB, idRute);
+                    }
+                });
+
+            } else {
+                parent.findViewById(R.id.btnDeleteJob).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        int idRute = ((RouteModel) dataOfTheList.get(position)).getIdRuta();
+                        customDialog.showCustomDialog(DIALOG_DELETE_JOB, idRute);
+                    }
+                });
+
+                parent.findViewById(R.id.btnEditJob).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        int idRute = ((RouteModel) dataOfTheList.get(position)).getIdRuta();
+                        customDialog.showCustomDialog(DIALOG_SAVE_JOB, idRute);
+                    }
+                });
+            }
+
         } else {
             ((TextView) parent.findViewById(R.id.poslovi)).setText(((JobModel) dataOfTheList.get(position)).getMjestoIstovara());
-        }
-
-        if (contextAct instanceof DriverJobsFragment) {
-            parent.findViewById(R.id.btnMapShow).setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    ((DriverJobsFragment) contextAct).clickedOnMap(3);
-                }
-            });
-
-            parent.findViewById(R.id.btnSetDoneJob).setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    int idRute = ((RouteModel)dataOfTheList.get(position)).getIdRuta();
-                    customDialog.showCustomDialog(DIALOG_SET_DONE, idRute);
-                }
-            });
-
-            parent.findViewById(R.id.btnACKJob).setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-
-                    int idRute = ((RouteModel)dataOfTheList.get(position)).getIdRuta();
-                    customDialog.showCustomDialog(DIALOG_ACK_TO_JOB, idRute);
-                }
-            });
-
-        } else {
-            ((ImageView) parent.findViewById(R.id.btnDeleteJob)).setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    int idRute = ((RouteModel)dataOfTheList.get(position)).getIdRuta();
-                    customDialog.showCustomDialog(DIALOG_DELETE_JOB, idRute);
-                }
-            });
-
-            ((ImageView) parent.findViewById(R.id.btnEditJob)).setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    int idRute = ((RouteModel)dataOfTheList.get(position)).getIdRuta();
-                    customDialog.showCustomDialog(DIALOG_SAVE_JOB,idRute);
-                }
-            });
         }
 
 
@@ -173,6 +185,28 @@ public class JobListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     public void removeFrom(int position, int numOfJobs) {
         for (int i = 0; i < numOfJobs; i++)
             dataOfTheList.remove(position + 1);
+    }
+
+    public void setColorWhite(ViewGroup view) {
+        for (int i = 0; i < view.getChildCount(); i++) {
+            View linear = view.getChildAt(i);
+            for (int j = 0; j < ((ViewGroup) linear).getChildCount(); j++) {
+                View child = ((ViewGroup) linear).getChildAt(j);
+                if (child instanceof TextView) {
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                        ((TextView) child).setTextColor(contextAct.getResources().getColor(R.color.textbody, contextAct.getContext().getTheme()));
+                    } else {
+                        ((TextView) child).setTextColor(contextAct.getResources().getColor(R.color.textbody));
+                    }
+                } else if (child instanceof ImageView) {
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                        ((ImageView) child).setColorFilter(contextAct.getResources().getColor(R.color.textbody, contextAct.getContext().getTheme()));
+                    } else {
+                        ((ImageView) child).setColorFilter(contextAct.getResources().getColor(R.color.textbody));
+                    }
+                }
+            }
+        }
     }
 }
 

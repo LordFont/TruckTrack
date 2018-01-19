@@ -89,8 +89,8 @@ public class RouteModel {
     }
 
     public String getIstovarDatum() {
-        if (mIstovarDatum == null) {
-            mIstovarDatum = "0";
+        if (mIstovarDatum == null || mIstovarDatum.equals("0")) {
+            return "Nepoznato";
         }
         SimpleDateFormat sf = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
         sf.setTimeZone(TimeZone.getTimeZone("UTC"));
@@ -111,6 +111,10 @@ public class RouteModel {
             result = "Čeka se potvrda";
         }
         return result;
+    }
+
+    public Integer getStatusId() {
+        return mStatus;
     }
 
     public void setStatus(int status) {
