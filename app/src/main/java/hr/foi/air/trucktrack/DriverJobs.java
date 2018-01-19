@@ -75,13 +75,13 @@ public class DriverJobs extends AppCompatActivity implements CustomDialog{
     public void showCustomDialog(int type) {
         if(type == DIALOG_SET_DONE) {
             AlertDialog.Builder dialog = new AlertDialog.Builder(this);
-            dialog.setNegativeButton("Odustani", new DialogInterface.OnClickListener() {
+            dialog.setNegativeButton(R.string.btnOdustani, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     dialog.dismiss();
                 }
             });
-            dialog.setPositiveButton("Potvrdi", new DialogInterface.OnClickListener() {
+            dialog.setPositiveButton(getResources().getString(R.string.btnPotvrdi), new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     /*DRIVER-DONE
@@ -93,18 +93,18 @@ public class DriverJobs extends AppCompatActivity implements CustomDialog{
                     * API bude gotov, nakon dolaska prvog response-a refreshati listu poslova vozača !*/
                 }
             });
-            dialog.setTitle("Potvrditi odrađeni posao?");
-            dialog.setMessage("Potvrdom odrađenog posla, potvrda se šalje vašem disponentu kao dokaz istoga. Potvrdom posao nestaje s vaše liste i u mogućnosti ste prihvatiti idući posao.");
+            dialog.setTitle(getResources().getString(R.string.title_potvrdi_odradeni_posao));
+            dialog.setMessage(getResources().getString(R.string.msg_potvrda_odradeni_posao));
             dialog.show();
         } else if (type == DIALOG_ACK_TO_JOB) {
             AlertDialog.Builder dialog = new AlertDialog.Builder(this);
-            dialog.setNegativeButton("Odustani", new DialogInterface.OnClickListener() {
+            dialog.setNegativeButton(getResources().getString(R.string.btnOdustani), new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     dialog.dismiss();
                 }
             });
-            dialog.setPositiveButton("Potvrdi", new DialogInterface.OnClickListener() {
+            dialog.setPositiveButton(getResources().getString(R.string.btnPotvrdi), new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                    /*DRIVER-ACK
@@ -112,8 +112,8 @@ public class DriverJobs extends AppCompatActivity implements CustomDialog{
                    * te se mora ažutirati lista poslova ! */
                 }
             });
-            dialog.setTitle("Prihvatiti posao?");
-            dialog.setMessage("Potvrdom novog dodijeljenog posla od strane disponenta isti će se pozivionirati na vrhu liste. Potvrdom dodijele novog posla potvrda se šalje vašem disponentu.");
+            dialog.setTitle(getResources().getString(R.string.title_prihvatiti_posao));
+            dialog.setMessage(getResources().getString(R.string.msg_potrvda_dodijele_posla));
             dialog.show();
         }
     }

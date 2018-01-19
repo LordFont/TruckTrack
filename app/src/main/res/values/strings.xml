@@ -13,9 +13,12 @@
     <string name="wrong_email_password">"Email adresa ili lozinka nisu točni!"</string>
     <string name="testApp">Testiraj Aplikaciju</string>
     <string name="testDriverJobs">Testiraj Poslovi</string>
-    <string name="toolbarVozaci">Vozači</string>
     <string name="title_activity_no_content">NoContentActivity</string>
+
+    <!-- Toolbar titles -->
     <string name="toolbarPoslovi">Poslovi</string>
+    <string name="toolbarPosao">Posao</string>
+    <string name="toolbarVozaci">Vozači</string>
 
     <string name="utovar">Poduzeće utovar</string>
     <string name="istovar">Poduzeće istovar</string>
@@ -27,4 +30,14 @@
     <string name="title_activity_new_job_form">NewJobForm</string>
     <string name="title_activity_map_job">Map</string>
     <string name="title_activity_maps_job_driver">Map</string>
+    <string name="btnOdustani">Odustani</string>
+    <string name="btnPotvrdi">Potvrdi</string>
+    <string name="title_potvrdi_odradeni_posao">Potvrditi odrađeni posao?</string>
+    <string name="msg_potvrda_odradeni_posao">Potvrdom odrađenog posla, potvrda se šalje vašem disponentu kao dokaz istoga. Potvrdom posao nestaje s vaše liste i u mogućnosti ste prihvatiti idući posao.</string>
+    <string name="title_prihvatiti_posao">Prihvatiti posao?</string>
+    <string name="msg_potrvda_dodijele_posla">Potvrdom novog dodijeljenog posla od strane disponenta isti će se pozivionirati na vrhu liste. Potvrdom dodijele novog posla potvrda se šalje vašem disponentu.</string>
+    <string name="title_brisanje_posla">Brisanje posla</string>
+    <string name="msg_potvrda_brisanja_posla">Potvrdom brisanja posla će rezultirati brisanjem istog iz baze podataka i kao takav više neće postojati za editiranje ili dodjeljivanje posla vozaču</string>
+    <string name="error_problem_server">Problem sa serverom!</string>
+    <string name="error_internet">Niste povezani na internet!</string>
 </resources>

@@ -61,7 +61,7 @@ public class NewJob extends AppCompatActivity implements
         Toolbar toolbar = (Toolbar) findViewById(R.id.job_toolbar);
         setSupportActionBar(toolbar);
         toolbar.setNavigationIcon(R.drawable.ic_view_headline_white_48px);
-        getSupportActionBar().setTitle("Posao");
+        getSupportActionBar().setTitle(getResources().getString(R.string.toolbarPosao));
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -80,7 +80,7 @@ public class NewJob extends AppCompatActivity implements
         if (iNeedToChangeToolbar) {
             menu.clear();
             getMenuInflater().inflate(R.menu.menu_drivers, menu);
-            getSupportActionBar().setTitle("Vozači");
+            getSupportActionBar().setTitle(getResources().getString(R.string.toolbarVozaci));
             menu.findItem(R.id.viewIcon).setIcon(R.drawable.ic_dashboard_white_48px);
 
             menu.findItem(R.id.viewIcon).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
@@ -163,8 +163,8 @@ public class NewJob extends AppCompatActivity implements
             }
         }, 2013, 2, 18);
 
-        if (input.getId() == R.id.input_datumIstovara) dialog.setTitle("Datum istovara");
-        else dialog.setTitle("Datum utovara");
+        if (input.getId() == R.id.input_datumIstovara) dialog.setTitle(getResources().getString(R.string.datum_istovara));
+        else dialog.setTitle(getResources().getString(R.string.datum_utovara));
 
         dialog.updateDate(Calendar.getInstance().get(Calendar.YEAR), Calendar.getInstance().get(Calendar.MONTH), Calendar.getInstance().get(Calendar.DAY_OF_MONTH));
         dialog.show();

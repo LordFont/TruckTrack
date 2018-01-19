@@ -93,7 +93,7 @@ public class LoginActivity extends AppCompatActivity {
 
                     @Override
                     public void onFailure(Call<Boolean> call, Throwable t) {
-                        Snackbar mySnackbar = Snackbar.make(findViewById(R.id.loginButton), "Problem sa serverom!", Snackbar.LENGTH_LONG );
+                        Snackbar mySnackbar = Snackbar.make(findViewById(R.id.loginButton), getResources().getString(R.string.error_problem_server), Snackbar.LENGTH_LONG );
                         mySnackbar.show();
                     }
                 });
@@ -106,7 +106,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onResume();
 
         if(!isNetworkConnected()){
-            Snackbar mySnackbar = Snackbar.make(this.findViewById(R.id.loginButton), "Niste povezani na internet!", Snackbar.LENGTH_LONG )
+            Snackbar mySnackbar = Snackbar.make(this.findViewById(R.id.loginButton), getResources().getString(R.string.error_internet), Snackbar.LENGTH_LONG )
                     .setAction("Postavke", new View.OnClickListener(){
                         @Override
                         public void onClick(View view){

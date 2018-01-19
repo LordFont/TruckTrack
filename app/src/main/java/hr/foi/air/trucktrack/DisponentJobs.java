@@ -68,13 +68,13 @@ public class DisponentJobs extends AppCompatActivity implements CustomDialog{
     public void showCustomDialog(int type) {
         if(type == DIALOG_DELETE_JOB) {
             AlertDialog.Builder dialog = new AlertDialog.Builder(this);
-            dialog.setNegativeButton("Odustani", new DialogInterface.OnClickListener() {
+            dialog.setNegativeButton(getResources().getString(R.string.btnOdustani), new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     dialog.dismiss();
                 }
             });
-            dialog.setPositiveButton("Obriši", new DialogInterface.OnClickListener() {
+            dialog.setPositiveButton(getResources().getString(R.string.btnPotvrdi), new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     /* DISPONENT-DELETE
@@ -83,8 +83,8 @@ public class DisponentJobs extends AppCompatActivity implements CustomDialog{
                     */
                 }
             });
-            dialog.setTitle("Brisanje posla");
-            dialog.setMessage("Potvrdom brisanja posla će rezultirati brisanjem istog iz baze podataka i kao takav više neće postojati za editiranje ili dodjeljivanje posla vozaču");
+            dialog.setTitle(getResources().getString(R.string.title_brisanje_posla));
+            dialog.setMessage(getResources().getString(R.string.msg_potvrda_brisanja_posla));
             dialog.show();
         } else if (type == DIALOG_SAVE_JOB){
             /* DISPONENT-SAVE
