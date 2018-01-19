@@ -6,6 +6,6 @@ import entities.DriverModel;
  * Created by ssajcic on 16.01.18..
  */
 
-public interface DriverSelectFromList {
+public interface DriverSelectFromListInterface {
     void driverSelected(DriverModel driver);
 }

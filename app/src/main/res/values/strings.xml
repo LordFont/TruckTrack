@@ -27,4 +27,5 @@
     <string name="title_activity_new_job_form">NewJobForm</string>
     <string name="title_activity_map_job">Map</string>
     <string name="title_activity_maps_job_driver">Map</string>
+    <string name="error_msg_happend">Dogodila se pogreška tokom učitavanja zaslona.</string>
 </resources>

@@ -1,17 +1,13 @@
 package hr.foi.air.drivermodule;
 
-import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import entities.DriverModel;
@@ -24,7 +20,7 @@ public class GridViewFragment extends android.support.v4.app.Fragment {
     RecyclerView mRecyclerView;
     static GridViewFragment instance = null;
     static List<DriverModel> data = null;
-    private DriverSelectFromList interfaceSelectedDriver;
+    private DriverSelectFromListInterface interfaceSelectedDriver;
 
     public static GridViewFragment getInstance(List<DriverModel> dataDrivers) {
         if(instance == null) {
@@ -53,7 +49,7 @@ public class GridViewFragment extends android.support.v4.app.Fragment {
     public void onAttach(Context context) {
         super.onAttach(context);
         try {
-            interfaceSelectedDriver = (DriverSelectFromList) context;
+            interfaceSelectedDriver = (DriverSelectFromListInterface) context;
         } catch (ClassCastException e) {
             throw new ClassCastException(context.toString()
                     + " must implement ToolbarListener");

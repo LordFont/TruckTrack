@@ -74,7 +74,7 @@ public class LoginActivity extends AppCompatActivity {
                 else {
                     intent = new Intent(getApplicationContext(), DisponentHome.class);
                 }
-                startActivity(intent);
+                startActivityForResult(intent, 1000);
 
 //                Call<Boolean> call = apiService.authUser(new UserModel(email,lozinka));
 //                //Log.d("Call", call.toString());
