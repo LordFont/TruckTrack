@@ -1,16 +1,12 @@
 package hr.foi.air.trucktrack.Adapters;
 
-import android.media.Image;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -73,10 +69,10 @@ public class JobListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             if (mTipPrikaza == "Vozac") {
                 ImageView button1 = (ImageView) parent.findViewById(R.id.btnACKJob);
                 ImageView button2 = (ImageView) parent.findViewById(R.id.btnSetDoneJob);
-                if(((RouteModel) dataOfTheList.get(position)).getButton() == DIALOG_SET_DONE) {
+                if (((RouteModel) dataOfTheList.get(position)).getButton() == DIALOG_SET_DONE) {
                     button1.setVisibility(View.GONE);
                     button2.setVisibility(View.VISIBLE);
-                } else{
+                } else {
                     button1.setVisibility(View.VISIBLE);
                     button2.setVisibility(View.GONE);
                 }
@@ -102,51 +98,52 @@ public class JobListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                     notifyDataSetChanged();
                 }
             });
+
+            if (contextAct instanceof DriverJobsFragment) {
+                parent.findViewById(R.id.btnMapShow).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        ((DriverJobsFragment) contextAct).clickedOnMap(3);
+                    }
+                });
+
+                parent.findViewById(R.id.btnSetDoneJob).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        int idRute = ((RouteModel) dataOfTheList.get(position)).getIdRuta();
+                        customDialog.showCustomDialog(DIALOG_SET_DONE, idRute);
+                    }
+                });
+
+                parent.findViewById(R.id.btnACKJob).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                        int idRute = ((RouteModel) dataOfTheList.get(position)).getIdRuta();
+                        customDialog.showCustomDialog(DIALOG_ACK_TO_JOB, idRute);
+                    }
+                });
+
+            } else {
+                parent.findViewById(R.id.btnDeleteJob).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        int idRute = ((RouteModel) dataOfTheList.get(position)).getIdRuta();
+                        customDialog.showCustomDialog(DIALOG_DELETE_JOB, idRute);
+                    }
+                });
+
+                parent.findViewById(R.id.btnEditJob).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        int idRute = ((RouteModel) dataOfTheList.get(position)).getIdRuta();
+                        customDialog.showCustomDialog(DIALOG_SAVE_JOB, idRute);
+                    }
+                });
+            }
+
         } else {
             ((TextView) parent.findViewById(R.id.poslovi)).setText(((JobModel) dataOfTheList.get(position)).getMjestoIstovara());
-        }
-
-        if (contextAct instanceof DriverJobsFragment) {
-            parent.findViewById(R.id.btnMapShow).setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    ((DriverJobsFragment) contextAct).clickedOnMap(3);
-                }
-            });
-
-            parent.findViewById(R.id.btnSetDoneJob).setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    int idRute = ((RouteModel)dataOfTheList.get(position)).getIdRuta();
-                    customDialog.showCustomDialog(DIALOG_SET_DONE, idRute);
-                }
-            });
-
-            parent.findViewById(R.id.btnACKJob).setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-
-                    int idRute = ((RouteModel)dataOfTheList.get(position)).getIdRuta();
-                    customDialog.showCustomDialog(DIALOG_ACK_TO_JOB, idRute);
-                }
-            });
-
-        } else {
-            ((ImageView) parent.findViewById(R.id.btnDeleteJob)).setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    int idRute = ((RouteModel)dataOfTheList.get(position)).getIdRuta();
-                    customDialog.showCustomDialog(DIALOG_DELETE_JOB, idRute);
-                }
-            });
-
-            ((ImageView) parent.findViewById(R.id.btnEditJob)).setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    int idRute = ((RouteModel)dataOfTheList.get(position)).getIdRuta();
-                    customDialog.showCustomDialog(DIALOG_SAVE_JOB,idRute);
-                }
-            });
         }
 
 
