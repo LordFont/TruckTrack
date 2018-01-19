@@ -69,44 +69,43 @@ public class LoginActivity extends AppCompatActivity {
                 if(((CheckBox)findViewById(R.id.cbIsDriver)).isChecked()) {
                     email = "pperic@gmail.com";
                     lozinka = "peric";
-                    intent = new Intent(getApplicationContext(), DriverJobs.class);
+                    //intent = new Intent(getApplicationContext(), DriverJobs.class);
                 }
                 else {
-                    intent = new Intent(getApplicationContext(), DisponentHome.class);
+                    //intent = new Intent(getApplicationContext(), DisponentHome.class);
                 }
-                startActivityForResult(intent, 1000);
+                //startActivity(intent);
 
-//                Call<Boolean> call = apiService.authUser(new UserModel(email,lozinka));
-//                //Log.d("Call", call.toString());
-//
-//                call.enqueue(new Callback<Boolean>() {
-//                    @Override
-//                    public void onResponse(Call<Boolean> call, Response<Boolean> response) {
-//                        if (response.code() == 200) {
-//                            wrongUserPass.setVisibility(View.GONE);
-//                            Intent intent;
-//                            boolean rjesenje = response.body();
-//                            if (rjesenje) {
-//                                intent = new Intent(getApplicationContext(), DriverJobs.class);
-//                            }
-//                            else intent = new Intent(getApplicationContext(), DisponentHome.class);
-//
-//                            startActivity(intent);
-//                        } else {
-//                            wrongUserPass.setVisibility(View.VISIBLE);
-//                        }
-//                    }
-//
-//                    @Override
-//                    public void onFailure(Call<Boolean> call, Throwable t) {
-//                        Snackbar mySnackbar = Snackbar.make(findViewById(R.id.loginButton), "Problem sa serverom!", Snackbar.LENGTH_LONG );
-//                        mySnackbar.show();
-//                    }
-//                });
+                Call<Boolean> call = apiService.authUser(new UserModel(email,lozinka));
+                call.enqueue(new Callback<Boolean>() {
+                    @Override
+                    public void onResponse(Call<Boolean> call, Response<Boolean> response) {
+                        if (response.code() == 200) {
+                            wrongUserPass.setVisibility(View.GONE);
+                            Intent intent;
+                            boolean rjesenje = response.body();
+                            if (rjesenje) {
+                                intent = new Intent(getApplicationContext(), DriverJobs.class);
+                            }
+                            else intent = new Intent(getApplicationContext(), DisponentHome.class);
+
+                            startActivityForResult(intent, 1000);
+                        } else {
+                            wrongUserPass.setVisibility(View.VISIBLE);
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<Boolean> call, Throwable t) {
+                        Snackbar mySnackbar = Snackbar.make(findViewById(R.id.loginButton), "Problem sa serverom!", Snackbar.LENGTH_LONG );
+                        mySnackbar.show();
+                    }
+                });
+                //startActivityForResult(intent, 1000);
             }
         });
-
     }
+
     @Override
     public void onResume(){
         super.onResume();
