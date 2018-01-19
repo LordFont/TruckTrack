@@ -67,6 +67,7 @@
             android:layout_width="32dp"
             android:layout_height="32dp"
             android:adjustViewBounds="false"
+            android:visibility="gone"
             app:srcCompat="@drawable/ic_done_all_black_24dp"
             android:tint="#7d7d7d"/>
 
@@ -74,8 +75,8 @@
             android:id="@+id/btnACKJob"
             android:layout_width="32dp"
             android:layout_height="32dp"
-            android:visibility="gone"
             android:adjustViewBounds="false"
+            android:visibility="gone"
             app:srcCompat="@drawable/ic_done_black_24dp"
             android:tint="#7d7d7d"/>
 

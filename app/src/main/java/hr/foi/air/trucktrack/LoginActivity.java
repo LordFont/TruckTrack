@@ -77,8 +77,6 @@ public class LoginActivity extends AppCompatActivity {
                 //startActivity(intent);
 
                 Call<Boolean> call = apiService.authUser(new UserModel(email,lozinka));
-                //Log.d("Call", call.toString());
-
                 call.enqueue(new Callback<Boolean>() {
                     @Override
                     public void onResponse(Call<Boolean> call, Response<Boolean> response) {
@@ -91,7 +89,7 @@ public class LoginActivity extends AppCompatActivity {
                             }
                             else intent = new Intent(getApplicationContext(), DisponentHome.class);
 
-                            startActivity(intent);
+                            startActivityForResult(intent, 1000);
                         } else {
                             wrongUserPass.setVisibility(View.VISIBLE);
                         }
@@ -103,10 +101,11 @@ public class LoginActivity extends AppCompatActivity {
                         mySnackbar.show();
                     }
                 });
+                //startActivityForResult(intent, 1000);
             }
         });
-
     }
+
     @Override
     public void onResume(){
         super.onResume();

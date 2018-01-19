@@ -124,4 +124,15 @@ public class RouteModel {
     public void setPoslovi(ArrayList<JobModel> poslovi) {
         this.poslovi = poslovi;
     }
+
+    public int getButton() {
+        int result;
+        if (mStatus == 1) {
+            result = 400;
+        }
+        else {
+            result = 500;
+        }
+        return result;
+    }
 }
