@@ -9,7 +9,13 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
+import android.view.View;
+import android.widget.ProgressBar;
+
+
+import com.wang.avi.AVLoadingIndicatorView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +25,7 @@ import entities.DriverModel;
 import entities.RouteModel;
 import hr.foi.air.trucktrack.Callbacks.CallbackDriverJobs;
 import hr.foi.air.trucktrack.Callbacks.CallbackDriverList;
+import hr.foi.air.trucktrack.Helpers.DataLoadingProgress;
 import hr.foi.air.trucktrack.Interface.CustomDialog;
 import hr.foi.air.webservice.ApiClient;
 import hr.foi.air.webservice.ApiInterface;
@@ -26,6 +33,7 @@ import retrofit2.Call;
 
 public class DriverJobs extends AppCompatActivity implements CustomDialog{
     private ApiInterface apiService;
+    AVLoadingIndicatorView avi;
     final int DIALOG_SET_DONE = 400;
     final int DIALOG_ACK_TO_JOB = 500;
 
