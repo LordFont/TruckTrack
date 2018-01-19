@@ -24,8 +24,8 @@ import static android.media.CamcorderProfile.get;
  * Created by Ivan on 7.12.2017..
  */
 
-public class CallbackDriverJobs extends FragmentManager implements Callback<List<DriverJobsResponse>>{
-    List<DriverJobsResponse> djResponse;
+public class CallbackDriverJobs extends FragmentManager implements Callback<ArrayList<RouteModel>>{
+    DriverJobsResponse djResponse;
     ArrayList<RouteModel> listOfRoutes = new ArrayList<RouteModel>();
     RouteModel mRouteModel;
 
@@ -40,30 +40,16 @@ public class CallbackDriverJobs extends FragmentManager implements Callback<List
     }
 
     @Override
-    public void onResponse(Call<List<DriverJobsResponse>> call, Response<List<DriverJobsResponse>> response) {
-        mRouteModel = new RouteModel();
-        djResponse = response.body();
-        for (int i = 0; i < djResponse.size(); i++) {
-            if (i == 0) {
-                String mjestoIstovara = djResponse.get(i).getDriverRoutes().getPoslovi().get(0).getMjestoIstovara();
-                String mjestoUtovara = djResponse.get(i).getDriverRoutes().getPoslovi().get(0).getMjestoUtovara();
-                String istovarDatum = djResponse.get(i).getDriverRoutes().getPoslovi().get(0).getIstovarDatum();
-                if (istovarDatum == null) {
-                    istovarDatum = "Datum2";
-                }
-                String utovarDatum = "Datum1";
-                mRouteModel.AddJob(mjestoUtovara,mjestoIstovara,utovarDatum,istovarDatum);
-                mRouteModel.setPoslovi(djResponse.get(i).getDriverRoutes().getPoslovi());
-                Log.d("sss",mjestoIstovara); //ovo ispisuje
-            }
-        }
-        listOfRoutes.add(mRouteModel);
-        mNnext = DriverJobsFragment.getInstance(listOfRoutes);
+    public void onResponse(Call<ArrayList<RouteModel>> call, Response<ArrayList<RouteModel>> response) {
+        //mRouteModel = new RouteModel();
+        listOfRoutes = response.body();
+        Log.d("body",listOfRoutes.get(0).getMjestoUtovara());
 
+        mNnext = DriverJobsFragment.getInstance(listOfRoutes);
         showFragment();
     }
 
-    public void onFailure(Call<List<DriverJobsResponse>> call, Throwable t) {
+    public void onFailure(Call<ArrayList<RouteModel>> call, Throwable t) {
         Log.d("JakoCoolGreska", t.toString());
     }
 }

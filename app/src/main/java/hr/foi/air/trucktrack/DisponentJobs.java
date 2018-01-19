@@ -14,9 +14,15 @@ import android.view.View;
 import java.util.ArrayList;
 
 import entities.RouteModel;
+import hr.foi.air.trucktrack.Callbacks.CallbackAllRoutes;
+import hr.foi.air.trucktrack.Callbacks.CallbackDriverJobs;
 import hr.foi.air.trucktrack.Interface.CustomDialog;
+import hr.foi.air.webservice.ApiClient;
+import hr.foi.air.webservice.ApiInterface;
+import retrofit2.Call;
 
 public class DisponentJobs extends AppCompatActivity implements CustomDialog{
+    private ApiInterface apiService;
     final int DIALOG_DELETE_JOB = 100;
     final int DIALOG_SAVE_JOB = 200;
 
@@ -33,15 +39,21 @@ public class DisponentJobs extends AppCompatActivity implements CustomDialog{
         });
 
         //kreiranje dummy podataka u svrhu testiranja bez servera
-        RouteModel routeJob1 = new RouteModel();
-        RouteModel routeJob2 = new RouteModel();
-        routeJob1.CreateTestData();
-        routeJob2.CreateTestData();
-        ArrayList<RouteModel> testList = new ArrayList<>();
-        testList.add(routeJob1);
-        testList.add(routeJob2);
+//        RouteModel routeJob1 = new RouteModel();
+//        RouteModel routeJob2 = new RouteModel();
+//        routeJob1.CreateTestData();
+//        routeJob2.CreateTestData();
+//        ArrayList<RouteModel> testList = new ArrayList<>();
+//        testList.add(routeJob1);
+//        testList.add(routeJob2);
+//
+//        showFragment(DisponentJobsFragment.getInstance(testList));
 
-        showFragment(DisponentJobsFragment.getInstance(testList));
+        ArrayList<RouteModel> testList = new ArrayList<>();
+        Fragment fragment = DisponentJobsFragment.getInstance(testList);
+        apiService = ApiClient.getClient().create(ApiInterface.class);
+        Call<ArrayList<RouteModel>> call = apiService.getAllRoutes(); //ovdje ide id korisnika, za testiranje uzet id 3
+        call.enqueue(new CallbackAllRoutes(this,fragment));
 
     }
 

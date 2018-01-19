@@ -13,7 +13,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import java.util.Calendar;
 import java.util.List;
@@ -22,7 +21,7 @@ import entities.DriverModel;
 import hr.foi.air.drivermodule.GridViewFragment;
 import hr.foi.air.drivermodule.ListViewFragment;
 import hr.foi.air.trucktrack.Callbacks.CallbackDriverList;
-import hr.foi.air.drivermodule.DriverSelectFromList;
+import hr.foi.air.drivermodule.DriverSelectFromListInterface;
 import hr.foi.air.webservice.ApiClient;
 import hr.foi.air.webservice.ApiInterface;
 import retrofit2.Call;
@@ -37,7 +36,7 @@ public class NewJob extends AppCompatActivity implements
         NewJobFragment.CalendarClicked,
         NewJobFragment.DriverForJob,
         NewJobFragment.PreviousActivity,
-        DriverSelectFromList {
+        DriverSelectFromListInterface {
 
     Fragment fragment;
     NewJobFragment firstFragment;

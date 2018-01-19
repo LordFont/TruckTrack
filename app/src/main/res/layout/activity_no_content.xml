@@ -45,6 +45,7 @@
                     android:src="@drawable/no_content_404" />
 
                 <TextView
+                    android:id="@+id/error_msg_content"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
