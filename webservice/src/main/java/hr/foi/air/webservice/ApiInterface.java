@@ -32,4 +32,7 @@ public interface ApiInterface {
 
     @GET("route/all")
     Call <ArrayList<RouteModel>> getAllRoutes();
+
+    @POST("job/assign")
+    Call<Boolean> jobAssign(@Body int idRuta);
 }
