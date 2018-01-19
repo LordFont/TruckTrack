@@ -27,7 +27,7 @@ public class RouteModel {
     @SerializedName("endIsporuka")
     String mIstovarDatum;
     @SerializedName("status")
-    String mStatus;
+    int mStatus;
 
     @SerializedName("poslovi")
     ArrayList<JobModel> poslovi;
@@ -104,7 +104,7 @@ public class RouteModel {
 
     public String getStatus() {
         String result = "";
-        if (mStatus == "1") {
+        if (mStatus == 1) {
             result = "Posao prihvaćen";
         }
         else {
@@ -113,7 +113,7 @@ public class RouteModel {
         return result;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(int status) {
         mStatus = status;
     }
 
@@ -123,5 +123,16 @@ public class RouteModel {
 
     public void setPoslovi(ArrayList<JobModel> poslovi) {
         this.poslovi = poslovi;
+    }
+
+    public int getButton() {
+        int result;
+        if (mStatus == 1) {
+            result = 400;
+        }
+        else {
+            result = 500;
+        }
+        return result;
     }
 }

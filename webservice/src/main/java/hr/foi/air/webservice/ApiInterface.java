@@ -5,6 +5,7 @@ import java.util.List;
 
 import entities.DriverJobsResponse;
 import entities.DriverModel;
+import entities.RouteIdRequest;
 import entities.RouteModel;
 import entities.UserModel;
 import retrofit2.Call;
@@ -32,4 +33,7 @@ public interface ApiInterface {
 
     @GET("route/all")
     Call <ArrayList<RouteModel>> getAllRoutes();
+
+    @POST("route/accept")
+    Call<Void> routeAccept(@Body RouteIdRequest body);
 }

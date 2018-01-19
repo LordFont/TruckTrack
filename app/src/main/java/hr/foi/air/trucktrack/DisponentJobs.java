@@ -77,7 +77,7 @@ public class DisponentJobs extends AppCompatActivity implements CustomDialog{
     }
 
     @Override
-    public void showCustomDialog(int type) {
+    public void showCustomDialog(int type, int idRuta) {
         if(type == DIALOG_DELETE_JOB) {
             AlertDialog.Builder dialog = new AlertDialog.Builder(this);
             dialog.setNegativeButton(getResources().getString(R.string.btnOdustani), new DialogInterface.OnClickListener() {
