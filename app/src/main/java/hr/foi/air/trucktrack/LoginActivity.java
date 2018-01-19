@@ -85,7 +85,7 @@ public class LoginActivity extends AppCompatActivity {
                             }
                             else intent = new Intent(getApplicationContext(), DisponentHome.class);
 
-                            startActivity(intent);
+                            startActivityForResult(intent, 1000);
                         } else {
                             wrongUserPass.setVisibility(View.VISIBLE);
                         }
