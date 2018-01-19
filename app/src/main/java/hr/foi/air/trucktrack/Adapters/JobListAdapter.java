@@ -1,12 +1,16 @@
 package hr.foi.air.trucktrack.Adapters;
 
+import android.media.Image;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -66,6 +70,18 @@ public class JobListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         * */
 
         if (holder instanceof ParentViewHolder) {
+            if (mTipPrikaza == "Vozac") {
+                ImageView button1 = (ImageView) parent.findViewById(R.id.btnACKJob);
+                ImageView button2 = (ImageView) parent.findViewById(R.id.btnSetDoneJob);
+                if(((RouteModel) dataOfTheList.get(position)).getButton() == DIALOG_SET_DONE) {
+                    button1.setVisibility(View.GONE);
+                    button2.setVisibility(View.VISIBLE);
+                } else{
+                    button1.setVisibility(View.VISIBLE);
+                    button2.setVisibility(View.GONE);
+                }
+            }
+
             String datum1 = "Nema ga";
             String datum2 = ((RouteModel) dataOfTheList.get(position)).getIstovarDatum().toString();
             ((TextView) parent.findViewById(R.id.datumi)).setText("Datum rute: " + datum2);
@@ -101,14 +117,17 @@ public class JobListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             parent.findViewById(R.id.btnSetDoneJob).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    customDialog.showCustomDialog(DIALOG_SET_DONE);
+                    int idRute = ((RouteModel)dataOfTheList.get(position)).getIdRuta();
+                    customDialog.showCustomDialog(DIALOG_SET_DONE, idRute);
                 }
             });
 
             parent.findViewById(R.id.btnACKJob).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    customDialog.showCustomDialog(DIALOG_ACK_TO_JOB);
+
+                    int idRute = ((RouteModel)dataOfTheList.get(position)).getIdRuta();
+                    customDialog.showCustomDialog(DIALOG_ACK_TO_JOB, idRute);
                 }
             });
 
@@ -116,14 +135,16 @@ public class JobListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             ((ImageView) parent.findViewById(R.id.btnDeleteJob)).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    customDialog.showCustomDialog(DIALOG_DELETE_JOB);
+                    int idRute = ((RouteModel)dataOfTheList.get(position)).getIdRuta();
+                    customDialog.showCustomDialog(DIALOG_DELETE_JOB, idRute);
                 }
             });
 
             ((ImageView) parent.findViewById(R.id.btnEditJob)).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    customDialog.showCustomDialog(DIALOG_SAVE_JOB);
+                    int idRute = ((RouteModel)dataOfTheList.get(position)).getIdRuta();
+                    customDialog.showCustomDialog(DIALOG_SAVE_JOB,idRute);
                 }
             });
         }
