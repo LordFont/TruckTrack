@@ -36,4 +36,10 @@ public interface ApiInterface {
 
     @POST("route/accept")
     Call<Void> routeAccept(@Body RouteIdRequest body);
+
+    @POST("route/done")
+    Call<Void> routeDone(@Body RouteIdRequest body);
+
+    @POST("route/delete")
+    Call<Void> routeDelete(@Body RouteIdRequest body);
 }

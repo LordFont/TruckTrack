@@ -2,6 +2,7 @@ package hr.foi.air.trucktrack;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
@@ -13,6 +14,7 @@ import android.view.View;
 
 import java.util.ArrayList;
 
+import entities.RouteIdRequest;
 import entities.RouteModel;
 import hr.foi.air.trucktrack.Callbacks.CallbackAllRoutes;
 import hr.foi.air.trucktrack.Callbacks.CallbackDriverJobs;
@@ -20,6 +22,8 @@ import hr.foi.air.trucktrack.Interface.CustomDialog;
 import hr.foi.air.webservice.ApiClient;
 import hr.foi.air.webservice.ApiInterface;
 import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class DisponentJobs extends AppCompatActivity implements CustomDialog{
     private ApiInterface apiService;
@@ -77,7 +81,7 @@ public class DisponentJobs extends AppCompatActivity implements CustomDialog{
     }
 
     @Override
-    public void showCustomDialog(int type, int idRuta) {
+    public void showCustomDialog(int type,final int idRuta) {
         if(type == DIALOG_DELETE_JOB) {
             AlertDialog.Builder dialog = new AlertDialog.Builder(this);
             dialog.setNegativeButton("Odustani", new DialogInterface.OnClickListener() {
@@ -93,10 +97,30 @@ public class DisponentJobs extends AppCompatActivity implements CustomDialog{
                         Na temelju ID posla slati api poziv za brisanje istog
                         Ako je response api poziva uspješan otvoriti SnackBar s porukom "Uspješno obrisano" u protivnom "Neuspješno poslano"
                     */
+                    RouteIdRequest request = new RouteIdRequest();
+                    request.setmIdRuta(idRuta);
+                    Call<Void> call = apiService.routeDelete(request);
+                    call.enqueue(new Callback<Void>() {
+                        @Override
+                        public void onResponse(Call<Void> call, Response<Void> response) {
+                            if (response.code() == 200) {
+                                Snackbar mySnackbar = Snackbar.make(findViewById(R.id.driver_jobs_toolbar), "Uspješno obrisano!", Snackbar.LENGTH_LONG );
+                                mySnackbar.show();
+                            } else {
+                                Snackbar mySnackbar2 = Snackbar.make(findViewById(R.id.driver_jobs_toolbar), "Neuspješno poslano!", Snackbar.LENGTH_LONG );
+                                mySnackbar2.show();
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<Void> call, Throwable t) {
+                            Snackbar mySnackbar3 = Snackbar.make(findViewById(R.id.driver_jobs_toolbar), "Neuspješno poslano!", Snackbar.LENGTH_LONG );
+                        }
+                    });
                 }
             });
-            dialog.setTitle("Brisanje posla");
-            dialog.setMessage("Potvrdom brisanja posla će rezultirati brisanjem istog iz baze podataka i kao takav više neće postojati za editiranje ili dodjeljivanje posla vozaču");
+            dialog.setTitle("Obrisati rutu?");
+            dialog.setMessage("Potvrdom brisanja rute ruta više neće biti vidljiva niti imati mogućnost povratka iste. Ako je ruta dodjeljena vozaču, vozač je više neće vidjeti niti će biti aktivna!");
             dialog.show();
         } else if (type == DIALOG_SAVE_JOB){
             /* DISPONENT-SAVE
