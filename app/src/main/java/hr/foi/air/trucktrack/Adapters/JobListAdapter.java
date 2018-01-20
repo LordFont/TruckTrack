@@ -74,10 +74,10 @@ public class JobListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             if (mTipPrikaza == "Vozac") {
                 ImageView button1 = (ImageView) parent.findViewById(R.id.btnACKJob);
                 ImageView button2 = (ImageView) parent.findViewById(R.id.btnSetDoneJob);
-                if (((RouteModel) dataOfTheList.get(position)).getButton() == DIALOG_SET_DONE) {
+                if (((RouteModel) dataOfTheList.get(position)).getButton() == DIALOG_SET_DONE) {//done
                     button1.setVisibility(View.GONE);
                     button2.setVisibility(View.VISIBLE);
-                } else {
+                } else {//accept
                     button1.setVisibility(View.VISIBLE);
                     button2.setVisibility(View.GONE);
                 }
