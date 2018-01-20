@@ -18,7 +18,7 @@ public class JobModel {
     @SerializedName("datum_isporuke")
     String mIstovarDatum;
 
-    JobModel(String mjestoIstovara, String istovarDatum) {
+    public JobModel(String mjestoIstovara, String istovarDatum) {
         mMjestoIstovara = mjestoIstovara;
         mIstovarDatum = istovarDatum;
     }
