@@ -38,7 +38,7 @@ public class DriverJobs extends AppCompatActivity implements CustomDialog{
         setContentView(R.layout.activity_driver_jobs);
 
         initToolbar();
-        
+
         //kreiranje dummy podataka u svrhu testiranja bez servera
         RouteModel routeJob1 = new RouteModel();
         RouteModel routeJob2 = new RouteModel();
