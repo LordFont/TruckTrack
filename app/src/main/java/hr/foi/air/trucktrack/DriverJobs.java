@@ -10,7 +10,6 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 
-import com.cloudrail.si.CloudRail;
 import com.wang.avi.AVLoadingIndicatorView;
 import java.util.ArrayList;
 
