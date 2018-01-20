@@ -9,12 +9,16 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
+
 import com.wang.avi.AVLoadingIndicatorView;
 import java.util.ArrayList;
+
+
 import entities.RouteIdRequest;
 import entities.RouteModel;
 import hr.foi.air.trucktrack.Callbacks.CallbackDriverJobs;
 
+import hr.foi.air.trucktrack.Helpers.MailHelper;
 import hr.foi.air.trucktrack.Interface.CustomDialog;
 import hr.foi.air.webservice.ApiClient;
 import hr.foi.air.webservice.ApiInterface;
@@ -29,7 +33,7 @@ public class DriverJobs extends AppCompatActivity implements CustomDialog{
     final int DIALOG_ACK_TO_JOB = 500;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_driver_jobs);
 
@@ -91,10 +95,29 @@ public class DriverJobs extends AppCompatActivity implements CustomDialog{
                     * api za slanje emaila. Nakon što se email bude poslao prikazat će se SnackBar
                     * poruka “Uspješno poslano” u protivnom “Neuspješno poslano”. Prije nego GMAIL
                     * API bude gotov, nakon dolaska prvog response-a refreshati listu poslova vozača !*/
+                    RouteIdRequest request = new RouteIdRequest();
+                    request.setmIdRuta(idRuta);
+                    Call<Void> call = apiService.routeDone(request);
+                    call.enqueue(new Callback<Void>() {
+                        @Override
+                        public void onResponse(Call<Void> call, Response<Void> response) {
+                            if (response.code() == 200) {
+                                Snackbar mySnackbar = Snackbar.make(findViewById(R.id.driver_jobs_toolbar), "Ruta je uspješno odrađena!", Snackbar.LENGTH_LONG );
+                                mySnackbar.show();
+                            } else {
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<Void> call, Throwable t) {
+                            Snackbar mySnackbar3 = Snackbar.make(findViewById(R.id.driver_jobs_toolbar), "Ruta NIJE odrađena!", Snackbar.LENGTH_LONG );
+                            mySnackbar3.show();
+                        }
+                    });
                 }
             });
-            dialog.setTitle("Potvrditi odrađeni posao?");
-            dialog.setMessage("Potvrdom odrađenog posla, potvrda se šalje vašem disponentu kao dokaz istoga. Potvrdom posao nestaje s vaše liste i u mogućnosti ste prihvatiti idući posao.");
+            dialog.setTitle("Potvrditi odrađenu rutu?");
+            dialog.setMessage("Potvrdom odrađene rute, potvrda se šalje vašem disponentu kao dokaz istoga. Potvrdom ruta nestaje s vaše liste i u mogućnosti ste prihvatiti iduću rutu.");
             dialog.show();
         } else if (type == DIALOG_ACK_TO_JOB) {
             AlertDialog.Builder dialog = new AlertDialog.Builder(this);
@@ -118,7 +141,7 @@ public class DriverJobs extends AppCompatActivity implements CustomDialog{
                         @Override
                         public void onResponse(Call<Void> call, Response<Void> response) {
                             if (response.code() == 200) {
-                                Snackbar mySnackbar = Snackbar.make(findViewById(R.id.driver_jobs_toolbar), "Posao je uspješno potvrđen!", Snackbar.LENGTH_LONG );
+                                Snackbar mySnackbar = Snackbar.make(findViewById(R.id.driver_jobs_toolbar), "Ruta je uspješno potvrđena!", Snackbar.LENGTH_LONG );
                                 mySnackbar.show();
                             } else {
                             }
@@ -127,14 +150,15 @@ public class DriverJobs extends AppCompatActivity implements CustomDialog{
                         @Override
                         public void onFailure(Call<Void> call, Throwable t) {
                             Snackbar mySnackbar3 = Snackbar.make(findViewById(R.id.driver_jobs_toolbar), "OnFailure", Snackbar.LENGTH_LONG );
+                            mySnackbar3.show();
                             //nemam ideje stacu "onFailure"
                         }
                     });
 
                 }
             });
-            dialog.setTitle("Prihvatiti posao?");
-            dialog.setMessage("Potvrdom novog dodijeljenog posla od strane disponenta isti će se pozivionirati na vrhu liste. Potvrdom dodijele novog posla potvrda se šalje vašem disponentu.");
+            dialog.setTitle("Prihvatiti rutu?");
+            dialog.setMessage("Potvrdom novo dodijeljene rute od strane disponenta ista će se pozivionirati na vrhu liste. Potvrdom dodijele nove rute potvrda se šalje vašem disponentu.");
             dialog.show();
         }
     }
