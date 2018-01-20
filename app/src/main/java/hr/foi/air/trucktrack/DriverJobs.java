@@ -9,12 +9,16 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
+
 import com.wang.avi.AVLoadingIndicatorView;
 import java.util.ArrayList;
+
+
 import entities.RouteIdRequest;
 import entities.RouteModel;
 import hr.foi.air.trucktrack.Callbacks.CallbackDriverJobs;
 
+import hr.foi.air.trucktrack.Helpers.MailHelper;
 import hr.foi.air.trucktrack.Interface.CustomDialog;
 import hr.foi.air.webservice.ApiClient;
 import hr.foi.air.webservice.ApiInterface;
@@ -29,7 +33,7 @@ public class DriverJobs extends AppCompatActivity implements CustomDialog{
     final int DIALOG_ACK_TO_JOB = 500;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_driver_jobs);
 
