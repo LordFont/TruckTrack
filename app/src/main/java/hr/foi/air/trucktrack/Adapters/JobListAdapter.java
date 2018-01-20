@@ -90,7 +90,8 @@ public class JobListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             ((TextView) parent.findViewById(R.id.istovar)).setText(((RouteModel) dataOfTheList.get(position)).getMjestoIstovara());
             ((TextView) parent.findViewById(R.id.status)).setText(((RouteModel) dataOfTheList.get(position)).getStatus().toString());
 
-             if (((RouteModel) dataOfTheList.get(position)).getStatusId() == JOB_ACK) {
+
+             if (((RouteModel) dataOfTheList.get(position)).getStatusId() == JOB_ACK || ((RouteModel) dataOfTheList.get(position)).getStatusId().equals(JOB_ACK)) {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                     parent.setBackgroundColor(contextAct.getResources().getColor(R.color.colorACK, contextAct.getContext().getTheme()));
                 } else {
@@ -98,7 +99,10 @@ public class JobListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                 }
 
                 setColorWhite((ViewGroup) parent);
-            }
+            } else {
+                 parent.setBackgroundColor(0x00000000);
+                 setColorBlack((ViewGroup) parent);
+             }
 
             parent.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -160,8 +164,6 @@ public class JobListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         } else {
             ((TextView) parent.findViewById(R.id.poslovi)).setText(((JobModel) dataOfTheList.get(position)).getMjestoIstovara());
         }
-
-
     }
 
     @Override
@@ -170,6 +172,7 @@ public class JobListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             return dataOfTheList.size();
         else return 0;
     }
+
 
     @Override
     public int getItemViewType(int position) {
@@ -203,6 +206,28 @@ public class JobListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                         ((ImageView) child).setColorFilter(contextAct.getResources().getColor(R.color.textbody, contextAct.getContext().getTheme()));
                     } else {
                         ((ImageView) child).setColorFilter(contextAct.getResources().getColor(R.color.textbody));
+                    }
+                }
+            }
+        }
+    }
+
+    public void setColorBlack(ViewGroup view) {
+        for (int i = 0; i < view.getChildCount(); i++) {
+            View linear = view.getChildAt(i);
+            for (int j = 0; j < ((ViewGroup) linear).getChildCount(); j++) {
+                View child = ((ViewGroup) linear).getChildAt(j);
+                if (child instanceof TextView) {
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                        ((TextView) child).setTextColor(contextAct.getResources().getColor(R.color.defaultTextColor, contextAct.getContext().getTheme()));
+                    } else {
+                        ((TextView) child).setTextColor(contextAct.getResources().getColor(R.color.defaultTextColor));
+                    }
+                } else if (child instanceof ImageView) {
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                        ((ImageView) child).setColorFilter(contextAct.getResources().getColor(R.color.defaultTextColor, contextAct.getContext().getTheme()));
+                    } else {
+                        ((ImageView) child).setColorFilter(contextAct.getResources().getColor(R.color.defaultTextColor));
                     }
                 }
             }

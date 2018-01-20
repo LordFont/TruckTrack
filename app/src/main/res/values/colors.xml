@@ -8,5 +8,6 @@
     <color name="colorGreyLogin">#ededed</color>
     <color name="textbody">#fffffd</color>
     <color name="crna">#131313</color>
+    <color name="defaultTextColor">#757575</color>
 
 </resources>
