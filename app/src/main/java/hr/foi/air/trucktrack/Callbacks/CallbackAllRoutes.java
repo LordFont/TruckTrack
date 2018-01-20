@@ -21,6 +21,8 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static hr.foi.air.trucktrack.R.id.input_vozac;
+
 /**
  * Created by Ivan on 7.12.2017..
  */
