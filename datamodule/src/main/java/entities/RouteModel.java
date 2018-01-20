@@ -1,20 +1,37 @@
 package entities;
 
+import com.google.gson.annotations.SerializedName;
+
+import java.text.Format;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+import java.util.Locale;
 import java.util.Random;
+import java.util.TimeZone;
 
 /**
  * Created by Ivan on 21.11.2017..
  */
 
 public class RouteModel {
-    String mMjestoUtovara;
+    @SerializedName("rutaID")
+    int mIdRuta;
+
+    @SerializedName("adresa_utovara")
+    String  mMjestoUtovara;
+    @SerializedName("endAdresa")
     String mMjestoIstovara;
     String mUtovarDatum;
+    @SerializedName("endIsporuka")
     String mIstovarDatum;
-    String mStatus;
+    @SerializedName("status")
+    int mStatus;
+    @SerializedName("zavrseno")
+    int mZavrseno;
+
+    @SerializedName("poslovi")
     ArrayList<JobModel> poslovi;
 
     public RouteModel() {
@@ -26,9 +43,9 @@ public class RouteModel {
         mMjestoIstovara = mjestoIstovara;
         mUtovarDatum = utovarDatum;
         mIstovarDatum = istovarDatum;
-        mStatus = "Čekanje Potvrde";
+        //mStatus = "Čekanje Potvrde";
 
-        JobModel job = new JobModel(mjestoUtovara,mjestoIstovara,utovarDatum,istovarDatum);
+        JobModel job = new JobModel(mjestoIstovara, istovarDatum);
         poslovi.add(job);
     }
 
@@ -39,6 +56,14 @@ public class RouteModel {
         Date date2 = new Date(Math.abs(System.currentTimeMillis() - rnd.nextLong()));
         AddJob("Mjesto A", "Mjesto B", "12.10.2017","14.10.2017");
         AddJob("Mjesto C", "Mjesto D", "12.10.2017","14.10.2017");
+    }
+
+    public int getIdRuta() {
+        return mIdRuta;
+    }
+
+    public void setIdRuta(int idRuta) {
+        mIdRuta = idRuta;
     }
 
     public String getMjestoUtovara() {
@@ -66,11 +91,40 @@ public class RouteModel {
     }
 
     public String getIstovarDatum() {
-        return mIstovarDatum;
+        if (mIstovarDatum == null || mIstovarDatum.equals("0")) {
+            return "Nepoznato";
+        }
+        SimpleDateFormat sf = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
+        sf.setTimeZone(TimeZone.getTimeZone("UTC"));
+        Date date = new Date(Long.parseLong(mIstovarDatum)*1000);
+        return sf.format(date);
     }
 
     public void setIstovarDatum(String istovarDatum) {
         mIstovarDatum = istovarDatum;
+    }
+
+    public String getStatus() {
+        String result = "";
+        if (mZavrseno == 1){
+            result = "Posao odrađen";
+        }
+        else {
+            if (mStatus == 1) {
+                result = "Posao prihvaćen";
+            } else {
+                result = "Čeka se potvrda";
+            }
+        }
+        return result;
+    }
+
+    public Integer getStatusId() {
+        return mStatus;
+    }
+
+    public void setStatus(int status) {
+        mStatus = status;
     }
 
     public ArrayList<JobModel> getPoslovi() {
@@ -81,11 +135,14 @@ public class RouteModel {
         this.poslovi = poslovi;
     }
 
-    public String getStatus() {
-        return mStatus;
-    }
-
-    public void setStatus(String status) {
-        mStatus = status;
+    public int getButton() {
+        int result;
+        if (mStatus == 1) {
+            result = 400;
+        }
+        else {
+            result = 500;
+        }
+        return result;
     }
 }

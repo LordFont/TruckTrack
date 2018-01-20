@@ -38,8 +38,7 @@ public class LoginActivity extends AppCompatActivity {
     EditText user, password;
     ApiInterface apiService;
     TextView wrongUserPass;
-    //ovo je samo button za testiranje dijelova aplikacije, posto navigacija jos nije potpuna
-    CheckBox isDriver;
+    Intent intent;
 
     private boolean isNetworkConnected() {
         ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -56,7 +55,6 @@ public class LoginActivity extends AppCompatActivity {
         Button signInButton = (Button)findViewById(R.id.loginButton);
         apiService = ApiClient.getClient().create(ApiInterface.class);
         wrongUserPass = (TextView) findViewById(R.id.txtWrongEmailOrPassword);
-        isDriver = (CheckBox) findViewById(R.id.cbIsDriver);
 
         password.setTypeface(Typeface.DEFAULT);
         password.setTextSize(18);
@@ -68,32 +66,46 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String email = user.getText().toString();
                 String lozinka = password.getText().toString();
+                if(((CheckBox)findViewById(R.id.cbIsDriver)).isChecked()) {
+                    email = "pperic@gmail.com";
+                    lozinka = "peric";
+                    //intent = new Intent(getApplicationContext(), DriverJobs.class);
+                }
+                else {
+                    //intent = new Intent(getApplicationContext(), DisponentHome.class);
+                }
+                //startActivity(intent);
 
-                Call<Void> call = apiService.authUser(new UserModel(email,lozinka));
-                //Log.d("Call", call.toString());
-
-                call.enqueue(new Callback<Void>() {
+                Call<Boolean> call = apiService.authUser(new UserModel(email,lozinka));
+                call.enqueue(new Callback<Boolean>() {
                     @Override
-                    public void onResponse(Call<Void> call, Response<Void> response) {
+                    public void onResponse(Call<Boolean> call, Response<Boolean> response) {
                         if (response.code() == 200) {
                             wrongUserPass.setVisibility(View.GONE);
-                            if(isDriver.isChecked()) startActivity(new Intent(getApplicationContext(), DriverJobs.class));
-                            else startActivity(new Intent(getApplicationContext(), DisponentHome.class));
+                            Intent intent;
+                            boolean rjesenje = response.body();
+                            if (rjesenje) {
+                                intent = new Intent(getApplicationContext(), DriverJobs.class);
+                            }
+                            else intent = new Intent(getApplicationContext(), DisponentHome.class);
+
+                            startActivityForResult(intent, 1000);
                         } else {
                             wrongUserPass.setVisibility(View.VISIBLE);
                         }
                     }
 
                     @Override
-                    public void onFailure(Call<Void> call, Throwable t) {
+                    public void onFailure(Call<Boolean> call, Throwable t) {
                         Snackbar mySnackbar = Snackbar.make(findViewById(R.id.loginButton), "Problem sa serverom!", Snackbar.LENGTH_LONG );
                         mySnackbar.show();
                     }
                 });
+                //startActivityForResult(intent, 1000);
             }
         });
-
     }
+
     @Override
     public void onResume(){
         super.onResume();

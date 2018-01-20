@@ -1,6 +1,8 @@
 package entities;
 
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -10,24 +12,15 @@ import java.util.List;
  */
 
 public class JobModel {
-    String mMjestoUtovara;
+    @SerializedName("adresa_primatelja")
     String mMjestoIstovara;
-    String mUtovarDatum;
+
+    @SerializedName("datum_isporuke")
     String mIstovarDatum;
 
-    JobModel(String mjestoUtovara, String mjestoIstovara, String utovarDatum, String istovarDatum) {
-        mMjestoUtovara = mjestoUtovara;
+    public JobModel(String mjestoIstovara, String istovarDatum) {
         mMjestoIstovara = mjestoIstovara;
-        mUtovarDatum = utovarDatum;
         mIstovarDatum = istovarDatum;
-    }
-
-    public String getMjestoUtovara() {
-        return mMjestoUtovara;
-    }
-
-    public void setMjestoUtovara(String mjestoUtovara) {
-        mMjestoUtovara = mjestoUtovara;
     }
 
     public String getMjestoIstovara() {
@@ -36,14 +29,6 @@ public class JobModel {
 
     public void setMjestoIstovara(String mjestoIstovara) {
         mMjestoIstovara = mjestoIstovara;
-    }
-
-    public String getUtovarDatum() {
-        return mUtovarDatum;
-    }
-
-    public void setUtovarDatum(String utovarDatum) {
-        mUtovarDatum = utovarDatum;
     }
 
     public String getIstovarDatum() {
