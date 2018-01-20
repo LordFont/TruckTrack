@@ -145,10 +145,10 @@ public class NewJob extends AppCompatActivity implements
             Intent i = data;
             String start = i.getStringExtra("START");
             String end = i.getStringExtra("END");
-            if (start != null && end != null) {
+            /*if (start != null && end != null) {
                 ((EditText) fragment.getView().findViewById(R.id.input_kordinateUtovara)).setText(start.toString());
                 ((EditText) fragment.getView().findViewById(R.id.input_kordinateIstovara)).setText(end.toString());
-            }
+            }*/
         }
     }
 
