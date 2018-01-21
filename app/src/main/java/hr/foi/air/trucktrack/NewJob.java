@@ -184,6 +184,7 @@ public class NewJob extends AppCompatActivity implements
     @Override
     public void driverSelected(DriverModel driver) {
         showFragment(firstFragment);
+        firstFragment.setDriverOnScreen(driver);
     }
 
     @Override

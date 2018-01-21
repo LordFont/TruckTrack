@@ -170,10 +170,7 @@ public class NewJobFragment extends Fragment {
     }
 
     public void setDriverOnScreen(final DriverModel driver) {
-        input_vozac.setText(driver.getIme() + " " + driver.getPrezime());
-
-
-        /*Thread timer = new Thread() {
+        Thread timer = new Thread() {
             @Override
             public void run() {
                 getActivity().runOnUiThread(new Runnable() {
@@ -184,7 +181,7 @@ public class NewJobFragment extends Fragment {
                 });
             }
         };
-        timer.start();*/
+        timer.start();
     }
 
     public void setNewCoordinates(String lan, String lon) {
