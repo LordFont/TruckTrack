@@ -85,6 +85,62 @@ public class NewJobFragment extends Fragment {
             }
         });
 
+        /*
+
+        inputStart = view.findViewById(R.id.input_kordinateUtovara);
+        inputEnd = view.findViewById(R.id.input_kordinateIstovara);
+
+        clearCoordinates = view.findViewById(R.id.btnClearCoordinates);
+        clearCoordinates.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                inputStart.setText("");
+                inputEnd.setText("");
+            }
+        });
+
+        addStart = view.findViewById(R.id.btnStartMap);
+        addStart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ((ClickedOnMap) getActivity()).ClickedOnMap(inputStart.getText().toString(), inputEnd.getText().toString());
+            }
+        });
+
+        addEnd = view.findViewById(R.id.btnStartMap);
+        addEnd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ((ClickedOnMap) getActivity()).ClickedOnMap(inputStart.getText().toString(), inputEnd.getText().toString());
+            }
+        });
+
+
+        datumUtovara.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                if(b) ((CalendarClicked) getActivity()).calendarClicked(view);
+
+            }
+        });
+
+        datumIstovara.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                if(b) ((CalendarClicked) getActivity()).calendarClicked(view);
+
+            }
+        });
+
+
+
+        view.findViewById(R.id.btn_accept).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((DriverForJob) getActivity()).saveNewJob();
+            }
+        });
+*/
         view.findViewById(R.id.btn_cancel).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -113,7 +169,20 @@ public class NewJobFragment extends Fragment {
     }
 
     public void setDriverOnScreen(final DriverModel driver) {
-        input_vozac.setText(driver.getIme() + " " + driver.getPrezime());
+        //input_vozac.setText(driver.getIme() + " " + driver.getPrezime());
+
+        Thread timer = new Thread() {
+            @Override
+            public void run() {
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        ((EditText)fragment.getView().findViewById(R.id.input_vozac)).setText(driver.getIme() + " " + driver.getPrezime());
+                    }
+                });
+            }
+        };
+        timer.start();
     }
 
     public void setNewCoordinates(String lan, String lon) {
