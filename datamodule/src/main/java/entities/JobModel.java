@@ -18,6 +18,12 @@ public class JobModel {
     @SerializedName("datum_isporuke")
     String mIstovarDatum;
 
+    @SerializedName("latitude")
+    String latitude;
+
+    @SerializedName("longitude")
+    String longitude;
+
     public JobModel(String mjestoIstovara, String istovarDatum) {
         mMjestoIstovara = mjestoIstovara;
         mIstovarDatum = istovarDatum;
@@ -37,5 +43,21 @@ public class JobModel {
 
     public void setIstovarDatum(String istovarDatum) {
         mIstovarDatum = istovarDatum;
+    }
+
+    public String getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(String latitude) {
+        this.latitude = latitude;
+    }
+
+    public String getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(String longitude) {
+        this.longitude = longitude;
     }
 }
