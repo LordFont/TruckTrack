@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import retrofit2.http.HEAD;
+
 /**
  * Created by Ivan on 21.11.2017..
  */
@@ -23,7 +25,6 @@ public class JobModel {
 
     @SerializedName("longitude")
     String longitude;
-
 
     public JobModel(String mjestoIstovara, String istovarDatum) {
         mMjestoIstovara = mjestoIstovara;
@@ -47,7 +48,8 @@ public class JobModel {
     }
 
     public String getLatitude() {
-        if(latitude != null) return latitude;
+        if(latitude != null)
+            return latitude;
         else return "";
     }
 
@@ -56,7 +58,8 @@ public class JobModel {
     }
 
     public String getLongitude() {
-        if(longitude != null) return longitude;
+        if(longitude != null)
+            return longitude;
         else return "";
     }
 
