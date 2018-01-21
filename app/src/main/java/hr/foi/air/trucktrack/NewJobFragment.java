@@ -177,7 +177,7 @@ public class NewJobFragment extends Fragment {
                 getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        ((EditText)fragment.getView().findViewById(R.id.input_vozac)).setText(driver.getIme() + " " + driver.getPrezime());
+                        ((EditText)instance.getView().findViewById(R.id.input_vozac)).setText(driver.getIme() + " " + driver.getPrezime());
                     }
                 });
             }
