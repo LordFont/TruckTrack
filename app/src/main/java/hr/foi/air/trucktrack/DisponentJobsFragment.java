@@ -78,4 +78,9 @@ public class DisponentJobsFragment extends Fragment implements ClickedOnMap{
         mRecyclerView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
     }
+
+     public void notifyAdapter(ArrayList<RouteModel> data) {
+        this.data = data;
+        if(adapter != null) adapter.notifyDataSetChanged();
+    }
 }

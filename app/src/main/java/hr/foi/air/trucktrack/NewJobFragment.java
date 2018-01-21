@@ -36,12 +36,13 @@ public class NewJobFragment extends Fragment {
     EditText inputStart, inputEnd, datumUtovara, datumIstovara;
     private ApiInterface apiService;
     private List<DriverModel> drivers = null;
-    Button clearCoordinates;
+    Button clearCoordinates, addJobs;
     EditText input_vozac;
     View view, viewBlock;
     ListView viewHolder;
     ArrayList<JobModel> jobs;
     ListAdapterJob adapterJob;
+
 
     public static NewJobFragment getInstance() {
         if (instance == null) {
@@ -56,7 +57,7 @@ public class NewJobFragment extends Fragment {
         setHasOptionsMenu(true);
 
         jobs = new ArrayList<>();
-        adapterJob = new ListAdapterJob(getContext(), R.layout.job_block_in_sublist, jobs);
+        adapterJob = new ListAdapterJob(getContext(), R.layout.job_block_in_sublist, jobs, getActivity());
     }
 
     @Override
@@ -66,14 +67,25 @@ public class NewJobFragment extends Fragment {
         viewHolder.setAdapter(adapterJob);
 
 
-
-        /*addDriver = view.findViewById(R.id.addDriverIcon);
+        addDriver = view.findViewById(R.id.addDriverIcon);
         addDriver.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 ((DriverForJob) getActivity()).setDriverForJob();
             }
         });
+
+        input_vozac = view.findViewById(R.id.input_vozac);
+
+        view.findViewById(R.id.btnAddJob).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                jobs.add(new JobModel("", ""));
+                adapterJob.notifyDataSetChanged();
+            }
+        });
+
+        /*
 
         inputStart = view.findViewById(R.id.input_kordinateUtovara);
         inputEnd = view.findViewById(R.id.input_kordinateIstovara);
@@ -103,11 +115,6 @@ public class NewJobFragment extends Fragment {
             }
         });
 
-        datumUtovara = view.findViewById(R.id.input_datumUtovaraa);
-        datumIstovara = view.findViewById(R.id.input_datumIstovara);
-
-        datumUtovara.setInputType(0);
-        datumIstovara.setInputType(0);
 
         datumUtovara.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
@@ -125,7 +132,7 @@ public class NewJobFragment extends Fragment {
             }
         });
 
-        input_vozac = view.findViewById(R.id.input_vozac);
+
 
         view.findViewById(R.id.btn_accept).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -133,13 +140,13 @@ public class NewJobFragment extends Fragment {
                 ((DriverForJob) getActivity()).saveNewJob();
             }
         });
-
+*/
         view.findViewById(R.id.btn_cancel).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 ((PreviousActivity) getActivity()).cancelCurrent();
             }
-        });*/
+        });
         return view;
     }
 
@@ -153,6 +160,7 @@ public class NewJobFragment extends Fragment {
 
     public interface DriverForJob {
         void setDriverForJob();
+
         void saveNewJob();
     }
 
@@ -161,8 +169,8 @@ public class NewJobFragment extends Fragment {
     }
 
     //IVAN - ova metoda ažurira u ui threadu edittext, i zbog toga sada mozemo vidjeti na ekranu ažurirani box
-    public void setDriverOnScreen(final DriverModel driver){
-        Log.d("Prezime u fragmentu",driver.getPrezime());
+    public void setDriverOnScreen(final DriverModel driver) {
+        Log.d("Prezime u fragmentu", driver.getPrezime());
         Thread timer = new Thread() {
             @Override
             public void run() {
@@ -175,5 +183,11 @@ public class NewJobFragment extends Fragment {
             }
         };
         timer.start();
+    }
+
+    public void setNewCoordinates(String lan, String lon) {
+        jobs.get(adapterJob.lastClicked).setLatitude(lan.toString());
+        jobs.get(adapterJob.lastClicked).setLongitude(lon.toString());
+        adapterJob.notifyDataSetChanged();
     }
 }
