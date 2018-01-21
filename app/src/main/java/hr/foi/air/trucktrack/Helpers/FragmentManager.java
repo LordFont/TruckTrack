@@ -8,6 +8,8 @@ import android.view.View;
 
 import hr.foi.air.trucktrack.R;
 
+import static hr.foi.air.trucktrack.R.id.input_vozac;
+
 /**
  * Created by Ivan on 5.12.2017..
  */
