@@ -32,6 +32,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/istovar"
+
                 />
         </android.support.design.widget.TextInputLayout>
     </LinearLayout>
@@ -62,7 +63,8 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/datum_istovara"
-                android:inputType="datetime" />
+                android:inputType="date"
+                android:focusable="false"/>
         </android.support.design.widget.TextInputLayout>
     </LinearLayout>
 
@@ -93,7 +95,8 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/koordinate_istovara"
-                android:inputType="numberDecimal" />
+                android:inputType="numberDecimal"
+                android:focusable="false"/>
 
         </android.support.design.widget.TextInputLayout>
 
