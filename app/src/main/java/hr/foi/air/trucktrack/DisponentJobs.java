@@ -1,6 +1,7 @@
 package hr.foi.air.trucktrack;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.provider.ContactsContract;
@@ -22,6 +23,7 @@ import entities.RouteModel;
 import hr.foi.air.trucktrack.Callbacks.CallbackAllRoutes;
 import hr.foi.air.trucktrack.Callbacks.CallbackDriverJobs;
 import hr.foi.air.trucktrack.Helpers.DataRefresher;
+import hr.foi.air.trucktrack.Helpers.FragmentManager;
 import hr.foi.air.trucktrack.Interface.CustomDialog;
 import hr.foi.air.webservice.ApiClient;
 import hr.foi.air.webservice.ApiInterface;
@@ -29,9 +31,11 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static hr.foi.air.trucktrack.R.id.input_vozac;
+
 public class DisponentJobs extends AppCompatActivity implements CustomDialog{
     private ApiInterface apiService;
-    Fragment fragment;
+    DisponentJobsFragment fragment;
     final int DIALOG_DELETE_JOB = 100;
     final int DIALOG_SAVE_JOB = 200;
 
@@ -46,17 +50,6 @@ public class DisponentJobs extends AppCompatActivity implements CustomDialog{
                 startActivity(new Intent(getApplicationContext(), NewJob.class));
             }
         });
-
-        //kreiranje dummy podataka u svrhu testiranja bez servera
-//        RouteModel routeJob1 = new RouteModel();
-//        RouteModel routeJob2 = new RouteModel();
-//        routeJob1.CreateTestData();
-//        routeJob2.CreateTestData();
-//        ArrayList<RouteModel> testList = new ArrayList<>();
-//        testList.add(routeJob1);
-//        testList.add(routeJob2);
-//
-//        showFragment(DisponentJobsFragment.getInstance(testList));
 
         ArrayList<RouteModel> testList = new ArrayList<>();
         fragment = DisponentJobsFragment.getInstance(testList);
@@ -87,7 +80,7 @@ public class DisponentJobs extends AppCompatActivity implements CustomDialog{
 
     @Override
     public void showCustomDialog(int type,final int idRuta) {
-        final Activity act = this.getParent();
+        final Activity act = this;
         if(type == DIALOG_DELETE_JOB) {
             AlertDialog.Builder dialog = new AlertDialog.Builder(this);
             dialog.setNegativeButton("Odustani", new DialogInterface.OnClickListener() {
@@ -111,8 +104,9 @@ public class DisponentJobs extends AppCompatActivity implements CustomDialog{
                         public void onResponse(Call<Void> call, Response<Void> response) {
                             if (response.code() == 200) {
                                 Snackbar mySnackbar = Snackbar.make(findViewById(R.id.driver_jobs_toolbar), "Uspješno obrisano!", Snackbar.LENGTH_LONG );
+                                DataRefresher dataRefresher = new DataRefresher();
+                                dataRefresher.osvjeziPosloveDisponenta(act,fragment);
                                 mySnackbar.show();
-                                azuriraj();
                             } else {
                                 Snackbar mySnackbar2 = Snackbar.make(findViewById(R.id.driver_jobs_toolbar), "Neuspješno poslano!", Snackbar.LENGTH_LONG );
                                 mySnackbar2.show();
@@ -135,12 +129,4 @@ public class DisponentJobs extends AppCompatActivity implements CustomDialog{
             */
         }
     }
-
-    void azuriraj() {
-        Log.d("Brisi", "Jesi uso");
-        Call<ArrayList<RouteModel>> call = apiService.getAllRoutes();
-        call.enqueue(new CallbackAllRoutes(this,fragment));
-
-    }
-
 }

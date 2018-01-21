@@ -1,5 +1,6 @@
 package hr.foi.air.trucktrack;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,12 +25,12 @@ import hr.foi.air.trucktrack.Interface.CustomDialog;
  */
 
 public class DisponentJobsFragment extends Fragment implements ClickedOnMap{
-    RecyclerView mRecyclerView;
+    static RecyclerView mRecyclerView;
     static DisponentJobsFragment instance = null;
     static List<RouteModel> data = null;
     final int OPEN_MAP = 3004;
-    CustomDialog customDialog;
-    JobListAdapter adapter = null;
+    static CustomDialog customDialog;
+    static JobListAdapter adapter;
 
     public static DisponentJobsFragment getInstance(List<RouteModel> dataJobs) {
         if(instance == null) {
@@ -70,7 +72,14 @@ public class DisponentJobsFragment extends Fragment implements ClickedOnMap{
         }
     }
 
-    public void notifyAdapter(ArrayList<RouteModel> data) {
+    public void updateAdaper(List<RouteModel> dataJobs) {
+        ArrayList<Object> arrayData = new ArrayList<Object>(dataJobs);
+        adapter = new JobListAdapter(arrayData,"Disponent", instance, customDialog);
+        mRecyclerView.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
+    }
+
+     public void notifyAdapter(ArrayList<RouteModel> data) {
         this.data = data;
         if(adapter != null) adapter.notifyDataSetChanged();
     }
