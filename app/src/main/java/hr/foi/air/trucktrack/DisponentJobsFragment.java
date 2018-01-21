@@ -28,6 +28,7 @@ public class DisponentJobsFragment extends Fragment implements ClickedOnMap{
     static List<RouteModel> data = null;
     final int OPEN_MAP = 3004;
     CustomDialog customDialog;
+    JobListAdapter adapter = null;
 
     public static DisponentJobsFragment getInstance(List<RouteModel> dataJobs) {
         if(instance == null) {
@@ -47,7 +48,7 @@ public class DisponentJobsFragment extends Fragment implements ClickedOnMap{
     }
 
     private void showRecycleView(ArrayList<Object> data) {
-        JobListAdapter adapter = new JobListAdapter(data,"Disponent", instance, customDialog);
+        adapter = new JobListAdapter(data,"Disponent", instance, customDialog);
         mRecyclerView.setAdapter(adapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
     }
@@ -67,5 +68,10 @@ public class DisponentJobsFragment extends Fragment implements ClickedOnMap{
         } catch (ClassCastException e) {
             throw  new ClassCastException(e.toString());
         }
+    }
+
+    public void notifyAdapter(ArrayList<RouteModel> data) {
+        this.data = data;
+        if(adapter != null) adapter.notifyDataSetChanged();
     }
 }

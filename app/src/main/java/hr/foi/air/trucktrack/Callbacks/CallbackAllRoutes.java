@@ -52,6 +52,7 @@ public class CallbackAllRoutes extends FragmentManager implements Callback<Array
 
         mNnext = DisponentJobsFragment.getInstance(listOfRoutes);
         showFragment();
+        ((DisponentJobsFragment) mNnext).notifyAdapter(listOfRoutes);
     }
 
     public void onFailure(Call<ArrayList<RouteModel>> call, Throwable t) {

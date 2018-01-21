@@ -140,6 +140,7 @@ public class DisponentJobs extends AppCompatActivity implements CustomDialog{
         Log.d("Brisi", "Jesi uso");
         Call<ArrayList<RouteModel>> call = apiService.getAllRoutes();
         call.enqueue(new CallbackAllRoutes(this,fragment));
+
     }
 
 }
