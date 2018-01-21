@@ -184,10 +184,6 @@ public class NewJob extends AppCompatActivity implements
     @Override
     public void driverSelected(DriverModel driver) {
         showFragment(firstFragment);
-        firstFragment.setDriverOnScreen(driver);
-        Log.d("Prezime",driver.getPrezime()); //IVAN KOMENTAR - ISPISUJE ISPRAVNO PREZIME, ZNACI DA GA JE TU USPIO DOHVATITI
-        /*DISPONENT-CLICKED
-        * STELLA TU DOBIJEM PODATKE - > KAKO FRAGMENT INPUT (ID: input_vozac) UPDATE-ati??*/
     }
 
     @Override

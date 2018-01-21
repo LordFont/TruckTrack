@@ -3,7 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-
     android:orientation="vertical"
     android:id="@+id/jobBlock">
 
@@ -74,7 +73,8 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp">
+        android:layout_marginRight="15dp"
+        android:layout_marginBottom="5dp">
 
         <ImageView
             android:id="@+id/image4"
@@ -108,7 +108,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="5"
-            app:srcCompat="@drawable/ic_map_black_24dp" />
+            app:srcCompat="@drawable/ic_map_black_24dp"/>
 
     </LinearLayout>
 
