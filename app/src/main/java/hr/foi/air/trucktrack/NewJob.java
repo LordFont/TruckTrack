@@ -1,6 +1,7 @@
 package hr.foi.air.trucktrack;
 
 import android.app.DatePickerDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -11,6 +12,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.DatePicker;
 import android.widget.EditText;
 
@@ -131,9 +133,8 @@ public class NewJob extends AppCompatActivity implements
 
 
     @Override
-    public void ClickedOnMap(String coordinatesStart, String coordinatesEnd) {
+    public void ClickedOnMap(String coordinatesEnd) {
         Intent intent = new Intent(getApplicationContext(), MapJobDisponent.class);
-        intent.putExtra("Start", coordinatesStart);
         intent.putExtra("End", coordinatesEnd);
         startActivityForResult(intent, ENTER_IN_MAP);
     }
@@ -143,17 +144,18 @@ public class NewJob extends AppCompatActivity implements
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == ENTER_IN_MAP && data != null) {
             Intent i = data;
-            String start = i.getStringExtra("START");
             String end = i.getStringExtra("END");
-            /*if (start != null && end != null) {
-                ((EditText) fragment.getView().findViewById(R.id.input_kordinateUtovara)).setText(start.toString());
-                ((EditText) fragment.getView().findViewById(R.id.input_kordinateIstovara)).setText(end.toString());
-            }*/
+            String [] positions = end.split(",");
+            showFragment(firstFragment);
+            ((NewJobFragment) firstFragment).setNewCoordinates(positions[0], positions[1]);
         }
     }
 
     @Override
     public void calendarClicked(final View input) {
+        InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(input.getWindowToken(), 0);
+
         DatePickerDialog dialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
@@ -166,7 +168,7 @@ public class NewJob extends AppCompatActivity implements
         else dialog.setTitle("Datum utovara");
 
         dialog.updateDate(Calendar.getInstance().get(Calendar.YEAR), Calendar.getInstance().get(Calendar.MONTH), Calendar.getInstance().get(Calendar.DAY_OF_MONTH));
-        dialog.show();
+        dialog.show();;
     }
 
     @Override

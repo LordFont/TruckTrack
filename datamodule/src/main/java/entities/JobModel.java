@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import retrofit2.http.HEAD;
+
 /**
  * Created by Ivan on 21.11.2017..
  */
@@ -46,7 +48,9 @@ public class JobModel {
     }
 
     public String getLatitude() {
-        return latitude;
+        if(latitude != null)
+            return latitude;
+        else return "";
     }
 
     public void setLatitude(String latitude) {
@@ -54,7 +58,9 @@ public class JobModel {
     }
 
     public String getLongitude() {
-        return longitude;
+        if(longitude != null)
+            return longitude;
+        else return "";
     }
 
     public void setLongitude(String longitude) {

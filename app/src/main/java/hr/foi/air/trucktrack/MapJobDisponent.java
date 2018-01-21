@@ -18,9 +18,9 @@ import com.google.android.gms.maps.model.MarkerOptions;
 public class MapJobDisponent extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
-    private String start, end;
-    private String[] startArray = null, endArray = null;
-    private LatLng startCoor, endCoor;
+    private String end;
+    private String[] endArray = null;
+    private LatLng endCoor;
     private Boolean isFirstClick = true;
     private Integer numOfClickes = 0;
     final Integer ENTER_IN_MAP = 3003;
@@ -36,11 +36,10 @@ public class MapJobDisponent extends FragmentActivity implements OnMapReadyCallb
         mapFragment.getMapAsync(this);
 
         intent = getIntent();
-        start = intent.getExtras().getString("Start", "");
         end = intent.getExtras().getString("End", "");
+        Log.d("MAP", end+"");
 
-        if (start.length() > 0) startArray = start.toString().split(",");
-        if (end.length() > 0) endArray = end.toString().split(",");
+        if (end.length() > 1) endArray = end.split(",");
     }
 
 
@@ -56,46 +55,35 @@ public class MapJobDisponent extends FragmentActivity implements OnMapReadyCallb
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-        Log.d("maps ", startArray + " " + endArray);
-        if (startArray != null) {
-            startCoor = new LatLng(Double.parseDouble(startArray[0]), Double.parseDouble(startArray[1]));
-            mMap.addMarker(new MarkerOptions().position(startCoor).title("Start").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
-            mMap.moveCamera(CameraUpdateFactory.newLatLng(startCoor));
-        }
-
+        Log.d("maps ", endArray + "");
         if (endArray != null) {
             endCoor = new LatLng(Double.parseDouble(endArray[0].toString()), Double.parseDouble(endArray[1].toString()));
             mMap.addMarker(new MarkerOptions().position(endCoor).title("End").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)));
             mMap.moveCamera(CameraUpdateFactory.newLatLng(endCoor));
+            mMap.animateCamera( CameraUpdateFactory.zoomTo( 17.0f ) );
+        } else {
+            mMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(46.306363, 16.339872)));
+            mMap.animateCamera( CameraUpdateFactory.zoomTo( 17.0f ) );
         }
 
         mMap.getUiSettings().setCompassEnabled(true);
         mMap.getUiSettings().setZoomControlsEnabled(true);
         mMap.getUiSettings().setMapToolbarEnabled(true);
 
-        if (startArray == null && endArray == null) {
+        if (endArray == null) {
 
             mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
                 @Override
                 public void onMapClick(LatLng latLng) {
                     String coord = latLng.toString();
                     numOfClickes++;
-                    if(numOfClickes <= 2) {
-                        if (isFirstClick) {
+                    if (numOfClickes <= 1) {
+                        endArray = coord.split(",");
+                        mMap.addMarker(new MarkerOptions().position(latLng).title("End").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)));
 
-                            mMap.addMarker(new MarkerOptions().position(latLng).title("Start").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
-                            isFirstClick = false;
-                            StringBuilder latString = new StringBuilder();
-                            latString.append(latLng.latitude).append(",").append(latLng.longitude);
-                            intent.putExtra("START", latString.toString());
-                        } else {
-                            endArray = coord.split(",");
-                            mMap.addMarker(new MarkerOptions().position(latLng).title("End").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)));
-
-                            StringBuilder latString = new StringBuilder();
-                            latString.append(latLng.latitude).append(",").append(latLng.longitude);
-                            intent.putExtra("END", latString.toString());
-                        }
+                        StringBuilder latString = new StringBuilder();
+                        latString.append(latLng.latitude).append(",").append(latLng.longitude);
+                        intent.putExtra("END", latString.toString());
                     }
                 }
             });
@@ -104,6 +92,10 @@ public class MapJobDisponent extends FragmentActivity implements OnMapReadyCallb
 
     @Override
     public void onBackPressed() {
+        if(!intent.hasExtra("END")) {
+            intent.putExtra("END", end);
+        }
+
         setResult(ENTER_IN_MAP, intent);
         super.onBackPressed();
     }
