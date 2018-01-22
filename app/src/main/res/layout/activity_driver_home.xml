@@ -13,6 +13,6 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="lista poslova koje ima vozac..."/>
+            android:text="@string/lista_poslova_koje_ima_vozac"/>
     </FrameLayout>
 </android.support.design.widget.CoordinatorLayout>
