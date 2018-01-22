@@ -7,6 +7,7 @@ import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -51,7 +52,8 @@ public class ListAdapterJob extends ArrayAdapter {
 
         if(data.size() > 0) {
             koordinateIstovara.setText(data.get(position).getLatitude().toString() + "," + data.get(position).getLongitude().toString());
-
+            datum_istovara.setText(data.get(position).getIstovarDatum());
+            koordinateIstovara.setText(data.get(position).getLatitude()+","+data.get(position).getLongitude());
 
             v.findViewById(R.id.btnEndMap).setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -70,9 +72,6 @@ public class ListAdapterJob extends ArrayAdapter {
                 }
             });
         }
-
-
-
         return v;
     }
 
@@ -85,5 +84,9 @@ public class ListAdapterJob extends ArrayAdapter {
     public int getItemViewType(int position) {
         if(position == 0) return 1;
         else return 0;
+    }
+
+    public void getData() {
+
     }
 }

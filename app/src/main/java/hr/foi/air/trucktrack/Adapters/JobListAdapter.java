@@ -1,17 +1,15 @@
 package hr.foi.air.trucktrack.Adapters;
 
-import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Build;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +18,7 @@ import entities.JobModel;
 import entities.RouteModel;
 import hr.foi.air.trucktrack.DriverJobsFragment;
 import hr.foi.air.trucktrack.Interface.CustomDialog;
+import hr.foi.air.trucktrack.Interface.OpenEditFormatInterface;
 import hr.foi.air.trucktrack.R;
 import hr.foi.air.trucktrack.ViewHolders.ChildViewHolder;
 import hr.foi.air.trucktrack.ViewHolders.ParentViewHolder;
@@ -33,17 +32,19 @@ public class JobListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     String mTipPrikaza = "";
     Fragment contextAct;
     CustomDialog customDialog;
+    OpenEditFormatInterface editFormatInterface;
     final int DIALOG_DELETE_JOB = 100;
     final int DIALOG_SAVE_JOB = 200;
     final int DIALOG_SET_DONE = 400;
     final int DIALOG_ACK_TO_JOB = 500;
     final int JOB_ACK = 1;
 
-    public JobListAdapter(ArrayList<Object> data, String tip, Fragment context, CustomDialog customDialog) {
+    public JobListAdapter(ArrayList<Object> data, String tip, Fragment context, CustomDialog customDialog, OpenEditFormatInterface editInterface) {
         dataOfTheList = data;
         mTipPrikaza = tip;
         contextAct = context;
         this.customDialog = customDialog;
+        this.editFormatInterface = editInterface;
     }
 
     @Override
@@ -118,6 +119,8 @@ public class JobListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                 }
             });
 
+
+
             if (contextAct instanceof DriverJobsFragment) {
                 parent.findViewById(R.id.btnMapShow).setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -156,7 +159,8 @@ public class JobListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                     @Override
                     public void onClick(View v) {
                         int idRute = ((RouteModel) dataOfTheList.get(position)).getIdRuta();
-                        customDialog.showCustomDialog(DIALOG_SAVE_JOB, idRute);
+                        //customDialog.showCustomDialog(DIALOG_SAVE_JOB, idRute);
+                        if(editFormatInterface != null) editFormatInterface.clickedToEditForm(((RouteModel) dataOfTheList.get(position)).getIdRuta());
                     }
                 });
             }

@@ -3,6 +3,7 @@ package hr.foi.air.trucktrack;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
@@ -15,13 +16,17 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
 import entities.DriverModel;
+import entities.RouteModel;
 import hr.foi.air.drivermodule.GridViewFragment;
 import hr.foi.air.drivermodule.ListViewFragment;
+import hr.foi.air.trucktrack.Callbacks.CallbackDriverJobs;
 import hr.foi.air.trucktrack.Callbacks.CallbackDriverList;
 import hr.foi.air.drivermodule.DriverSelectFromListInterface;
 import hr.foi.air.webservice.ApiClient;
@@ -54,8 +59,21 @@ public class NewJob extends AppCompatActivity implements
         setContentView(R.layout.activity_new_job);
         initToolbar();
 
+        Intent i = getIntent();
+        int routeId = -1;
+
+    /*    if(i != null) {
+            routeId = i.getIntExtra("EDIT", -1);
+            Fragment fragment = NewJobFragment.getInstance();
+            apiService = ApiClient.getClient().create(ApiInterface.class);
+            Call<ArrayList<RouteModel>> call = apiService.getDriverJobs("3"); //ovdje ide id korisnika, za testiranje uzet id 3
+            call.enqueue(new CallbackDriverJobs(this,fragment));
+        }
+        } else {*/
+
         firstFragment = NewJobFragment.getInstance();
         showFragment(firstFragment);
+
     }
 
     public void initToolbar() {
@@ -145,7 +163,7 @@ public class NewJob extends AppCompatActivity implements
         if (resultCode == ENTER_IN_MAP && data != null) {
             Intent i = data;
             String end = i.getStringExtra("END");
-            String [] positions = end.split(",");
+            String[] positions = end.split(",");
             showFragment(firstFragment);
             ((NewJobFragment) firstFragment).setNewCoordinates(positions[0], positions[1]);
         }
@@ -153,7 +171,7 @@ public class NewJob extends AppCompatActivity implements
 
     @Override
     public void calendarClicked(final View input) {
-        InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(input.getWindowToken(), 0);
 
         DatePickerDialog dialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
@@ -168,7 +186,8 @@ public class NewJob extends AppCompatActivity implements
         else dialog.setTitle("Datum utovara");
 
         dialog.updateDate(Calendar.getInstance().get(Calendar.YEAR), Calendar.getInstance().get(Calendar.MONTH), Calendar.getInstance().get(Calendar.DAY_OF_MONTH));
-        dialog.show();;
+        dialog.show();
+        ;
     }
 
     @Override
@@ -178,7 +197,6 @@ public class NewJob extends AppCompatActivity implements
         Call<List<DriverModel>> call = apiService.getDrivers();
         call.enqueue(new CallbackDriverList(this, fragment));
     }
-
 
 
     @Override
@@ -193,7 +211,12 @@ public class NewJob extends AppCompatActivity implements
     }
 
     @Override
-    public void saveNewJob() {
+    public void saveNewJob(boolean canSave) {
+        if(!canSave) {
+            Snackbar.make(findViewById(R.id.job_toolbar), getResources().getString(R.string.input_required_not_filled), Snackbar.LENGTH_LONG ).show();
+        }
+
+
         /*DISPONENT-JOB-SAVE
         * metoda kao parametar mora dobiti instancu klase koja će spremati sve podatke forme posla.
         * nakon uspješnog spremanja prikazati SnackBar sa porukom "Uspješno spremanje" u protivnom
