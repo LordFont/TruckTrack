@@ -20,13 +20,14 @@ import hr.foi.air.trucktrack.Callbacks.CallbackDriverJobs;
 
 import hr.foi.air.trucktrack.Helpers.MailHelper;
 import hr.foi.air.trucktrack.Interface.CustomDialog;
+import hr.foi.air.trucktrack.Interface.OpenEditFormatInterface;
 import hr.foi.air.webservice.ApiClient;
 import hr.foi.air.webservice.ApiInterface;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class DriverJobs extends AppCompatActivity implements CustomDialog{
+public class DriverJobs extends AppCompatActivity implements CustomDialog {
     private ApiInterface apiService;
     AVLoadingIndicatorView avi;
     final int DIALOG_SET_DONE = 400;
@@ -46,7 +47,6 @@ public class DriverJobs extends AppCompatActivity implements CustomDialog{
         routeJob2.CreateTestData();
         ArrayList<RouteModel> testList = new ArrayList<>();
         testList.add(routeJob1);
-        testList.add(routeJob2);
 
         //showFragment(DriverJobsFragment.getInstance(testList));
         Fragment fragment = DriverJobsFragment.getInstance(testList);
@@ -102,8 +102,7 @@ public class DriverJobs extends AppCompatActivity implements CustomDialog{
                         @Override
                         public void onResponse(Call<Void> call, Response<Void> response) {
                             if (response.code() == 200) {
-                                Snackbar mySnackbar = Snackbar.make(findViewById(R.id.driver_jobs_toolbar), "Ruta je uspješno odrađena!", Snackbar.LENGTH_LONG );
-                                mySnackbar.show();
+                                Snackbar.make(findViewById(R.id.driver_jobs_toolbar), "Ruta je uspješno odrađena!", Snackbar.LENGTH_LONG ).show();
                             } else {
                             }
                         }
@@ -162,4 +161,5 @@ public class DriverJobs extends AppCompatActivity implements CustomDialog{
             dialog.show();
         }
     }
+
 }

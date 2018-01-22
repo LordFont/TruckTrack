@@ -1,24 +1,15 @@
 package hr.foi.air.trucktrack;
 
-import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,7 +28,7 @@ public class NewJobFragment extends Fragment {
     private ApiInterface apiService;
     private List<DriverModel> drivers = null;
     Button clearCoordinates, addJobs;
-    EditText input_vozac;
+    EditText input_vozac, adresa_utovara;
     View view, viewBlock;
     ListView viewHolder;
     ArrayList<JobModel> jobs;
@@ -85,73 +76,35 @@ public class NewJobFragment extends Fragment {
             }
         });
 
-        /*
 
-        inputStart = view.findViewById(R.id.input_kordinateUtovara);
-        inputEnd = view.findViewById(R.id.input_kordinateIstovara);
-
-        clearCoordinates = view.findViewById(R.id.btnClearCoordinates);
-        clearCoordinates.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                inputStart.setText("");
-                inputEnd.setText("");
-            }
-        });
-
-        addStart = view.findViewById(R.id.btnStartMap);
-        addStart.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ((ClickedOnMap) getActivity()).ClickedOnMap(inputStart.getText().toString(), inputEnd.getText().toString());
-            }
-        });
-
-        addEnd = view.findViewById(R.id.btnStartMap);
-        addEnd.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ((ClickedOnMap) getActivity()).ClickedOnMap(inputStart.getText().toString(), inputEnd.getText().toString());
-            }
-        });
-
-
-        datumUtovara.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View view, boolean b) {
-                if(b) ((CalendarClicked) getActivity()).calendarClicked(view);
-
-            }
-        });
-
-        datumIstovara.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View view, boolean b) {
-                if(b) ((CalendarClicked) getActivity()).calendarClicked(view);
-
-            }
-        });
-
-
-
-        view.findViewById(R.id.btn_accept).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ((DriverForJob) getActivity()).saveNewJob();
-            }
-        });
-*/
         view.findViewById(R.id.btn_cancel).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 ((PreviousActivity) getActivity()).cancelCurrent();
             }
         });
+
+        adresa_utovara = view.findViewById(R.id.input_utovar);
+
+        view.findViewById(R.id.btn_save_job).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                boolean validationPassed = true;
+                if(adresa_utovara.getText().length() == 0 ) validationPassed = false;
+                if(jobs.size() == 0 ) validationPassed = false;
+
+                for(int i = 0; i < jobs.size(); i++) {
+                    if(jobs.get(i).getMjestoIstovara().length() == 0) validationPassed = false;
+                }
+
+                ((DriverForJob) getActivity()).saveNewJob(validationPassed);
+            }
+        });
         return view;
     }
 
     public interface ClickedOnMap {
-        void ClickedOnMap(String coordinatesStart, String coordinatesEnd);
+        void ClickedOnMap(String coordinatesEnd);
     }
 
     public interface CalendarClicked {
@@ -161,23 +114,21 @@ public class NewJobFragment extends Fragment {
     public interface DriverForJob {
         void setDriverForJob();
 
-        void saveNewJob();
+        void saveNewJob(boolean canSave);
     }
 
     public interface PreviousActivity {
         void cancelCurrent();
     }
 
-    //IVAN - ova metoda ažurira u ui threadu edittext, i zbog toga sada mozemo vidjeti na ekranu ažurirani box
     public void setDriverOnScreen(final DriverModel driver) {
-        Log.d("Prezime u fragmentu", driver.getPrezime());
         Thread timer = new Thread() {
             @Override
             public void run() {
                 getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        input_vozac.setText(driver.getIme() + " " + driver.getPrezime());
+                        ((EditText)instance.getView().findViewById(R.id.input_vozac)).setText(driver.getIme() + " " + driver.getPrezime());
                     }
                 });
             }

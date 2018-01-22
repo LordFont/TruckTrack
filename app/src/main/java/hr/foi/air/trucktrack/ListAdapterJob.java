@@ -7,6 +7,7 @@ import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,6 +27,7 @@ public class ListAdapterJob extends ArrayAdapter {
     private ArrayList<View> listBlocks = null;
     Activity act;
     public int lastClicked = -1;
+    EditText koordinateIstovara = null, datum_istovara = null, poduzece_utovara = null;
 
     public ListAdapterJob(@NonNull Context context, @LayoutRes int resource, ArrayList<JobModel> jobBlocks, Activity activity) {
         super(context, resource);
@@ -44,18 +46,32 @@ public class ListAdapterJob extends ArrayAdapter {
             v = vi.inflate(R.layout.job_block_in_sublist, null, false);
         }
 
-        v.findViewById(R.id.btnEndMap).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ((NewJobFragment.ClickedOnMap) act).ClickedOnMap("", "");
-                lastClicked = position;
-            }
-        });
+        koordinateIstovara = v.findViewById(R.id.input_kordinateIstovara);
+        datum_istovara = v.findViewById(R.id.input_datumIstovara);
+        poduzece_utovara = v.findViewById(R.id.input_istovar);
 
         if(data.size() > 0) {
-            ((EditText) v.findViewById(R.id.input_kordinateIstovara)).setText(data.get(position).getLatitude().toString()+","+data.get(position).getLongitude().toString());
-        }
+            koordinateIstovara.setText(data.get(position).getLatitude().toString() + "," + data.get(position).getLongitude().toString());
+            datum_istovara.setText(data.get(position).getIstovarDatum());
+            koordinateIstovara.setText(data.get(position).getLatitude()+","+data.get(position).getLongitude());
 
+            v.findViewById(R.id.btnEndMap).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    poduzece_utovara.clearFocus();
+                    ((NewJobFragment.ClickedOnMap) act).ClickedOnMap(koordinateIstovara.getText().toString());
+                    lastClicked = position;
+                }
+            });
+
+            datum_istovara.setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View v) {
+                   ((NewJobFragment.CalendarClicked) act).calendarClicked(datum_istovara);
+                }
+            });
+        }
         return v;
     }
 
@@ -68,5 +84,9 @@ public class ListAdapterJob extends ArrayAdapter {
     public int getItemViewType(int position) {
         if(position == 0) return 1;
         else return 0;
+    }
+
+    public void getData() {
+
     }
 }

@@ -19,6 +19,8 @@ public class RouteModel {
     @SerializedName("rutaID")
     int mIdRuta;
 
+    @SerializedName("korisnikID")
+    int korisnikID;
     @SerializedName("adresa_utovara")
     String  mMjestoUtovara;
     @SerializedName("endAdresa")
