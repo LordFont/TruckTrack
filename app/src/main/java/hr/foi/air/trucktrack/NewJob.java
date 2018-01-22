@@ -143,12 +143,11 @@ public class NewJob extends AppCompatActivity implements
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == ENTER_IN_MAP && data != null) {
             Intent i = data;
-            String start = i.getStringExtra("START");
             String end = i.getStringExtra("END");
-            if (start != null && end != null) {
-                ((EditText) fragment.getView().findViewById(R.id.input_kordinateUtovara)).setText(start.toString());
-                ((EditText) fragment.getView().findViewById(R.id.input_kordinateIstovara)).setText(end.toString());
-            }
+            Log.d("STELLA", "end"+end);
+            String [] positions = end.split(",");
+            showFragment(firstFragment);
+            ((NewJobFragment) firstFragment).setNewCoordinates(positions[0], positions[1]);
         }
     }
 

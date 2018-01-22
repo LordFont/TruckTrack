@@ -28,6 +28,8 @@ public class RouteModel {
     String mIstovarDatum;
     @SerializedName("status")
     int mStatus;
+    @SerializedName("zavrseno")
+    int mZavrseno;
 
     @SerializedName("poslovi")
     ArrayList<JobModel> poslovi;
@@ -104,11 +106,15 @@ public class RouteModel {
 
     public String getStatus() {
         String result = "";
-        if (mStatus == 1) {
-            result = "Posao prihvaćen";
+        if (mZavrseno == 1){
+            result = "Posao odrađen";
         }
         else {
-            result = "Čeka se potvrda";
+            if (mStatus == 1) {
+                result = "Posao prihvaćen";
+            } else {
+                result = "Čeka se potvrda";
+            }
         }
         return result;
     }

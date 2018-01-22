@@ -21,16 +21,17 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static hr.foi.air.trucktrack.R.id.input_vozac;
+
 /**
  * Created by Ivan on 7.12.2017..
  */
 
 public class CallbackAllRoutes extends FragmentManager implements Callback<ArrayList<RouteModel>>{
-    DriverJobsResponse djResponse;
     ArrayList<RouteModel> listOfRoutes = new ArrayList<RouteModel>();
-    RouteModel mRouteModel;
+    DisponentJobsFragment dpFragment;
 
-    public CallbackAllRoutes (Object curr, Fragment next) {
+    public CallbackAllRoutes (Object curr, DisponentJobsFragment next) {
         if (curr instanceof Fragment) {
             mCurrent = ((Fragment) curr).getActivity();
         }
@@ -38,18 +39,18 @@ public class CallbackAllRoutes extends FragmentManager implements Callback<Array
             mCurrent = (FragmentActivity)curr;
         }
         mNnext = next;
+        dpFragment = next;
+        showFragment();
     }
 
     @Override
     public void onResponse(Call<ArrayList<RouteModel>> call, Response<ArrayList<RouteModel>> response) {
-        //mRouteModel = new RouteModel();
         AVLoadingIndicatorView avi = mCurrent.findViewById(R.id.avi);
         listOfRoutes = response.body();
         avi.hide();
         Log.d("body",listOfRoutes.get(0).getMjestoUtovara());
+        dpFragment.updateAdaper(listOfRoutes);
 
-        mNnext = DisponentJobsFragment.getInstance(listOfRoutes);
-        showFragment();
     }
 
     public void onFailure(Call<ArrayList<RouteModel>> call, Throwable t) {

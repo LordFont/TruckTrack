@@ -1,5 +1,6 @@
 package hr.foi.air.trucktrack;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -12,14 +13,18 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import org.w3c.dom.Text;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import entities.DriverModel;
+import entities.JobModel;
 import hr.foi.air.webservice.ApiInterface;
 
 
@@ -31,9 +36,13 @@ public class NewJobFragment extends Fragment {
     EditText inputStart, inputEnd, datumUtovara, datumIstovara;
     private ApiInterface apiService;
     private List<DriverModel> drivers = null;
-    Button clearCoordinates;
+    Button clearCoordinates, addJobs;
     EditText input_vozac;
-    View view;
+    View view, viewBlock;
+    ListView viewHolder;
+    ArrayList<JobModel> jobs;
+    ListAdapterJob adapterJob;
+
 
     public static NewJobFragment getInstance() {
         if (instance == null) {
@@ -46,11 +55,17 @@ public class NewJobFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
+
+        jobs = new ArrayList<>();
+        adapterJob = new ListAdapterJob(getContext(), R.layout.job_block_in_sublist, jobs, getActivity());
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_new_job, container, false);
+        viewHolder = view.findViewById(R.id.holderJob);
+        viewHolder.setAdapter(adapterJob);
+
 
         addDriver = view.findViewById(R.id.addDriverIcon);
         addDriver.setOnClickListener(new View.OnClickListener() {
@@ -59,6 +74,18 @@ public class NewJobFragment extends Fragment {
                 ((DriverForJob) getActivity()).setDriverForJob();
             }
         });
+
+        input_vozac = view.findViewById(R.id.input_vozac);
+
+        view.findViewById(R.id.btnAddJob).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                jobs.add(new JobModel("", ""));
+                adapterJob.notifyDataSetChanged();
+            }
+        });
+
+        /*
 
         inputStart = view.findViewById(R.id.input_kordinateUtovara);
         inputEnd = view.findViewById(R.id.input_kordinateIstovara);
@@ -88,11 +115,6 @@ public class NewJobFragment extends Fragment {
             }
         });
 
-        datumUtovara = view.findViewById(R.id.input_datumUtovaraa);
-        datumIstovara = view.findViewById(R.id.input_datumIstovara);
-
-        datumUtovara.setInputType(0);
-        datumIstovara.setInputType(0);
 
         datumUtovara.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
@@ -110,7 +132,7 @@ public class NewJobFragment extends Fragment {
             }
         });
 
-        input_vozac = view.findViewById(R.id.input_vozac);
+
 
         view.findViewById(R.id.btn_accept).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -118,7 +140,7 @@ public class NewJobFragment extends Fragment {
                 ((DriverForJob) getActivity()).saveNewJob();
             }
         });
-
+*/
         view.findViewById(R.id.btn_cancel).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -138,6 +160,7 @@ public class NewJobFragment extends Fragment {
 
     public interface DriverForJob {
         void setDriverForJob();
+
         void saveNewJob();
     }
 
@@ -146,8 +169,8 @@ public class NewJobFragment extends Fragment {
     }
 
     //IVAN - ova metoda ažurira u ui threadu edittext, i zbog toga sada mozemo vidjeti na ekranu ažurirani box
-    public void setDriverOnScreen(final DriverModel driver){
-        Log.d("Prezime u fragmentu",driver.getPrezime());
+    public void setDriverOnScreen(final DriverModel driver) {
+        Log.d("Prezime u fragmentu", driver.getPrezime());
         Thread timer = new Thread() {
             @Override
             public void run() {
@@ -160,5 +183,11 @@ public class NewJobFragment extends Fragment {
             }
         };
         timer.start();
+    }
+
+    public void setNewCoordinates(String lan, String lon) {
+        jobs.get(adapterJob.lastClicked).setLatitude(lan.toString());
+        jobs.get(adapterJob.lastClicked).setLongitude(lon.toString());
+        adapterJob.notifyDataSetChanged();
     }
 }
