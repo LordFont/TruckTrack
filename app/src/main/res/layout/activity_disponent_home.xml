@@ -33,7 +33,7 @@
             android:layout_gravity="center"
             android:layout_marginTop="50dp"
             android:gravity="center"
-            android:text="Lista vozača"
+            android:text="@string/lista_vozaca"
             android:textColor="@color/textbody"
             android:textSize="18sp" />
     </FrameLayout>
@@ -60,7 +60,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="50dp"
-            android:text="Lista poslova"
+            android:text="@string/lista_poslova"
             android:textColor="@color/colorPrimary"
             android:layout_gravity="center"
             android:gravity="center"
