@@ -37,8 +37,9 @@ public class MapJobDisponent extends FragmentActivity implements OnMapReadyCallb
 
         intent = getIntent();
         end = intent.getExtras().getString("End", "");
+        Log.d("MAP", end+"");
 
-        if (end.length() > 0) endArray = end.toString().split(",");
+        if (end.length() > 1) endArray = end.split(",");
     }
 
 
@@ -59,6 +60,10 @@ public class MapJobDisponent extends FragmentActivity implements OnMapReadyCallb
             endCoor = new LatLng(Double.parseDouble(endArray[0].toString()), Double.parseDouble(endArray[1].toString()));
             mMap.addMarker(new MarkerOptions().position(endCoor).title("End").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)));
             mMap.moveCamera(CameraUpdateFactory.newLatLng(endCoor));
+            mMap.animateCamera( CameraUpdateFactory.zoomTo( 17.0f ) );
+        } else {
+            mMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(46.306363, 16.339872)));
+            mMap.animateCamera( CameraUpdateFactory.zoomTo( 17.0f ) );
         }
 
         mMap.getUiSettings().setCompassEnabled(true);
@@ -72,13 +77,13 @@ public class MapJobDisponent extends FragmentActivity implements OnMapReadyCallb
                 public void onMapClick(LatLng latLng) {
                     String coord = latLng.toString();
                     numOfClickes++;
-                    if (numOfClickes <= 2) {
+                    if (numOfClickes <= 1) {
                         endArray = coord.split(",");
                         mMap.addMarker(new MarkerOptions().position(latLng).title("End").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)));
+
                         StringBuilder latString = new StringBuilder();
                         latString.append(latLng.latitude).append(",").append(latLng.longitude);
                         intent.putExtra("END", latString.toString());
-
                     }
                 }
             });
@@ -87,6 +92,10 @@ public class MapJobDisponent extends FragmentActivity implements OnMapReadyCallb
 
     @Override
     public void onBackPressed() {
+        if(!intent.hasExtra("END")) {
+            intent.putExtra("END", end);
+        }
+
         setResult(ENTER_IN_MAP, intent);
         super.onBackPressed();
     }

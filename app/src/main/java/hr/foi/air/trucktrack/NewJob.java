@@ -1,7 +1,9 @@
 package hr.foi.air.trucktrack;
 
 import android.app.DatePickerDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
@@ -11,15 +13,20 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
 import entities.DriverModel;
+import entities.RouteModel;
 import hr.foi.air.drivermodule.GridViewFragment;
 import hr.foi.air.drivermodule.ListViewFragment;
+import hr.foi.air.trucktrack.Callbacks.CallbackDriverJobs;
 import hr.foi.air.trucktrack.Callbacks.CallbackDriverList;
 import hr.foi.air.drivermodule.DriverSelectFromListInterface;
 import hr.foi.air.webservice.ApiClient;
@@ -45,6 +52,7 @@ public class NewJob extends AppCompatActivity implements
     final Integer ENTER_IN_MAP = 3003;
     private ApiInterface apiService;
     private List<DriverModel> drivers = null;
+    private RouteModel rute = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,8 +60,21 @@ public class NewJob extends AppCompatActivity implements
         setContentView(R.layout.activity_new_job);
         initToolbar();
 
-        firstFragment = NewJobFragment.getInstance();
+        Intent i = getIntent();
+        int routeId = -1;
+
+    /*    if(i != null) {
+            routeId = i.getIntExtra("EDIT", -1);
+            Fragment fragment = NewJobFragment.getInstance();
+            apiService = ApiClient.getClient().create(ApiInterface.class);
+            Call<ArrayList<RouteModel>> call = apiService.getDriverJobs("3"); //ovdje ide id korisnika, za testiranje uzet id 3
+            call.enqueue(new CallbackDriverJobs(this,fragment));
+        }
+        } else {*/
+        rute = new RouteModel();
+        firstFragment = NewJobFragment.getInstance(rute);
         showFragment(firstFragment);
+
     }
 
     public void initToolbar() {
@@ -131,9 +152,8 @@ public class NewJob extends AppCompatActivity implements
 
 
     @Override
-    public void ClickedOnMap(String coordinatesStart, String coordinatesEnd) {
+    public void ClickedOnMap(String coordinatesEnd) {
         Intent intent = new Intent(getApplicationContext(), MapJobDisponent.class);
-        intent.putExtra("Start", coordinatesStart);
         intent.putExtra("End", coordinatesEnd);
         startActivityForResult(intent, ENTER_IN_MAP);
     }
@@ -144,8 +164,7 @@ public class NewJob extends AppCompatActivity implements
         if (resultCode == ENTER_IN_MAP && data != null) {
             Intent i = data;
             String end = i.getStringExtra("END");
-            Log.d("STELLA", "end"+end);
-            String [] positions = end.split(",");
+            String[] positions = end.split(",");
             showFragment(firstFragment);
             ((NewJobFragment) firstFragment).setNewCoordinates(positions[0], positions[1]);
         }
@@ -153,6 +172,9 @@ public class NewJob extends AppCompatActivity implements
 
     @Override
     public void calendarClicked(final View input) {
+        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(input.getWindowToken(), 0);
+
         DatePickerDialog dialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
@@ -166,6 +188,7 @@ public class NewJob extends AppCompatActivity implements
 
         dialog.updateDate(Calendar.getInstance().get(Calendar.YEAR), Calendar.getInstance().get(Calendar.MONTH), Calendar.getInstance().get(Calendar.DAY_OF_MONTH));
         dialog.show();
+        ;
     }
 
     @Override
@@ -177,14 +200,11 @@ public class NewJob extends AppCompatActivity implements
     }
 
 
-
     @Override
     public void driverSelected(DriverModel driver) {
         showFragment(firstFragment);
         firstFragment.setDriverOnScreen(driver);
-        Log.d("Prezime",driver.getPrezime()); //IVAN KOMENTAR - ISPISUJE ISPRAVNO PREZIME, ZNACI DA GA JE TU USPIO DOHVATITI
-        /*DISPONENT-CLICKED
-        * STELLA TU DOBIJEM PODATKE - > KAKO FRAGMENT INPUT (ID: input_vozac) UPDATE-ati??*/
+
     }
 
     @Override
@@ -193,7 +213,14 @@ public class NewJob extends AppCompatActivity implements
     }
 
     @Override
-    public void saveNewJob() {
+    public void saveNewJob(boolean canSave, RouteModel rute) {
+
+        if (!canSave) {
+            Snackbar.make(findViewById(R.id.job_toolbar), getResources().getString(R.string.input_required_not_filled), Snackbar.LENGTH_LONG).show();
+        }
+
+
+
         /*DISPONENT-JOB-SAVE
         * metoda kao parametar mora dobiti instancu klase koja će spremati sve podatke forme posla.
         * nakon uspješnog spremanja prikazati SnackBar sa porukom "Uspješno spremanje" u protivnom
@@ -201,6 +228,11 @@ public class NewJob extends AppCompatActivity implements
         * koristiti metodu cancelCurrent koja poziva prethodnu aktivnost koja je upravo DisponentJobs.class
         * koja nam i treba.
         * KOORDINATE MORAJU BITI SPREMLJENE KAO STRING (TEXT)*/
+    }
+
+    @Override
+    public void notFieldData() {
+        Snackbar.make(findViewById(R.id.job_toolbar), getResources().getString(R.string.input_required_not_filled), Snackbar.LENGTH_LONG).show();
     }
 
     @Override

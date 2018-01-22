@@ -16,6 +16,7 @@ import java.util.List;
 import entities.RouteModel;
 import hr.foi.air.trucktrack.Adapters.JobListAdapter;
 import hr.foi.air.trucktrack.Interface.CustomDialog;
+import hr.foi.air.trucktrack.Interface.OpenEditFormatInterface;
 
 /**
  * Created by Ivan on 1.12.2017..
@@ -51,7 +52,7 @@ public class DriverJobsFragment extends android.support.v4.app.Fragment {
 
 
     private void showRecycleView(ArrayList<Object> data) {
-        JobListAdapter adapter = new JobListAdapter(data,"Vozac", instance, customDialog);
+        JobListAdapter adapter = new JobListAdapter(data,"Vozac", instance, customDialog, null);
         mRecyclerView.setAdapter(adapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
     }

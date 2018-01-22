@@ -15,6 +15,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -25,6 +26,7 @@ import hr.foi.air.trucktrack.Callbacks.CallbackDriverJobs;
 import hr.foi.air.trucktrack.Helpers.DataRefresher;
 import hr.foi.air.trucktrack.Helpers.FragmentManager;
 import hr.foi.air.trucktrack.Interface.CustomDialog;
+import hr.foi.air.trucktrack.Interface.OpenEditFormatInterface;
 import hr.foi.air.webservice.ApiClient;
 import hr.foi.air.webservice.ApiInterface;
 import retrofit2.Call;
@@ -33,7 +35,7 @@ import retrofit2.Response;
 
 import static hr.foi.air.trucktrack.R.id.input_vozac;
 
-public class DisponentJobs extends AppCompatActivity implements CustomDialog{
+public class DisponentJobs extends AppCompatActivity implements CustomDialog, OpenEditFormatInterface{
     private ApiInterface apiService;
     DisponentJobsFragment fragment;
     final int DIALOG_DELETE_JOB = 100;
@@ -128,5 +130,11 @@ public class DisponentJobs extends AppCompatActivity implements CustomDialog{
                 Spremanje tako što se poziva api poziv i uspješnim spremanjem se otvara SnackBar sa porukom : "Uspješno spremljeno" u protivnom "Neuspješno spremljeno".
             */
         }
+    }
+
+    @Override
+    public void clickedToEditForm(int routeId) {
+        //startActivity(new Intent(getApplicationContext(), NewJob.class).putExtra("EDIT", routeId));
+        Snackbar.make(findViewById(R.id.driver_jobs_toolbar), getResources().getString(R.string.action_no_implement), Snackbar.LENGTH_LONG ).show();
     }
 }

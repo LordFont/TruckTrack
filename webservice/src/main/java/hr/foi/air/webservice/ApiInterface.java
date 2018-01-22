@@ -42,4 +42,7 @@ public interface ApiInterface {
 
     @POST("route/delete")
     Call<Void> routeDelete(@Body RouteIdRequest body);
+
+    @POST("route/new")
+    Call<Void> routeNew(@Body RouteModel body);
 }

@@ -17,15 +17,18 @@
     <string name="title_activity_no_content">NoContentActivity</string>
     <string name="toolbarPoslovi">Poslovi</string>
 
-    <string name="utovar">Poduzeće utovar</string>
-    <string name="istovar">Poduzeće istovar</string>
+    <string name="utovar">Poduzeće utovar *</string>
+    <string name="istovar">Poduzeće istovar *</string>
     <string name="datum_utovara">Datum utovara</string>
     <string name="datum_istovara">Datum istovara</string>
     <string name="koordinate_utovara">Kordinate utovara</string>
     <string name="koordinate_istovara">Koordinate istovara</string>
-    <string name="dodjeljeni_vozac">Dodjeljeni vozač</string>
+    <string name="dodjeljeni_vozac">Dodjeljeni vozač (*)</string>
     <string name="title_activity_new_job_form">NewJobForm</string>
     <string name="title_activity_map_job">Map</string>
     <string name="title_activity_maps_job_driver">Map</string>
     <string name="error_msg_happend">Dogodila se pogreška tokom učitavanja zaslona.</string>
+
+    <string name="action_no_implement">Akcija nije implementirana.</string>
+    <string name="input_required_not_filled">Inputi koji su obavezni nisu ispunjeni!</string>
 </resources>
