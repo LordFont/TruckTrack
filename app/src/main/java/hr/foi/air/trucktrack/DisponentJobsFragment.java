@@ -61,7 +61,7 @@ public class DisponentJobsFragment extends Fragment implements ClickedOnMap{
     @Override
     public void ClickedOnMap(int id) {
         Intent i = new Intent(getContext(), MapsJobDriver.class);
-        i.putExtra("JOB_ID", id);
+        i.putExtra("RUTE_ID", id);
         startActivityForResult(i, OPEN_MAP);
     }
 

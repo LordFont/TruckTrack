@@ -15,8 +15,11 @@ import java.util.List;
 
 import entities.RouteModel;
 import hr.foi.air.trucktrack.Adapters.JobListAdapter;
+import hr.foi.air.trucktrack.Callbacks.CallbackDriverJobsForMap;
 import hr.foi.air.trucktrack.Interface.CustomDialog;
-import hr.foi.air.trucktrack.Interface.OpenEditFormatInterface;
+import hr.foi.air.webservice.ApiClient;
+import hr.foi.air.webservice.ApiInterface;
+import retrofit2.Call;
 
 /**
  * Created by Ivan on 1.12.2017..
@@ -58,8 +61,12 @@ public class DriverJobsFragment extends android.support.v4.app.Fragment {
     }
 
     public void clickedOnMap(int id) {
+        ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
+        Call<ArrayList<RouteModel>> call = apiService.getDriverJobs("3");
+        call.enqueue(new CallbackDriverJobsForMap());
+
         Intent i = new Intent(getContext(), MapsJobDriver.class);
-        i.putExtra("JOB_ID", id);
+        i.putExtra("EDIT_JOB", id);
         startActivityForResult(i, OPEN_MAP);
     }
 
@@ -69,6 +76,7 @@ public class DriverJobsFragment extends android.support.v4.app.Fragment {
         super.onAttach(context);
         try {
             customDialog = ((CustomDialog) context);
+
         } catch (ClassCastException e) {
             throw  new ClassCastException(e.toString());
         }

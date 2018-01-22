@@ -13,6 +13,15 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import entities.DriverModel;
+import entities.RouteModel;
+import hr.foi.air.trucktrack.Callbacks.CallbackDriverJobsForMap;
+import hr.foi.air.trucktrack.Singleton.JobCoordinates;
+import hr.foi.air.webservice.ApiClient;
+import hr.foi.air.webservice.ApiInterface;
+import retrofit2.Call;
 
 public class MapsJobDriver extends FragmentActivity implements OnMapReadyCallback {
 
@@ -32,10 +41,14 @@ public class MapsJobDriver extends FragmentActivity implements OnMapReadyCallbac
         list = new ArrayList();
         int idOfJob = i.getExtras().getInt("JOB_ID", -1);
         if(idOfJob != -1) {
-            //CALL TO SERVICE FOR COORDINATES
             list.add("46.30685429425279,16.3228223310410976");
             list.add("45.829488492817834,15.97651831805706");
             list.add("47.1513,15.854156");
+        }
+
+        int ruteId = i.getExtras().getInt("EDIT_JOB", -1); //dobim index
+        if(ruteId != -1) {
+            //new JobCoordinates().getJobs(ruteId);
         }
     }
 
