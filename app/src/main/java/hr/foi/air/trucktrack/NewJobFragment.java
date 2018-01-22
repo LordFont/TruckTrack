@@ -151,7 +151,7 @@ public class NewJobFragment extends Fragment {
     }
 
     public interface ClickedOnMap {
-        void ClickedOnMap(String coordinatesStart, String coordinatesEnd);
+        void ClickedOnMap(String coordinatesEnd);
     }
 
     public interface CalendarClicked {
@@ -168,16 +168,16 @@ public class NewJobFragment extends Fragment {
         void cancelCurrent();
     }
 
-    //IVAN - ova metoda ažurira u ui threadu edittext, i zbog toga sada mozemo vidjeti na ekranu ažurirani box
     public void setDriverOnScreen(final DriverModel driver) {
-        Log.d("Prezime u fragmentu", driver.getPrezime());
+        //input_vozac.setText(driver.getIme() + " " + driver.getPrezime());
+
         Thread timer = new Thread() {
             @Override
             public void run() {
                 getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        input_vozac.setText(driver.getIme() + " " + driver.getPrezime());
+                        ((EditText)instance.getView().findViewById(R.id.input_vozac)).setText(driver.getIme() + " " + driver.getPrezime());
                     }
                 });
             }
