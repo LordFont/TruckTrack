@@ -26,11 +26,12 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class DriverJobs extends AppCompatActivity implements CustomDialog{
+public class DriverJobs extends AppCompatActivity implements CustomDialog {
     private ApiInterface apiService;
     AVLoadingIndicatorView avi;
     final int DIALOG_SET_DONE = 400;
     final int DIALOG_ACK_TO_JOB = 500;
+    MailHelper mail = new MailHelper();
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -46,7 +47,6 @@ public class DriverJobs extends AppCompatActivity implements CustomDialog{
         routeJob2.CreateTestData();
         ArrayList<RouteModel> testList = new ArrayList<>();
         testList.add(routeJob1);
-        testList.add(routeJob2);
 
         //showFragment(DriverJobsFragment.getInstance(testList));
         Fragment fragment = DriverJobsFragment.getInstance(testList);
@@ -79,13 +79,13 @@ public class DriverJobs extends AppCompatActivity implements CustomDialog{
         //Toast.makeText(this, "idRuta: " + idRuta, Toast.LENGTH_SHORT).show();
         if(type == DIALOG_SET_DONE) {
             AlertDialog.Builder dialog = new AlertDialog.Builder(this);
-            dialog.setNegativeButton("Odustani", new DialogInterface.OnClickListener() {
+            dialog.setNegativeButton(getResources().getString(R.string.btnOdustani), new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     dialog.dismiss();
                 }
             });
-            dialog.setPositiveButton("Potvrdi", new DialogInterface.OnClickListener() {
+            dialog.setPositiveButton(getResources().getString(R.string.btnPotvrdi), new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     /*DRIVER-DONE
@@ -102,32 +102,34 @@ public class DriverJobs extends AppCompatActivity implements CustomDialog{
                         @Override
                         public void onResponse(Call<Void> call, Response<Void> response) {
                             if (response.code() == 200) {
-                                Snackbar mySnackbar = Snackbar.make(findViewById(R.id.driver_jobs_toolbar), "Ruta je uspješno odrađena!", Snackbar.LENGTH_LONG );
-                                mySnackbar.show();
+                                mail.sendMail(getApplicationContext(),"marhren2@gmail.com","odradio");
+                                Snackbar.make(findViewById(R.id.driver_jobs_toolbar), getResources().getString(R.string.msg_ruta_odradena), Snackbar.LENGTH_LONG ).show();
                             } else {
+                                Snackbar mySnackbar2 = Snackbar.make(findViewById(R.id.driver_jobs_toolbar), "Ruta nije odrađena!", Snackbar.LENGTH_LONG );
+                                mySnackbar2.show();
                             }
                         }
 
                         @Override
                         public void onFailure(Call<Void> call, Throwable t) {
-                            Snackbar mySnackbar3 = Snackbar.make(findViewById(R.id.driver_jobs_toolbar), "Ruta NIJE odrađena!", Snackbar.LENGTH_LONG );
+                            Snackbar mySnackbar3 = Snackbar.make(findViewById(R.id.driver_jobs_toolbar), getResources().getString(R.string.msg_ruta_nije_odradena), Snackbar.LENGTH_LONG );
                             mySnackbar3.show();
                         }
                     });
                 }
             });
-            dialog.setTitle("Potvrditi odrađenu rutu?");
-            dialog.setMessage("Potvrdom odrađene rute, potvrda se šalje vašem disponentu kao dokaz istoga. Potvrdom ruta nestaje s vaše liste i u mogućnosti ste prihvatiti iduću rutu.");
+            dialog.setTitle(getResources().getString(R.string.title_potvrditi_odradenu_rutu));
+            dialog.setMessage(getResources().getString(R.string.msg_potvrda_odradene_rute));
             dialog.show();
         } else if (type == DIALOG_ACK_TO_JOB) {
             AlertDialog.Builder dialog = new AlertDialog.Builder(this);
-            dialog.setNegativeButton("Odustani", new DialogInterface.OnClickListener() {
+            dialog.setNegativeButton(getResources().getString(R.string.btnOdustani), new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     dialog.dismiss();
                 }
             });
-            dialog.setPositiveButton("Potvrdi", new DialogInterface.OnClickListener() {
+            dialog.setPositiveButton(getResources().getString(R.string.btnPotvrdi), new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                    /*DRIVER-ACK
@@ -141,15 +143,19 @@ public class DriverJobs extends AppCompatActivity implements CustomDialog{
                         @Override
                         public void onResponse(Call<Void> call, Response<Void> response) {
                             if (response.code() == 200) {
-                                Snackbar mySnackbar = Snackbar.make(findViewById(R.id.driver_jobs_toolbar), "Ruta je uspješno potvrđena!", Snackbar.LENGTH_LONG );
+
+                                mail.sendMail(getApplicationContext(),"marhren2@gmail.com", "potvrdio");
+                                Snackbar mySnackbar = Snackbar.make(findViewById(R.id.driver_jobs_toolbar), getResources().getString(R.string.msg_ruta_potvrdena), Snackbar.LENGTH_LONG );
                                 mySnackbar.show();
                             } else {
+                                Snackbar mySnackbar4 = Snackbar.make(findViewById(R.id.driver_jobs_toolbar), "Ruta nije potvrđena!", Snackbar.LENGTH_LONG );
+                                mySnackbar4.show();
                             }
                         }
 
                         @Override
                         public void onFailure(Call<Void> call, Throwable t) {
-                            Snackbar mySnackbar3 = Snackbar.make(findViewById(R.id.driver_jobs_toolbar), "OnFailure", Snackbar.LENGTH_LONG );
+                            Snackbar mySnackbar3 = Snackbar.make(findViewById(R.id.driver_jobs_toolbar), getResources().getString(R.string.msg_ruta_odbijena), Snackbar.LENGTH_LONG );
                             mySnackbar3.show();
                             //nemam ideje stacu "onFailure"
                         }
@@ -157,9 +163,11 @@ public class DriverJobs extends AppCompatActivity implements CustomDialog{
 
                 }
             });
-            dialog.setTitle("Prihvatiti rutu?");
-            dialog.setMessage("Potvrdom novo dodijeljene rute od strane disponenta ista će se pozivionirati na vrhu liste. Potvrdom dodijele nove rute potvrda se šalje vašem disponentu.");
+            dialog.setTitle(getResources().getString(R.string.title_prihvatiti_rutu));
+            dialog.setMessage(getResources().getString(R.string.msg_potvrdom_rute));
             dialog.show();
         }
     }
+
+
 }

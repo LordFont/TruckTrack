@@ -50,5 +50,4 @@ public class CallbackDriverList extends FragmentManager implements Callback<List
     public void onFailure(Call<List<DriverModel>> call, Throwable t) {
         Log.d("Error", t.toString());
     }
-
 }

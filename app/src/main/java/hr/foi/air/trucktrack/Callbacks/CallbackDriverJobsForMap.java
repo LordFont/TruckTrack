@@ -5,56 +5,53 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 
-import com.wang.avi.AVLoadingIndicatorView;
-
 import java.util.ArrayList;
-import java.util.List;
 
 import entities.DriverJobsResponse;
-import entities.DriverModel;
 import entities.RouteModel;
 import hr.foi.air.trucktrack.DisponentJobsFragment;
-import hr.foi.air.trucktrack.DriverJobsFragment;
 import hr.foi.air.trucktrack.Helpers.FragmentManager;
-import hr.foi.air.trucktrack.R;
+import hr.foi.air.trucktrack.MapsJobDriver;
+import hr.foi.air.trucktrack.Singleton.JobCoordinates;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-import static hr.foi.air.trucktrack.R.id.input_vozac;
-
 /**
- * Created by Ivan on 7.12.2017..
+ * Created by ssajcic on 22.01.18..
  */
 
-public class CallbackAllRoutes extends FragmentManager implements Callback<ArrayList<RouteModel>>{
+public class CallbackDriverJobsForMap extends FragmentManager implements Callback<ArrayList<RouteModel>> {
+    DriverJobsResponse djResponse;
     ArrayList<RouteModel> listOfRoutes = new ArrayList<RouteModel>();
-    DisponentJobsFragment dpFragment;
+    RouteModel mRouteModel;
+    JobCoordinates jobCoordinates;
+    MapsJobDriver dpFragment;
 
-    public CallbackAllRoutes (Object curr, DisponentJobsFragment next) {
-        if (curr instanceof Fragment) {
+ /*   public CallbackDriverJobsForMap (Object curr, MapsJobDriver next) {
+        if (curr instanceof FragmentActivity) {
             mCurrent = ((Fragment) curr).getActivity();
         }
         if (curr instanceof Activity) {
             mCurrent = (FragmentActivity)curr;
         }
-        mNnext = next;
+        mCurrent = next;
         dpFragment = next;
         showFragment();
-    }
+    }*/
 
     @Override
     public void onResponse(Call<ArrayList<RouteModel>> call, Response<ArrayList<RouteModel>> response) {
-        AVLoadingIndicatorView avi = mCurrent.findViewById(R.id.avi);
         listOfRoutes = response.body();
-        avi.hide();
-        Log.d("body",listOfRoutes.get(0).getMjestoUtovara());
-        dpFragment.updateAdaper(listOfRoutes);
-
+        jobCoordinates = new JobCoordinates();
+        jobCoordinates.setRute(listOfRoutes);
     }
 
     public void onFailure(Call<ArrayList<RouteModel>> call, Throwable t) {
-        Log.d("JakoCoolGreska", t.toString());
+        Log.d("ERROR", t.toString());
+    }
+
+    public interface DataFinished {
+        void dataFinished();
     }
 }
-
