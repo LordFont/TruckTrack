@@ -14,21 +14,75 @@
     <string name="testApp">Testiraj Aplikaciju</string>
     <string name="testDriverJobs">Testiraj Poslovi</string>
     <string name="toolbarVozaci">Vozači</string>
-    <string name="title_activity_no_content">NoContentActivity</string>
     <string name="toolbarPoslovi">Poslovi</string>
-
     <string name="utovar">Poduzeće utovar *</string>
     <string name="istovar">Poduzeće istovar *</string>
+
+    <!-- Titles -->
+    <string name="title_activity_no_content">NoContentActivity</string>
+    <string name="title_activity_new_job_form">NewJobForm</string>
+    <string name="title_activity_map_job">Map</string>
+    <string name="title_activity_maps_job_driver">Map</string>
+    <string name="title_potvrdi_odradeni_posao">Potvrditi odrađeni posao?</string>
+    <string name="title_prihvatiti_posao">Prihvatiti posao?</string>
+    <string name="title_brisanje_posla">Brisanje posla</string>
+    <string name="title_obrisati_rutu">Obrisati rutu?</string>
+    <string name="title_potvrditi_odradenu_rutu">Potvrditi odrađenu rutu?</string>
+    <string name="title_prihvatiti_rutu">Prihvatiti rutu?</string>
+
+
+    <!-- Messages -->
+    <string name="msg_potvrda_odradeni_posao">Potvrdom odrađenog posla, potvrda se šalje vašem disponentu kao dokaz istoga. Potvrdom posao nestaje s vaše liste i u mogućnosti ste prihvatiti idući posao.</string>
+    <string name="msg_potrvda_dodijele_posla">Potvrdom novog dodijeljenog posla od strane disponenta isti će se pozivionirati na vrhu liste. Potvrdom dodijele novog posla potvrda se šalje vašem disponentu.</string>
+    <string name="msg_potvrda_brisanja_posla">Potvrdom brisanja posla će rezultirati brisanjem istog iz baze podataka i kao takav više neće postojati za editiranje ili dodjeljivanje posla vozaču</string>
+    <string name="msg_potvrda_brisanja_rute">Potvrdom brisanja rute ruta više neće biti vidljiva niti imati mogućnost povratka iste. Ako je ruta dodjeljena vozaču, vozač je više neće vidjeti niti će biti aktivna!</string>
+    <string name="msg_ruta_odradena">Ruta je uspješno odrađena!</string>
+    <string name="msg_ruta_nije_odradena">Ruta NIJE odrađena!</string>
+    <string name="msg_potvrda_odradene_rute">Potvrdom odrađene rute, potvrda se šalje vašem disponentu kao dokaz istoga. Potvrdom ruta nestaje s vaše liste i u mogućnosti ste prihvatiti iduću rutu.</string>
+    <string name="msg_ruta_potvrdena">Ruta je uspješno potvrđena!</string>
+    <string name="msg_ruta_odbijena">OnFailure</string>
+    <string name="msg_potvrdom_rute">Potvrdom novo dodijeljene rute od strane disponenta ista će se pozivionirati na vrhu liste. Potvrdom dodijele nove rute potvrda se šalje vašem disponentu.</string>
+
+
+
     <string name="datum_utovara">Datum utovara</string>
     <string name="datum_istovara">Datum istovara</string>
     <string name="koordinate_utovara">Kordinate utovara</string>
     <string name="koordinate_istovara">Koordinate istovara</string>
     <string name="dodjeljeni_vozac">Dodjeljeni vozač (*)</string>
-    <string name="title_activity_new_job_form">NewJobForm</string>
-    <string name="title_activity_map_job">Map</string>
-    <string name="title_activity_maps_job_driver">Map</string>
     <string name="error_msg_happend">Dogodila se pogreška tokom učitavanja zaslona.</string>
 
     <string name="action_no_implement">Akcija nije implementirana.</string>
     <string name="input_required_not_filled">Inputi koji su obavezni nisu ispunjeni!</string>
+    
+    
+    <!-- Buttons -->
+    <string name="btnOdustani">Odustani</string>
+    <string name="btnPotvrdi">Potvrdi</string>
+    <string name="btnObrisi">Obriši</string>
+    
+    
+    <!-- Errors and info -->
+    <string name="error_problem_server">Problem sa serverom!</string>
+    <string name="error_internet">Niste povezani na internet!</string>
+    <string name="info_uspjeno_obrisano">Uspješno obrisano!</string>
+    <string name="info_neuspjesno_obrisano">Neuspješno poslano!</string>
+    <string name="info_neuspjesno_poslano">Neuspješno poslano!</string>
+    
+    
+    <!-- Layout strings -->
+    <string name="lista_vozaca">Lista vozača</string>
+    <string name="lista_poslova">Lista poslova</string>
+    <string name="lista_poslova_koje_ima_vozac">lista poslova koje ima vozac...</string>
+    <string name="e_mail">E-mail:</string>
+    <string name="stella_gmail_com">stella@gmail.com</string>
+    <string name="lozinka">Lozinka:</string>
+    <string name="_123456">123456</string>
+    <string name="vozac">Vozac ?</string>
+    <string name="upppss">Upppss...</string>
+    <string name="trenutni_sadrzaj_nije_dostupan_pokusajte_ponovo">Trenutni sadržaj nije dostupan pokušajte ponovo...</string>
+    <string name="dodaj_poslove">Dodaj poslove</string>
+    <string name="odustani">Odustani</string>
+    <string name="objavi">Objavi</string>
+    <string name="textview">TextView</string>
 </resources>

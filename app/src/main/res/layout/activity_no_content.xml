@@ -36,7 +36,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:text="Upppss..."
+                    android:text="@string/upppss"
                     android:textSize="60sp" />
 
                 <ImageView
@@ -51,7 +51,7 @@
                     android:layout_gravity="center"
                     android:layout_marginTop="20dp"
                     android:textAlignment="center"
-                    android:text="Trenutni sadržaj nije dostupan\npokušajte ponovo..." />
+                    android:text="@string/trenutni_sadrzaj_nije_dostupan_pokusajte_ponovo" />
             </LinearLayout>
         </FrameLayout>
     </FrameLayout>

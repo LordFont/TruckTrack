@@ -86,14 +86,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="right"
-            android:layout_marginRight="15dp"
-            android:text="Dodaj poslove" />
+            android:layout_margin="15dp"
+            android:text="@string/dodaj_poslove" />
 
         <ListView
             android:id="@+id/holderJob"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1"></ListView>
+            android:layout_weight="1"/>
 
         <LinearLayout
             android:id="@+id/buttoni_za_save"
@@ -108,8 +108,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@color/colorGreyLogin"
-                android:text="Odustani"
-                android:textColor="@android:color/darker_gray"></Button>
+                android:text="@string/odustani"
+                android:textColor="@android:color/darker_gray"/>
 
             <Button
                 android:id="@+id/btn_save_job"
@@ -117,7 +117,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@color/colorPrimary"
-                android:text="Objavi"
+                android:text="@string/objavi"
                 android:textColor="@color/colorGreyLogin">
 
             </Button>
