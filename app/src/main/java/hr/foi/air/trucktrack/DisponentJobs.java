@@ -85,13 +85,13 @@ public class DisponentJobs extends AppCompatActivity implements CustomDialog, Op
         final Activity act = this;
         if(type == DIALOG_DELETE_JOB) {
             AlertDialog.Builder dialog = new AlertDialog.Builder(this);
-            dialog.setNegativeButton("Odustani", new DialogInterface.OnClickListener() {
+            dialog.setNegativeButton(getResources().getString(R.string.btnOdustani), new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     dialog.dismiss();
                 }
             });
-            dialog.setPositiveButton("Obriši", new DialogInterface.OnClickListener() {
+            dialog.setPositiveButton(getResources().getString(R.string.btnObrisi), new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(final DialogInterface dialog, int which) {
                     /* DISPONENT-DELETE
@@ -105,25 +105,25 @@ public class DisponentJobs extends AppCompatActivity implements CustomDialog, Op
                         @Override
                         public void onResponse(Call<Void> call, Response<Void> response) {
                             if (response.code() == 200) {
-                                Snackbar mySnackbar = Snackbar.make(findViewById(R.id.driver_jobs_toolbar), "Uspješno obrisano!", Snackbar.LENGTH_LONG );
+                                Snackbar mySnackbar = Snackbar.make(findViewById(R.id.driver_jobs_toolbar), getResources().getString(R.string.info_uspjeno_obrisano), Snackbar.LENGTH_LONG );
                                 DataRefresher dataRefresher = new DataRefresher();
                                 dataRefresher.osvjeziPosloveDisponenta(act,fragment);
                                 mySnackbar.show();
                             } else {
-                                Snackbar mySnackbar2 = Snackbar.make(findViewById(R.id.driver_jobs_toolbar), "Neuspješno poslano!", Snackbar.LENGTH_LONG );
+                                Snackbar mySnackbar2 = Snackbar.make(findViewById(R.id.driver_jobs_toolbar), getResources().getString(R.string.info_neuspjesno_obrisano), Snackbar.LENGTH_LONG );
                                 mySnackbar2.show();
                             }
                         }
 
                         @Override
                         public void onFailure(Call<Void> call, Throwable t) {
-                            Snackbar mySnackbar3 = Snackbar.make(findViewById(R.id.driver_jobs_toolbar), "Neuspješno poslano!", Snackbar.LENGTH_LONG );
+                            Snackbar mySnackbar3 = Snackbar.make(findViewById(R.id.driver_jobs_toolbar), getResources().getString(R.string.info_neuspjesno_poslano), Snackbar.LENGTH_LONG );
                         }
                     });
                 }
             });
-            dialog.setTitle("Obrisati rutu?");
-            dialog.setMessage("Potvrdom brisanja rute ruta više neće biti vidljiva niti imati mogućnost povratka iste. Ako je ruta dodjeljena vozaču, vozač je više neće vidjeti niti će biti aktivna!");
+            dialog.setTitle(getResources().getString(R.string.title_obrisati_rutu));
+            dialog.setMessage(getResources().getString(R.string.msg_potvrda_brisanja_rute));
             dialog.show();
         } else if (type == DIALOG_SAVE_JOB){
             /* DISPONENT-SAVE
