@@ -126,7 +126,7 @@ public class JobListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                 parent.findViewById(R.id.btnMapShow).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        ((DriverJobsFragment) contextAct).clickedOnMap(3);
+                        ((DriverJobsFragment) contextAct).clickedOnMap(position);
                     }
                 });
 

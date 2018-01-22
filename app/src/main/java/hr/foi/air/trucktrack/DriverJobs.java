@@ -18,9 +18,7 @@ import entities.RouteIdRequest;
 import entities.RouteModel;
 import hr.foi.air.trucktrack.Callbacks.CallbackDriverJobs;
 
-import hr.foi.air.trucktrack.Helpers.MailHelper;
 import hr.foi.air.trucktrack.Interface.CustomDialog;
-import hr.foi.air.trucktrack.Interface.OpenEditFormatInterface;
 import hr.foi.air.webservice.ApiClient;
 import hr.foi.air.webservice.ApiInterface;
 import retrofit2.Call;
@@ -161,5 +159,6 @@ public class DriverJobs extends AppCompatActivity implements CustomDialog {
             dialog.show();
         }
     }
+
 
 }
