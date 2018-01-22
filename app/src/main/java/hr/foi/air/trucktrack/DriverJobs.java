@@ -31,6 +31,7 @@ public class DriverJobs extends AppCompatActivity implements CustomDialog{
     AVLoadingIndicatorView avi;
     final int DIALOG_SET_DONE = 400;
     final int DIALOG_ACK_TO_JOB = 500;
+    MailHelper mail = new MailHelper();
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -102,15 +103,18 @@ public class DriverJobs extends AppCompatActivity implements CustomDialog{
                         @Override
                         public void onResponse(Call<Void> call, Response<Void> response) {
                             if (response.code() == 200) {
+                                mail.sendMail(getApplicationContext(),"marhren2@gmail.com","odradio");
                                 Snackbar mySnackbar = Snackbar.make(findViewById(R.id.driver_jobs_toolbar), "Ruta je uspješno odrađena!", Snackbar.LENGTH_LONG );
                                 mySnackbar.show();
                             } else {
+                                Snackbar mySnackbar2 = Snackbar.make(findViewById(R.id.driver_jobs_toolbar), "Ruta nije odrađena!", Snackbar.LENGTH_LONG );
+                                mySnackbar2.show();
                             }
                         }
 
                         @Override
                         public void onFailure(Call<Void> call, Throwable t) {
-                            Snackbar mySnackbar3 = Snackbar.make(findViewById(R.id.driver_jobs_toolbar), "Ruta NIJE odrađena!", Snackbar.LENGTH_LONG );
+                            Snackbar mySnackbar3 = Snackbar.make(findViewById(R.id.driver_jobs_toolbar), "Ruta nije odrađena!", Snackbar.LENGTH_LONG );
                             mySnackbar3.show();
                         }
                     });
@@ -141,15 +145,18 @@ public class DriverJobs extends AppCompatActivity implements CustomDialog{
                         @Override
                         public void onResponse(Call<Void> call, Response<Void> response) {
                             if (response.code() == 200) {
+                                mail.sendMail(getApplicationContext(),"marhren2@gmail.com", "potvrdio");
                                 Snackbar mySnackbar = Snackbar.make(findViewById(R.id.driver_jobs_toolbar), "Ruta je uspješno potvrđena!", Snackbar.LENGTH_LONG );
                                 mySnackbar.show();
                             } else {
+                                Snackbar mySnackbar4 = Snackbar.make(findViewById(R.id.driver_jobs_toolbar), "Ruta nije potvrđena!", Snackbar.LENGTH_LONG );
+                                mySnackbar4.show();
                             }
                         }
 
                         @Override
                         public void onFailure(Call<Void> call, Throwable t) {
-                            Snackbar mySnackbar3 = Snackbar.make(findViewById(R.id.driver_jobs_toolbar), "OnFailure", Snackbar.LENGTH_LONG );
+                            Snackbar mySnackbar3 = Snackbar.make(findViewById(R.id.driver_jobs_toolbar), "Ruta nije potvrđena!", Snackbar.LENGTH_LONG );
                             mySnackbar3.show();
                             //nemam ideje stacu "onFailure"
                         }
