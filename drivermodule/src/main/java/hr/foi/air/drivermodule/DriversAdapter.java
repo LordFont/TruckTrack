@@ -47,13 +47,13 @@ public class DriversAdapter extends RecyclerView.Adapter<ViewHolderTilesOfList> 
     }
 
     @Override
-    public void onBindViewHolder(final ViewHolderTilesOfList holder, int position) {
+    public void onBindViewHolder(final ViewHolderTilesOfList holder, final int position) {
         holder.driverName.setText(mDrivers.get(position).getIme()+" "+mDrivers.get(position).getPrezime());
         holder.driverImage.setImageResource(R.drawable.test01);
         holder.dView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                interfaceSelectedDriver.driverSelected(mDrivers.get(holder.getAdapterPosition()));
+                interfaceSelectedDriver.driverSelected(mDrivers.get(position));
             }
         });
     }

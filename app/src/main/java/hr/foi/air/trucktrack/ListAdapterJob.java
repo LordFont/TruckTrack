@@ -6,6 +6,8 @@ import android.support.annotation.IdRes;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -71,6 +73,41 @@ public class ListAdapterJob extends ArrayAdapter {
                    ((NewJobFragment.CalendarClicked) act).calendarClicked(datum_istovara);
                 }
             });
+
+            datum_istovara.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                }
+
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                }
+
+                @Override
+                public void afterTextChanged(Editable s) {
+                    data.get(position).setIstovarDatum(s.toString());
+                }
+            });
+
+            poduzece_utovara.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                }
+
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                }
+
+                @Override
+                public void afterTextChanged(Editable s) {
+                    data.get(position).setMjestoIstovara(s.toString());
+                }
+            });
+
         }
         return v;
     }

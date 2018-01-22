@@ -52,6 +52,7 @@ public class NewJob extends AppCompatActivity implements
     final Integer ENTER_IN_MAP = 3003;
     private ApiInterface apiService;
     private List<DriverModel> drivers = null;
+    private RouteModel rute = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,8 +71,8 @@ public class NewJob extends AppCompatActivity implements
             call.enqueue(new CallbackDriverJobs(this,fragment));
         }
         } else {*/
-
-        firstFragment = NewJobFragment.getInstance();
+        rute = new RouteModel();
+        firstFragment = NewJobFragment.getInstance(rute);
         showFragment(firstFragment);
 
     }
@@ -203,6 +204,7 @@ public class NewJob extends AppCompatActivity implements
     public void driverSelected(DriverModel driver) {
         showFragment(firstFragment);
         firstFragment.setDriverOnScreen(driver);
+
     }
 
     @Override
@@ -211,10 +213,12 @@ public class NewJob extends AppCompatActivity implements
     }
 
     @Override
-    public void saveNewJob(boolean canSave) {
-        if(!canSave) {
-            Snackbar.make(findViewById(R.id.job_toolbar), getResources().getString(R.string.input_required_not_filled), Snackbar.LENGTH_LONG ).show();
+    public void saveNewJob(boolean canSave, RouteModel rute) {
+
+        if (!canSave) {
+            Snackbar.make(findViewById(R.id.job_toolbar), getResources().getString(R.string.input_required_not_filled), Snackbar.LENGTH_LONG).show();
         }
+
 
 
         /*DISPONENT-JOB-SAVE
@@ -224,6 +228,11 @@ public class NewJob extends AppCompatActivity implements
         * koristiti metodu cancelCurrent koja poziva prethodnu aktivnost koja je upravo DisponentJobs.class
         * koja nam i treba.
         * KOORDINATE MORAJU BITI SPREMLJENE KAO STRING (TEXT)*/
+    }
+
+    @Override
+    public void notFieldData() {
+        Snackbar.make(findViewById(R.id.job_toolbar), getResources().getString(R.string.input_required_not_filled), Snackbar.LENGTH_LONG).show();
     }
 
     @Override

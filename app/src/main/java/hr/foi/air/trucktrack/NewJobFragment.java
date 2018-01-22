@@ -1,8 +1,12 @@
 package hr.foi.air.trucktrack;
 
+import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +20,7 @@ import java.util.List;
 
 import entities.DriverModel;
 import entities.JobModel;
+import entities.RouteModel;
 import hr.foi.air.webservice.ApiInterface;
 
 
@@ -27,17 +32,19 @@ public class NewJobFragment extends Fragment {
     EditText inputStart, inputEnd, datumUtovara, datumIstovara;
     private ApiInterface apiService;
     private List<DriverModel> drivers = null;
+    private static RouteModel rute = null;
     Button clearCoordinates, addJobs;
     EditText input_vozac, adresa_utovara;
     View view, viewBlock;
     ListView viewHolder;
     ArrayList<JobModel> jobs;
     ListAdapterJob adapterJob;
+    Activity activity = null;
 
-
-    public static NewJobFragment getInstance() {
+    public static NewJobFragment getInstance(RouteModel ruteData) {
         if (instance == null) {
             instance = new NewJobFragment();
+            rute = ruteData;
         }
         return instance;
     }
@@ -67,12 +74,18 @@ public class NewJobFragment extends Fragment {
         });
 
         input_vozac = view.findViewById(R.id.input_vozac);
+        adresa_utovara = view.findViewById(R.id.input_utovar);
 
         view.findViewById(R.id.btnAddJob).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                jobs.add(new JobModel("", ""));
-                adapterJob.notifyDataSetChanged();
+                if(input_vozac.getText().length() > 0 && adresa_utovara.getText().length() > 0) {
+                    jobs.add(new JobModel("", ""));
+                    rute.setPoslovi(jobs);
+                    adapterJob.notifyDataSetChanged();
+                } else {
+                    ((DriverForJob) getActivity()).notFieldData();
+                }
             }
         });
 
@@ -84,7 +97,25 @@ public class NewJobFragment extends Fragment {
             }
         });
 
-        adresa_utovara = view.findViewById(R.id.input_utovar);
+
+        adresa_utovara.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                rute.setMjestoUtovara(s.toString());
+            }
+        });
+
+        rute.setMjestoUtovara(adresa_utovara.getText().toString());
 
         view.findViewById(R.id.btn_save_job).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -97,11 +128,12 @@ public class NewJobFragment extends Fragment {
                     if(jobs.get(i).getMjestoIstovara().length() == 0) validationPassed = false;
                 }
 
-                ((DriverForJob) getActivity()).saveNewJob(validationPassed);
+                ((DriverForJob) getActivity()).saveNewJob(validationPassed, rute);
             }
         });
         return view;
     }
+
 
     public interface ClickedOnMap {
         void ClickedOnMap(String coordinatesEnd);
@@ -114,7 +146,9 @@ public class NewJobFragment extends Fragment {
     public interface DriverForJob {
         void setDriverForJob();
 
-        void saveNewJob(boolean canSave);
+        void saveNewJob(boolean validationPassed, RouteModel rute);
+
+        void notFieldData();
     }
 
     public interface PreviousActivity {
@@ -125,20 +159,31 @@ public class NewJobFragment extends Fragment {
         Thread timer = new Thread() {
             @Override
             public void run() {
-                getActivity().runOnUiThread(new Runnable() {
+                activity.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        ((EditText)instance.getView().findViewById(R.id.input_vozac)).setText(driver.getIme() + " " + driver.getPrezime());
+                        ((EditText) instance.getView().findViewById(R.id.input_vozac)).setText(driver.getIme() + " " + driver.getPrezime());
                     }
                 });
             }
         };
         timer.start();
+
+        rute.setKorisnikID(driver.getId());
+        adapterJob.notifyDataSetChanged();
     }
 
     public void setNewCoordinates(String lan, String lon) {
         jobs.get(adapterJob.lastClicked).setLatitude(lan.toString());
         jobs.get(adapterJob.lastClicked).setLongitude(lon.toString());
         adapterJob.notifyDataSetChanged();
+    }
+
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        activity = (Activity) context;
+
     }
 }

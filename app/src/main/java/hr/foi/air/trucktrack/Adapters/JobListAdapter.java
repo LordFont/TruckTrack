@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -160,9 +161,11 @@ public class JobListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                     public void onClick(View v) {
                         int idRute = ((RouteModel) dataOfTheList.get(position)).getIdRuta();
                         //customDialog.showCustomDialog(DIALOG_SAVE_JOB, idRute);
-                        if(editFormatInterface != null) editFormatInterface.clickedToEditForm(((RouteModel) dataOfTheList.get(position)).getIdRuta());
+
                     }
                 });
+
+
             }
 
         } else {
