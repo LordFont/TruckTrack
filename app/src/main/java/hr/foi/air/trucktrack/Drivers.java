@@ -11,26 +11,31 @@ import android.view.MenuItem;
 import java.util.List;
 
 import entities.DriverModel;
+import hr.foi.air.trucktrack.Helpers.DriverFragmentGridLoader;
+import hr.foi.air.trucktrack.Helpers.DriverFragmentListLoader;
 import hr.foi.air.drivermodule.DriverSelectFromListInterface;
+import hr.foi.air.trucktrack.Helpers.DriversFragmentLoader;
+import hr.foi.air.trucktrack.Interface.FragmentLoaderListener;
 import hr.foi.air.drivermodule.ListViewFragment;
-import hr.foi.air.drivermodule.GridViewFragment;
 import hr.foi.air.trucktrack.Callbacks.CallbackDriverList;
 import hr.foi.air.webservice.ApiClient;
 import hr.foi.air.webservice.ApiInterface;
 import retrofit2.Call;
 
-public class Drivers extends AppCompatActivity implements ListViewFragment.ToolbarListener, DriverSelectFromListInterface {
+public class Drivers extends AppCompatActivity implements ListViewFragment.ToolbarListener, DriverSelectFromListInterface, FragmentLoaderListener {
 
     private List<DriverModel> drivers = null;
-    private int changeImage = 1;
+    private boolean isListFragment;
     private ApiInterface apiService;
     Fragment fragment;
+    private Drivers thisInstance;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_drivers);
 
+        thisInstance = this;
         initToolbar();
         getDrivers();
     }
@@ -43,20 +48,22 @@ public class Drivers extends AppCompatActivity implements ListViewFragment.Toolb
         menu.findItem(R.id.viewIcon).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
-                if (changeImage == 1) {
-                    item.setIcon(R.drawable.ic_dashboard_white_48px);
-                    changeImage = 0;
-                    fragment = ListViewFragment.getInstance(drivers);
-//                    showFragment(fragment);
-                    getDrivers();
+                DriversFragmentLoader driversFragmentLoader = null;
+
+                if (isListFragment){
+                    driversFragmentLoader = new DriverFragmentGridLoader(thisInstance);
+                    isListFragment = false;
+                    item.setIcon(R.drawable.ic_view_list_white_48px);
                 }
                 else {
-                    item.setIcon(R.drawable.ic_view_list_white_48px);
-                    changeImage = 1;
-                    fragment = GridViewFragment.getInstance(drivers);
-//                    showFragment(fragment);
-                    getDrivers();
+                    driversFragmentLoader = new DriverFragmentListLoader(thisInstance);
+                    isListFragment = true;
+                    item.setIcon(R.drawable.ic_dashboard_white_48px);
                 }
+
+                driversFragmentLoader.loadFragment(drivers);
+                getDrivers();
+
                 return true;
             }
         });
@@ -98,5 +105,10 @@ public class Drivers extends AppCompatActivity implements ListViewFragment.Toolb
     @Override
     public void driverSelected(DriverModel driver) {
 
+    }
+
+    @Override
+    public void provideFragment(Fragment fragment) {
+        this.fragment = fragment;
     }
 }
