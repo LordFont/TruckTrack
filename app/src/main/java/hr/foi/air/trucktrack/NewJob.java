@@ -29,6 +29,7 @@ import hr.foi.air.drivermodule.ListViewFragment;
 import hr.foi.air.trucktrack.Callbacks.CallbackDriverJobs;
 import hr.foi.air.trucktrack.Callbacks.CallbackDriverList;
 import hr.foi.air.drivermodule.DriverSelectFromListInterface;
+import hr.foi.air.trucktrack.Callbacks.CallbackRouteNew;
 import hr.foi.air.webservice.ApiClient;
 import hr.foi.air.webservice.ApiInterface;
 import retrofit2.Call;
@@ -214,10 +215,16 @@ public class NewJob extends AppCompatActivity implements
 
     @Override
     public void saveNewJob(boolean canSave, RouteModel rute) {
-
+        Toast.makeText(this, "save", Toast.LENGTH_SHORT).show();
         if (!canSave) {
             Snackbar.make(findViewById(R.id.job_toolbar), getResources().getString(R.string.input_required_not_filled), Snackbar.LENGTH_LONG).show();
         }
+        else {
+            apiService = ApiClient.getClient().create(ApiInterface.class);
+            Call<RouteModel> call = apiService.routeNew(rute); //ovdje ide id korisnika, za testiranje uzet id 3
+            call.enqueue(new CallbackRouteNew(this,rute));
+        }
+
 
 
 
