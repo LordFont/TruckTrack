@@ -8,8 +8,10 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.text.InputType;
 import android.util.Log;
 import android.view.Menu;
+import android.widget.EditText;
 
 import com.wang.avi.AVLoadingIndicatorView;
 import java.util.ArrayList;
@@ -172,6 +174,10 @@ public class DriverJobs extends AppCompatActivity implements CustomDialog {
             dialog.show();
         } else if (type == DIALOG_FAIL_JOB) {
             AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+            final EditText input = new EditText(this);
+            input.setInputType(InputType.TYPE_CLASS_TEXT);
+
+            dialog.setView(input);
             dialog.setNegativeButton(getResources().getString(R.string.btnOdustani), new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
@@ -181,7 +187,7 @@ public class DriverJobs extends AppCompatActivity implements CustomDialog {
             dialog.setPositiveButton(getResources().getString(R.string.btnPotvrdi), new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-                    mail.sendMail(getApplicationContext(),"romantomask@gmail.com", "Vozač " + Session.Instance().getEmail() + " neće biti u mogućnosti na vrijeme obaviti prijevoz " + String.valueOf(idRuta));
+                    mail.sendMail(getApplicationContext(),"romantomask@gmail.com", "Vozač " + Session.Instance().getEmail() + " neće biti u mogućnosti na vrijeme obaviti prijevoz " + String.valueOf(idRuta) + " uz sljedeće obrazloženje: \n----------------------------------\n" + input.getText().toString());
                 }
             });
             dialog.setTitle(getResources().getString(R.string.title_potvrda_neuspjeha));
