@@ -13,14 +13,14 @@ import entities.UserModel;
  */
 
 public class MailHelper {
-    public void sendMail(Context context, String mail,String vrsta) {
+    public void sendMail(Context context, String mail, String body) {
         BackgroundMail.newBuilder(context)
                 .withUsername("protect1zu95@gmail.com")
                 .withPassword("crypto2101pi#")
                 .withMailTo(mail) //IVAN - treba razmisliti o proslljeđivanju Korisnika kao modela
                 .withType(BackgroundMail.TYPE_PLAIN)
                 .withSubject("TruckTrack - Posao")
-                .withBody("Vozač je " + vrsta + " rutu.")
+                .withBody(body)
                 .withProcessVisibility(false)
                 .withOnSuccessCallback(new BackgroundMail.OnSuccessCallback() {
                     @Override

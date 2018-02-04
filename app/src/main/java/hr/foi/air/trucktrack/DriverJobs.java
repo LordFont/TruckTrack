@@ -8,6 +8,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 
 import com.wang.avi.AVLoadingIndicatorView;
@@ -20,6 +21,7 @@ import hr.foi.air.trucktrack.Callbacks.CallbackDriverJobs;
 
 import hr.foi.air.trucktrack.Helpers.MailHelper;
 import hr.foi.air.trucktrack.Interface.CustomDialog;
+import hr.foi.air.trucktrack.Singleton.Session;
 import hr.foi.air.webservice.ApiClient;
 import hr.foi.air.webservice.ApiInterface;
 import retrofit2.Call;
@@ -31,6 +33,7 @@ public class DriverJobs extends AppCompatActivity implements CustomDialog {
     AVLoadingIndicatorView avi;
     final int DIALOG_SET_DONE = 400;
     final int DIALOG_ACK_TO_JOB = 500;
+    final int DIALOG_FAIL_JOB = 600;
     MailHelper mail = new MailHelper();
 
     @Override
@@ -77,6 +80,7 @@ public class DriverJobs extends AppCompatActivity implements CustomDialog {
     @Override
     public void showCustomDialog(int type, final int idRuta) {
         //Toast.makeText(this, "idRuta: " + idRuta, Toast.LENGTH_SHORT).show();
+        Log.d("TYPE", String.valueOf(type));
         if(type == DIALOG_SET_DONE) {
             AlertDialog.Builder dialog = new AlertDialog.Builder(this);
             dialog.setNegativeButton(getResources().getString(R.string.btnOdustani), new DialogInterface.OnClickListener() {
@@ -102,7 +106,7 @@ public class DriverJobs extends AppCompatActivity implements CustomDialog {
                         @Override
                         public void onResponse(Call<Void> call, Response<Void> response) {
                             if (response.code() == 200) {
-                                mail.sendMail(getApplicationContext(),"marhren2@gmail.com","odradio");
+                                mail.sendMail(getApplicationContext(),"marhren2@gmail.com","Vozač je odradio rutu");
                                 Snackbar.make(findViewById(R.id.driver_jobs_toolbar), getResources().getString(R.string.msg_ruta_odradena), Snackbar.LENGTH_LONG ).show();
                             } else {
                                 Snackbar mySnackbar2 = Snackbar.make(findViewById(R.id.driver_jobs_toolbar), "Ruta nije odrađena!", Snackbar.LENGTH_LONG );
@@ -144,7 +148,7 @@ public class DriverJobs extends AppCompatActivity implements CustomDialog {
                         public void onResponse(Call<Void> call, Response<Void> response) {
                             if (response.code() == 200) {
 
-                                mail.sendMail(getApplicationContext(),"marhren2@gmail.com", "potvrdio");
+                                mail.sendMail(getApplicationContext(),"marhren2@gmail.com", "Vozač je potvrdio rutu");
                                 Snackbar mySnackbar = Snackbar.make(findViewById(R.id.driver_jobs_toolbar), getResources().getString(R.string.msg_ruta_potvrdena), Snackbar.LENGTH_LONG );
                                 mySnackbar.show();
                             } else {
@@ -165,6 +169,23 @@ public class DriverJobs extends AppCompatActivity implements CustomDialog {
             });
             dialog.setTitle(getResources().getString(R.string.title_prihvatiti_rutu));
             dialog.setMessage(getResources().getString(R.string.msg_potvrdom_rute));
+            dialog.show();
+        } else if (type == DIALOG_FAIL_JOB) {
+            AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+            dialog.setNegativeButton(getResources().getString(R.string.btnOdustani), new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                }
+            });
+            dialog.setPositiveButton(getResources().getString(R.string.btnPotvrdi), new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    mail.sendMail(getApplicationContext(),"romantomask@gmail.com", "Vozač " + Session.Instance().getEmail() + " neće biti u mogućnosti na vrijeme obaviti prijevoz " + String.valueOf(idRuta));
+                }
+            });
+            dialog.setTitle(getResources().getString(R.string.title_potvrda_neuspjeha));
+            dialog.setMessage(getResources().getString(R.string.msg_potvrda_neuspjeha));
             dialog.show();
         }
     }
