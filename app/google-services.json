@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "652598675612",
+    "firebase_url": "https://trucktrack-37acc.firebaseio.com",
+    "project_id": "trucktrack-37acc",
+    "storage_bucket": "trucktrack-37acc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:652598675612:android:800dcd8db172da1d",
+        "android_client_info": {
+          "package_name": "hr.foi.air.trucktrack"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "652598675612-77pgu05r24himp55a3ju0hu59k4ut934.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBtJIDbgI3Y2F0S_pSGiNY3_b-pgJcN6vQ"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

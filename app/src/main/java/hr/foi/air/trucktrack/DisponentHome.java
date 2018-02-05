@@ -1,7 +1,9 @@
 package hr.foi.air.trucktrack;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -16,6 +18,8 @@ public class DisponentHome extends AppCompatActivity implements View.OnClickList
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        CheckExtrasForNotificationData(getIntent());
 
         String expectedParentActivity = getPackageName()+".LoginActivity";
         String expectedPackage = getPackageName();
@@ -40,5 +44,42 @@ public class DisponentHome extends AppCompatActivity implements View.OnClickList
                 startActivity(new Intent(getApplicationContext(), Drivers.class));
                 break;
         }
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        CheckExtrasForNotificationData(intent);
+    }
+
+    private void CheckExtrasForNotificationData(Intent i)
+    {
+        Bundle data = i.getExtras();
+
+        if (data != null) {
+            String b = data.containsKey("body") ? data.getString("body") : "";
+            if (!b.isEmpty())
+            {
+                showMyDialog("Message", b);
+            }
+        }
+    }
+
+    private void showMyDialog(String t, String b) {
+        AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+        View dialogView = getLayoutInflater().inflate(R.layout.notification_dialog, null);
+
+        dialog.setView(dialogView);
+
+        dialog.setTitle(t);
+        TextView tv = (TextView) dialogView.findViewById(R.id.message);
+        tv.setText(b);
+        dialog.setPositiveButton(getString(R.string.btnPotvrdi), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        dialog.show();
     }
 }
