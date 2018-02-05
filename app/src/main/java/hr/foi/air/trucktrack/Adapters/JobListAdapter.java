@@ -38,6 +38,7 @@ public class JobListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     final int DIALOG_SAVE_JOB = 200;
     final int DIALOG_SET_DONE = 400;
     final int DIALOG_ACK_TO_JOB = 500;
+    final int DIALOG_FAIL_JOB = 600;
     final int JOB_ACK = 1;
 
     public JobListAdapter(ArrayList<Object> data, String tip, Fragment context, CustomDialog customDialog, OpenEditFormatInterface editInterface) {
@@ -146,7 +147,17 @@ public class JobListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                         customDialog.showCustomDialog(DIALOG_ACK_TO_JOB, idRute);
                     }
                 });
-
+                parent.setOnLongClickListener(new View.OnLongClickListener() {
+                    @Override
+                    public boolean onLongClick(View v) {
+                        Log.d("LONGPRESS", "is of a success, yes");
+                        int idRute = ((RouteModel) dataOfTheList.get(position)).getIdRuta();
+                        customDialog.showCustomDialog(DIALOG_FAIL_JOB, idRute);
+                        return true;
+                    }
+                });
+                parent.setLongClickable(true);
+                parent.setClickable(true);
             } else {
                 parent.findViewById(R.id.btnDeleteJob).setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -164,8 +175,6 @@ public class JobListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
                     }
                 });
-
-
             }
 
         } else {

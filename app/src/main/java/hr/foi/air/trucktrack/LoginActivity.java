@@ -4,9 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 
 
-import android.graphics.Color;
-import android.graphics.Movie;
-import android.graphics.Rect;
 import android.graphics.Typeface;
 import android.net.ConnectivityManager;
 
@@ -14,16 +11,14 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.method.TransformationMethod;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import entities.UserModel;
+import hr.foi.air.trucktrack.Singleton.Session;
 import hr.foi.air.webservice.ApiClient;
 import hr.foi.air.webservice.ApiInterface;
 import retrofit2.Call;
@@ -88,6 +83,9 @@ public class LoginActivity extends AppCompatActivity {
                                 intent = new Intent(getApplicationContext(), DriverJobs.class);
                             }
                             else intent = new Intent(getApplicationContext(), DisponentHome.class);
+
+                            Session.Instance();
+                            Session.Instance().setEmail(user.getText().toString());
 
                             startActivityForResult(intent, 1000);
                         } else {
