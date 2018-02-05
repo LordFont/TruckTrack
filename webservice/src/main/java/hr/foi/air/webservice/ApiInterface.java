@@ -44,5 +44,5 @@ public interface ApiInterface {
     Call<Void> routeDelete(@Body RouteIdRequest body);
 
     @POST("route/new")
-    Call<Void> routeNew(@Body RouteModel body);
+    Call<RouteModel> routeNew(@Body RouteModel body);
 }
