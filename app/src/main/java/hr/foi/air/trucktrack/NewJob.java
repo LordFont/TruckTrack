@@ -30,6 +30,10 @@ import hr.foi.air.trucktrack.Callbacks.CallbackDriverJobs;
 import hr.foi.air.trucktrack.Callbacks.CallbackDriverList;
 import hr.foi.air.drivermodule.DriverSelectFromListInterface;
 import hr.foi.air.trucktrack.Callbacks.CallbackRouteNew;
+import hr.foi.air.trucktrack.Helpers.DriverFragmentGridLoader;
+import hr.foi.air.trucktrack.Helpers.DriverFragmentListLoader;
+import hr.foi.air.trucktrack.Helpers.DriversFragmentLoader;
+import hr.foi.air.trucktrack.Interface.FragmentLoaderListener;
 import hr.foi.air.webservice.ApiClient;
 import hr.foi.air.webservice.ApiInterface;
 import retrofit2.Call;
@@ -44,16 +48,18 @@ public class NewJob extends AppCompatActivity implements
         NewJobFragment.CalendarClicked,
         NewJobFragment.DriverForJob,
         NewJobFragment.PreviousActivity,
-        DriverSelectFromListInterface {
+        DriverSelectFromListInterface,
+        FragmentLoaderListener {
 
     Fragment fragment;
     NewJobFragment firstFragment;
-    int changeImage;
     boolean iNeedToChangeToolbar = false;
     final Integer ENTER_IN_MAP = 3003;
     private ApiInterface apiService;
     private List<DriverModel> drivers = null;
     private RouteModel rute = null;
+    private boolean isListFragment = true;
+    private NewJob thisInstance;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +69,7 @@ public class NewJob extends AppCompatActivity implements
 
         Intent i = getIntent();
         int routeId = -1;
+        thisInstance = this;
 
     /*    if(i != null) {
             routeId = i.getIntExtra("EDIT", -1);
@@ -107,17 +114,23 @@ public class NewJob extends AppCompatActivity implements
             menu.findItem(R.id.viewIcon).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
                 @Override
                 public boolean onMenuItemClick(MenuItem item) {
-                    if (changeImage == 1) {
-                        item.setIcon(R.drawable.ic_dashboard_white_48px);
-                        changeImage = 0;
-                        fragment = new ListViewFragment();
-                        getDrivers();
-                    } else {
+
+                    DriversFragmentLoader driversFragmentLoader = null;
+
+                    if (isListFragment){
+                        driversFragmentLoader = new DriverFragmentGridLoader(thisInstance);
+                        isListFragment = false;
                         item.setIcon(R.drawable.ic_view_list_white_48px);
-                        changeImage = 1;
-                        fragment = new GridViewFragment();
-                        getDrivers();
                     }
+                    else {
+                        driversFragmentLoader = new DriverFragmentListLoader(thisInstance);
+                        isListFragment = true;
+                        item.setIcon(R.drawable.ic_dashboard_white_48px);
+                    }
+
+                    driversFragmentLoader.loadFragment(drivers);
+                    getDrivers();
+
                     return true;
                 }
             });
@@ -142,7 +155,7 @@ public class NewJob extends AppCompatActivity implements
     @Override
     public void onFragmentAttached(boolean change) {
         iNeedToChangeToolbar = change;
-        changeImage = 0;
+        isListFragment = true;
     }
 
     private void getDrivers() {
@@ -245,5 +258,10 @@ public class NewJob extends AppCompatActivity implements
     @Override
     public void onBackPressed() {
         super.onBackPressed();
+    }
+
+    @Override
+    public void provideFragment(Fragment fragment) {
+        this.fragment = fragment;
     }
 }
