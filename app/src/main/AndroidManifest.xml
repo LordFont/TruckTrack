@@ -24,9 +24,9 @@
 
         <!-- Set custom default icon. This is used when no icon is set for incoming notification messages.
              See README(https://goo.gl/l4GJaQ) for more. -->
-        <!--<meta-data
+        <meta-data
             android:name="com.google.firebase.messaging.default_notification_icon"
-            android:resource="@drawable/" />-->
+            android:resource="@drawable/common_full_open_on_phone" />
         <!-- Set color used with incoming notification messages. This is used when no color is set for the incoming
              notification message. See README(https://goo.gl/6BKBk7) for more. -->
         <meta-data
@@ -63,7 +63,7 @@
             android:label="@string/title_activity_no_content"
             android:theme="@style/AppTheme" />
         <activity android:name=".DriverJobs" />
-        <activity android:name=".NewJob" />
+        <activity android:name=".NewJob" android:windowSoftInputMode="adjustPan"/>
         <activity android:name=".DriverHome" />
         <activity android:name=".DisponentJobs" />
         <activity android:name=".NewJobForm" />
