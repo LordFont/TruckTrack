@@ -7,8 +7,9 @@ package hr.foi.air.trucktrack.Singleton;
 public class Session {
     private static Session instance = null;
     private String userID;
-    private String username;
+    private boolean vozac;
     private String email;
+    private String disponentEmail;
 
     public static Session Instance() {
         if(instance == null) instance = new Session();
@@ -25,12 +26,12 @@ public class Session {
         this.userID = userID;
     }
 
-    public String getUsername() {
-        return username;
+    public boolean isVozac() {
+        return vozac;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setVozac(boolean vozac) {
+        this.vozac = vozac;
     }
 
     public String getEmail() {
@@ -39,5 +40,13 @@ public class Session {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getDisponentEmail() {
+        return disponentEmail;
+    }
+
+    public void setDisponentEmail(String disponentEmail) {
+        this.disponentEmail = disponentEmail;
     }
 }
