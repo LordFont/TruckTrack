@@ -22,10 +22,13 @@ import hr.foi.air.webservice.ApiClient;
 import hr.foi.air.webservice.ApiInterface;
 import retrofit2.Call;
 
-public class Drivers extends AppCompatActivity implements ListViewFragment.ToolbarListener, DriverSelectFromListInterface, FragmentLoaderListener {
+public class Drivers extends AppCompatActivity implements
+        ListViewFragment.ToolbarListener,
+        DriverSelectFromListInterface,
+        FragmentLoaderListener {
 
     private List<DriverModel> drivers = null;
-    private boolean isListFragment;
+    private boolean isListFragment = false;
     private ApiInterface apiService;
     Fragment fragment;
     private Drivers thisInstance;
