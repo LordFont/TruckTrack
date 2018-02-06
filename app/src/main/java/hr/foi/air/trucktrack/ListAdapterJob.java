@@ -16,7 +16,11 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 
+import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import entities.JobModel;
 
@@ -87,7 +91,15 @@ public class ListAdapterJob extends ArrayAdapter {
 
                 @Override
                 public void afterTextChanged(Editable s) {
-                    data.get(position).setIstovarDatum(s.toString());
+                    SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+                    Date parsedDate = null;
+                    try {
+                        parsedDate = dateFormat.parse(s.toString());
+                        Timestamp timestamp = new Timestamp(parsedDate.getTime());
+                        data.get(position).setIstovarDatum(String.valueOf(timestamp.getTime()/1000));
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
                 }
             });
 
@@ -123,7 +135,7 @@ public class ListAdapterJob extends ArrayAdapter {
         else return 0;
     }
 
-    public void getData() {
-
+    public ArrayList<JobModel> getData() {
+        return data;
     }
 }
