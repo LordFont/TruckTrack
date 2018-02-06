@@ -17,6 +17,7 @@ import java.util.List;
 import entities.DriverModel;
 import entities.SortRequest;
 import hr.foi.air.trucktrack.Callbacks.CallbackDriversSort;
+import hr.foi.air.trucktrack.Helpers.DataRefresher;
 import hr.foi.air.trucktrack.Helpers.DriverFragmentGridLoader;
 import hr.foi.air.trucktrack.Helpers.DriverFragmentListLoader;
 import hr.foi.air.drivermodule.DriverSelectFromListInterface;
@@ -134,10 +135,9 @@ public class Drivers extends AppCompatActivity implements ListViewFragment.Toolb
 
     private void getDriversSorted() {
         apiService = ApiClient.getClient().create(ApiInterface.class);
-        Spinner spinnerField = (Spinner) findViewById(R.id.spinner_field);
         SortRequest sortRequest = new SortRequest(spinnerSortBy.getSelectedItem().toString(), spinnerField.getSelectedItem().toString());
-        Call<List<DriverModel>> call = apiService.driverSort(sortRequest);
-        call.enqueue(new CallbackDriversSort(this,fragment));
+        DataRefresher df = new DataRefresher();
+        df.osvjeziPopisVozacaSortiran(this, fragment, sortRequest);
     }
 
     @Override

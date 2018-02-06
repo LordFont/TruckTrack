@@ -22,6 +22,8 @@ import retrofit2.Response;
 public class CallbackDriversSort extends FragmentManager implements Callback<List<DriverModel>> {
     List<DriverModel> drivers;
     private String sort_by, field;
+    GridViewFragment gridFragment;
+    ListViewFragment listFragment;
 
     public CallbackDriversSort(Object curr, Fragment next) {
         if (curr instanceof Fragment) {
@@ -38,8 +40,15 @@ public class CallbackDriversSort extends FragmentManager implements Callback<Lis
     @Override
     public void onResponse(Call<List<DriverModel>> call, Response<List<DriverModel>> response) {
         drivers = response.body();
-        if (mNnext instanceof ListViewFragment) mNnext = ListViewFragment.getInstance(drivers);
-        else mNnext = GridViewFragment.getInstance(drivers);
+        if (mNnext instanceof ListViewFragment) {
+            mNnext = ListViewFragment.getInstance(drivers);
+            listFragment = ListViewFragment.getInstance(drivers);
+            listFragment.updateAdapter(drivers);
+        } else {
+            mNnext = GridViewFragment.getInstance(drivers);
+            gridFragment = GridViewFragment.getInstance(drivers);
+            gridFragment.updateAdapter(drivers);
+        }
         showFragment();
     }
 
