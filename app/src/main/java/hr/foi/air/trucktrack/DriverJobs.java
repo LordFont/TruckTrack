@@ -56,7 +56,7 @@ public class DriverJobs extends AppCompatActivity implements CustomDialog {
         //showFragment(DriverJobsFragment.getInstance(testList));
         Fragment fragment = DriverJobsFragment.getInstance(testList);
         apiService = ApiClient.getClient().create(ApiInterface.class);
-        Call<ArrayList<RouteModel>> call = apiService.getDriverJobs("3"); //ovdje ide id korisnika, za testiranje uzet id 3
+        Call<ArrayList<RouteModel>> call = apiService.getDriverJobs("2"); //ovdje ide id korisnika, za testiranje uzet id 2 (Pero Perić)
         call.enqueue(new CallbackDriverJobs(this,fragment));
     }
 

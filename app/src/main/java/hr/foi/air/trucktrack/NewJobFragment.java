@@ -129,6 +129,8 @@ public class NewJobFragment extends Fragment {
                     if(jobs.get(i).getMjestoIstovara().length() == 0) validationPassed = false;
                 }
 
+                rute.setPoslovi(adapterJob.getData());
+
                 ((DriverForJob) getActivity()).saveNewJob(validationPassed, rute);
             }
         });

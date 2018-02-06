@@ -17,6 +17,7 @@ public class TTFirebaseInstanceIDService extends FirebaseInstanceIdService {
 
     @Override
     public void onTokenRefresh() {
+        super.onTokenRefresh();
         // Get updated InstanceID token.
         String refreshedToken = FirebaseInstanceId.getInstance().getToken();
         Log.d(TAG, "Refreshed token: " + refreshedToken);
@@ -32,6 +33,7 @@ public class TTFirebaseInstanceIDService extends FirebaseInstanceIdService {
         //save to shared preferences
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         preferences.edit().putString(FCM_TOKEN, token).apply();
+        Log.e(TAG, "sendRegistrationToServer: " + token);
 
         //send to your own web service
         //TODO

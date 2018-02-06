@@ -87,4 +87,16 @@
     <string name="textview">TextView</string>
     <string name="title_potvrda_neuspjeha">Potvrđujete da nećete moći obaviti rutu na vrijeme?</string>
     <string name="msg_potvrda_neuspjeha">Potvrdom nemogućnosti pravovremene dostave paketa obavijestit će se disponenta uz uneseno obrazloženje.</string>
+
+    <!-- Spinner sort by -->
+    <string-array name="array_sort_by">
+        <item>asc</item>
+        <item>desc</item>
+    </string-array>
+
+    <!-- Spinner field-->
+    <string-array name="array_field">
+        <item>user</item>
+        <item>job</item>
+    </string-array>
 </resources>

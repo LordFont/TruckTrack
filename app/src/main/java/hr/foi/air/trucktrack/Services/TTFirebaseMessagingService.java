@@ -13,6 +13,7 @@ import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
 import hr.foi.air.trucktrack.DisponentHome;
+import hr.foi.air.trucktrack.DisponentJobsFragment;
 
 /**
  * Created by roman on 1/31/18.
