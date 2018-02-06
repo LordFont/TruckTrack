@@ -248,5 +248,6 @@ public class NewJob extends AppCompatActivity implements
     @Override
     public void onBackPressed() {
         super.onBackPressed();
+        finish();
     }
 }
