@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import entities.DriverModel;
@@ -21,6 +22,7 @@ public class GridViewFragment extends android.support.v4.app.Fragment {
     static GridViewFragment instance = null;
     static List<DriverModel> data = null;
     private DriverSelectFromListInterface interfaceSelectedDriver;
+    static DriversAdapter adapter;
 
     public static GridViewFragment getInstance(List<DriverModel> dataDrivers) {
         if(instance == null) {
@@ -40,7 +42,7 @@ public class GridViewFragment extends android.support.v4.app.Fragment {
     }
 
     private void showRecycleView(List<DriverModel> data) {
-        DriversAdapter adapter = new DriversAdapter(getContext(),data, 0, interfaceSelectedDriver);
+        adapter = new DriversAdapter(getContext(),data, 0, interfaceSelectedDriver);
         mRecyclerView.setAdapter(adapter);
         mRecyclerView.setLayoutManager(new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL));
     }
@@ -54,5 +56,13 @@ public class GridViewFragment extends android.support.v4.app.Fragment {
             throw new ClassCastException(context.toString()
                     + " must implement ToolbarListener");
         }
+    }
+
+    public void updateAdapter(List<DriverModel> dataJobs) {
+        data = dataJobs;
+        adapter = new DriversAdapter(getContext(), data, 0, interfaceSelectedDriver);
+        mRecyclerView.setAdapter(adapter);
+        mRecyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
+        adapter.notifyDataSetChanged();
     }
 }

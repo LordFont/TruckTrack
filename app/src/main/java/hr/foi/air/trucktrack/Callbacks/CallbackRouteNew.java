@@ -43,15 +43,19 @@ public class CallbackRouteNew extends FragmentManager implements Callback<RouteM
 
     @Override
     public void onResponse(Call<RouteModel> call, Response<RouteModel> response) {
+        Log.d("NEW ROUTE RESPONSE", String.valueOf(response.code()));
         if (response.code() == 200) {
             //ovdje se obavljaju radnje kada su uspjesno poslani podaci
-            mCurrent.startActivity(new Intent(mCurrent.getApplicationContext(), DisponentJobs.class));
+            //mCurrent.startActivity(new Intent(mCurrent.getApplicationContext(), DisponentJobs.class));
         } else {
             //ovdje se obavljaju radnje kada nisu uspjesno poslani podaci
         }
+        mCurrent.onBackPressed();
     }
 
     public void onFailure(Call<RouteModel> call, Throwable t) {
-        Log.d("JakoCoolGreska", t.toString());
+        Log.d("JakoCoolGreska-RouteNew", t.toString());
+        //mCurrent.startActivity(new Intent(mCurrent.getApplicationContext(), DisponentJobs.class));
+        mCurrent.onBackPressed();
     }
 }
