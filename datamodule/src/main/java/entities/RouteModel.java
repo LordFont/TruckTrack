@@ -19,17 +19,22 @@ public class RouteModel {
     @SerializedName("rutaID")
     int mIdRuta;
 
+    @SerializedName("korisnikID")
+    int korisnikID;
     @SerializedName("adresa_utovara")
     String  mMjestoUtovara;
     @SerializedName("endAdresa")
     String mMjestoIstovara;
+
     String mUtovarDatum;
     @SerializedName("endIsporuka")
     String mIstovarDatum;
+
     @SerializedName("status")
     int mStatus;
     @SerializedName("zavrseno")
     int mZavrseno;
+
 
     @SerializedName("poslovi")
     ArrayList<JobModel> poslovi;
@@ -144,5 +149,13 @@ public class RouteModel {
             result = 500;
         }
         return result;
+    }
+
+    public int getKorisnikID() {
+        return korisnikID;
+    }
+
+    public void setKorisnikID(int korisnikID) {
+        this.korisnikID = korisnikID;
     }
 }

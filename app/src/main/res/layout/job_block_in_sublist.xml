@@ -3,7 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-
     android:orientation="vertical"
     android:id="@+id/jobBlock">
 
@@ -32,6 +31,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/istovar"
+                android:imeOptions="actionNext"
                 />
         </android.support.design.widget.TextInputLayout>
     </LinearLayout>
@@ -62,7 +62,9 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/datum_istovara"
-                android:inputType="datetime" />
+                android:inputType="date"
+                android:focusable="false"
+                android:imeOptions="actionNext"/>
         </android.support.design.widget.TextInputLayout>
     </LinearLayout>
 
@@ -71,7 +73,8 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp">
+        android:layout_marginRight="15dp"
+        android:layout_marginBottom="5dp">
 
         <ImageView
             android:id="@+id/image4"
@@ -93,7 +96,9 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/koordinate_istovara"
-                android:inputType="numberDecimal" />
+                android:inputType="numberDecimal"
+                android:focusable="false"
+                android:imeOptions="actionNext"/>
 
         </android.support.design.widget.TextInputLayout>
 
@@ -103,7 +108,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="5"
-            app:srcCompat="@drawable/ic_map_black_24dp" />
+            app:srcCompat="@drawable/ic_map_black_24dp"/>
 
     </LinearLayout>
 

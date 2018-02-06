@@ -34,7 +34,7 @@
                 android:id="@+id/txtEmail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="E-mail:" />
+                android:text="@string/e_mail" />
 
             <EditText
                 android:id="@+id/email"
@@ -42,7 +42,7 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:inputType="textEmailAddress"
-                android:text="stella@gmail.com"
+                android:text="@string/stella_gmail_com"
                 android:hint="@string/prompt_email"
                 android:textSize="16sp" />
 
@@ -51,7 +51,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingTop="@dimen/login_password_padding"
-                android:text="Lozinka:" />
+                android:text="@string/lozinka" />
 
             <EditText
                 android:id="@+id/password"
@@ -60,7 +60,7 @@
                 android:ems="10"
                 android:hint="@string/prompt_password"
                 android:inputType="textPassword"
-                android:text="123456"
+                android:text="@string/_123456"
                 android:textSize="16sp" />
 
             <CheckBox
@@ -68,7 +68,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingTop="10dp"
-                android:text="Vozac ? " />
+                android:text="@string/vozac" />
 
             <TextView
                 android:id="@+id/txtWrongEmailOrPassword"

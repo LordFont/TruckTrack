@@ -10,7 +10,7 @@ import com.google.gson.annotations.SerializedName;
 
 public class DriverModel {
 
-    @SerializedName("korisnikId")
+    @SerializedName("korisnikID")
     int id;
 
     @SerializedName("ime")
