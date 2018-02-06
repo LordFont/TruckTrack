@@ -62,6 +62,13 @@ public class DisponentJobs extends AppCompatActivity implements CustomDialog, Op
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        Call<ArrayList<RouteModel>> call = apiService.getAllRoutes();
+        call.enqueue(new CallbackAllRoutes(this,fragment));
+    }
+
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_standard, menu);
         return true;

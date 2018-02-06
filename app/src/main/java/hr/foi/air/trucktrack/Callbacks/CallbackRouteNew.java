@@ -50,10 +50,12 @@ public class CallbackRouteNew extends FragmentManager implements Callback<RouteM
         } else {
             //ovdje se obavljaju radnje kada nisu uspjesno poslani podaci
         }
+        mCurrent.onBackPressed();
     }
 
     public void onFailure(Call<RouteModel> call, Throwable t) {
         Log.d("JakoCoolGreska-RouteNew", t.toString());
         //mCurrent.startActivity(new Intent(mCurrent.getApplicationContext(), DisponentJobs.class));
+        mCurrent.onBackPressed();
     }
 }

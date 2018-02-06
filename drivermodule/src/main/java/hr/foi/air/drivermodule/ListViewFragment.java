@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import entities.DriverModel;
@@ -18,7 +19,7 @@ import entities.DriverModel;
 
 public class ListViewFragment extends android.support.v4.app.Fragment {
     ToolbarListener mCallback;
-        DriverSelectFromListInterface interfaceSelectedDriver;
+    DriverSelectFromListInterface interfaceSelectedDriver;
 
     public interface ToolbarListener {
         public void onFragmentAttached(boolean change);
@@ -27,6 +28,7 @@ public class ListViewFragment extends android.support.v4.app.Fragment {
     RecyclerView mRecyclerView;
     static ListViewFragment instance = null;
     static List<DriverModel> data = null;
+    static DriversAdapter adapter;
 
     public static ListViewFragment getInstance(List<DriverModel> dataDrivers) {
         if(instance == null) {
@@ -59,10 +61,16 @@ public class ListViewFragment extends android.support.v4.app.Fragment {
     }
 
     private void showRecycleView(List<DriverModel> data) {
-        DriversAdapter adapter = new DriversAdapter(getContext(),data, 1, interfaceSelectedDriver);
+        adapter = new DriversAdapter(getContext(),data, 1, interfaceSelectedDriver);
         mRecyclerView.setAdapter(adapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
     }
 
-
+    public void updateAdapter(List<DriverModel> dataJobs) {
+        data = dataJobs;
+        adapter = new DriversAdapter(getContext(), data, 1, interfaceSelectedDriver);
+        mRecyclerView.setAdapter(adapter);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        adapter.notifyDataSetChanged();
+    }
 }
