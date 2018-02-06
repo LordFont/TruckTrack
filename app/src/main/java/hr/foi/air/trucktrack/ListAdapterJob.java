@@ -91,15 +91,7 @@ public class ListAdapterJob extends ArrayAdapter {
 
                 @Override
                 public void afterTextChanged(Editable s) {
-                    SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-                    Date parsedDate = null;
-                    try {
-                        parsedDate = dateFormat.parse(s.toString());
-                        Timestamp timestamp = new Timestamp(parsedDate.getTime());
-                        data.get(position).setIstovarDatum(String.valueOf(timestamp.getTime()/1000));
-                    } catch (ParseException e) {
-                        e.printStackTrace();
-                    }
+                    data.get(position).setIstovarDatum(s.toString());
                 }
             });
 

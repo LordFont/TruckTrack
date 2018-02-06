@@ -23,6 +23,7 @@ import java.util.Calendar;
 import java.util.List;
 
 import entities.DriverModel;
+import entities.JobModel;
 import entities.RouteModel;
 import hr.foi.air.drivermodule.GridViewFragment;
 import hr.foi.air.drivermodule.ListViewFragment;
@@ -60,7 +61,6 @@ public class NewJob extends AppCompatActivity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_job);
         initToolbar();
-
         Intent i = getIntent();
         int routeId = -1;
 
@@ -222,6 +222,9 @@ public class NewJob extends AppCompatActivity implements
         else {
             apiService = ApiClient.getClient().create(ApiInterface.class);
             Call<RouteModel> call = apiService.routeNew(rute); //ovdje ide id korisnika, za testiranje uzet id 3
+            for (JobModel job: rute.getPoslovi()) {
+                job.setIstovarDatum(job.getTimestamp());
+            }
             call.enqueue(new CallbackRouteNew(this,rute));
         }
 

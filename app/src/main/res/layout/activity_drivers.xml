@@ -20,6 +20,27 @@
             android:minHeight="?attr/actionBarSize"
             android:theme="?attr/actionBarTheme"/>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Spinner
+                android:id="@+id/spinner_sort_by"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:entries="@array/array_sort_by" />
+
+            <Spinner
+                android:id="@+id/spinner_field"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:entries="@array/array_field" />
+
+        </LinearLayout>
+
         <FrameLayout
             android:id="@+id/main_container"
             android:layout_width="match_parent"

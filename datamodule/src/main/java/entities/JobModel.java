@@ -3,9 +3,14 @@ package entities;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
+import java.util.TimeZone;
 
 import retrofit2.http.HEAD;
 
@@ -65,5 +70,19 @@ public class JobModel {
 
     public void setLongitude(String longitude) {
         this.longitude = longitude;
+    }
+
+    public String getTimestamp() {
+        String out = "";
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        Date parsedDate = null;
+        try {
+            parsedDate = dateFormat.parse(mIstovarDatum);
+            Timestamp timestamp = new Timestamp(parsedDate.getTime());
+            out = (String.valueOf(timestamp.getTime()/1000));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return out;
     }
 }
