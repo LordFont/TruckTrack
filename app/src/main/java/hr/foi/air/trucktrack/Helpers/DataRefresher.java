@@ -6,16 +6,23 @@ import android.support.v4.app.Fragment;
 import android.util.Log;
 
 import java.util.ArrayList;
+import java.util.List;
 
+import entities.DriverModel;
 import entities.RouteModel;
+import entities.SortRequest;
+import hr.foi.air.drivermodule.DriversUpdateListener;
+import hr.foi.air.drivermodule.GridViewFragment;
 import hr.foi.air.trucktrack.Callbacks.CallbackAllRoutes;
 import hr.foi.air.trucktrack.Callbacks.CallbackDriverJobs;
+import hr.foi.air.trucktrack.Callbacks.CallbackDriversSort;
 import hr.foi.air.trucktrack.DisponentJobsFragment;
 import hr.foi.air.trucktrack.DriverJobsFragment;
 import hr.foi.air.webservice.ApiClient;
 import hr.foi.air.webservice.ApiInterface;
 import retrofit2.Call;
 
+import static hr.foi.air.trucktrack.R.id.activity_chooser_view_content;
 import static hr.foi.air.trucktrack.R.id.input_vozac;
 
 /**
@@ -37,5 +44,10 @@ public class DataRefresher {
     public void osvjeziPosloveDisponenta(Activity context, DisponentJobsFragment fragment) {
         Call<ArrayList<RouteModel>> call = apiService.getAllRoutes();
         call.enqueue(new CallbackAllRoutes(context,fragment));
+    }
+
+    public void osvjeziPopisVozacaSortiran(Activity context, Fragment fragment, SortRequest sortRequest) {
+        Call<List<DriverModel>> call = apiService.driverSort(sortRequest);
+        call.enqueue(new CallbackDriversSort(context,fragment));
     }
 }

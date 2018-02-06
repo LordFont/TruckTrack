@@ -7,6 +7,7 @@ import entities.DriverJobsResponse;
 import entities.DriverModel;
 import entities.RouteIdRequest;
 import entities.RouteModel;
+import entities.SortRequest;
 import entities.UserModel;
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -45,4 +46,7 @@ public interface ApiInterface {
 
     @POST("route/new")
     Call<RouteModel> routeNew(@Body RouteModel body);
+
+    @POST("driver/sort")
+    Call<List<DriverModel>> driverSort(@Body SortRequest body);
 }

@@ -16,7 +16,11 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 
+import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import entities.JobModel;
 
@@ -123,7 +127,7 @@ public class ListAdapterJob extends ArrayAdapter {
         else return 0;
     }
 
-    public void getData() {
-
+    public ArrayList<JobModel> getData() {
+        return data;
     }
 }

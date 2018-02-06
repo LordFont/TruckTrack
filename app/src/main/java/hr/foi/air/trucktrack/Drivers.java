@@ -5,12 +5,18 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.Spinner;
 
 import java.util.List;
 
 import entities.DriverModel;
+import entities.SortRequest;
+import hr.foi.air.trucktrack.Callbacks.CallbackDriversSort;
 import hr.foi.air.trucktrack.Helpers.DriverFragmentGridLoader;
 import hr.foi.air.trucktrack.Helpers.DriverFragmentListLoader;
 import hr.foi.air.drivermodule.DriverSelectFromListInterface;
@@ -21,6 +27,8 @@ import hr.foi.air.trucktrack.Callbacks.CallbackDriverList;
 import hr.foi.air.webservice.ApiClient;
 import hr.foi.air.webservice.ApiInterface;
 import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class Drivers extends AppCompatActivity implements
         ListViewFragment.ToolbarListener,
@@ -32,11 +40,39 @@ public class Drivers extends AppCompatActivity implements
     private ApiInterface apiService;
     Fragment fragment;
     private Drivers thisInstance;
+    Spinner spinnerSortBy, spinnerField;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_drivers);
+
+        spinnerSortBy = (Spinner) findViewById(R.id.spinner_sort_by);
+        spinnerField = (Spinner) findViewById(R.id.spinner_field);
+
+        spinnerSortBy.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                getDriversSorted();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        spinnerField.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                getDriversSorted();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
         thisInstance = this;
         initToolbar();
@@ -49,10 +85,9 @@ public class Drivers extends AppCompatActivity implements
         getMenuInflater().inflate(R.menu.menu_drivers, menu);
 
         menu.findItem(R.id.viewIcon).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            DriversFragmentLoader driversFragmentLoader = null;
             @Override
             public boolean onMenuItemClick(MenuItem item) {
-                DriversFragmentLoader driversFragmentLoader = null;
-
                 if (isListFragment){
                     driversFragmentLoader = new DriverFragmentGridLoader(thisInstance);
                     isListFragment = false;
@@ -98,6 +133,14 @@ public class Drivers extends AppCompatActivity implements
         apiService = ApiClient.getClient().create(ApiInterface.class);
         Call<List<DriverModel>> call = apiService.getDrivers();
         call.enqueue(new CallbackDriverList(this,fragment));
+    }
+
+    private void getDriversSorted() {
+        apiService = ApiClient.getClient().create(ApiInterface.class);
+        Spinner spinnerField = (Spinner) findViewById(R.id.spinner_field);
+        SortRequest sortRequest = new SortRequest(spinnerSortBy.getSelectedItem().toString(), spinnerField.getSelectedItem().toString());
+        Call<List<DriverModel>> call = apiService.driverSort(sortRequest);
+        call.enqueue(new CallbackDriversSort(this,fragment));
     }
 
     @Override
