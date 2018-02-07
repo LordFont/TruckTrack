@@ -11,7 +11,7 @@ import java.util.List;
 import entities.DriverModel;
 import entities.RouteModel;
 import entities.SortRequest;
-import hr.foi.air.drivermodule.DriversUpdateListener;
+//import hr.foi.air.drivermodule.DriversUpdateListener;
 import hr.foi.air.drivermodule.GridViewFragment;
 import hr.foi.air.trucktrack.Callbacks.CallbackAllRoutes;
 import hr.foi.air.trucktrack.Callbacks.CallbackDriverJobs;
