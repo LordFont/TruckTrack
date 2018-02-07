@@ -56,7 +56,7 @@ public class CallbackRouteNew extends FragmentManager implements Callback<RouteM
                     GetFCMTokenResponse userTokenResponse = response.body();
                     FCMPushNotifRequest fcmPushNotifRequest = new FCMPushNotifRequest();
                     fcmPushNotifRequest.setTokenTo(userTokenResponse.getToken());
-                    fcmPushNotifRequest.setData("Dodijeljena vam je nova ruta!");
+                    fcmPushNotifRequest.setData("Nova ruta!", "Dodijeljena vam je nova ruta!");
 
                     firebaseApiService = FirebaseApiClient.getClient().create(FirebaseApiInterface.class);
                     Call<FCMResult> pushMessageCall = firebaseApiService.sendMessageToDevice(fcmPushNotifRequest);
@@ -96,7 +96,7 @@ public class CallbackRouteNew extends FragmentManager implements Callback<RouteM
                 GetFCMTokenResponse userTokenResponse = response.body();
                 FCMPushNotifRequest fcmPushNotifRequest = new FCMPushNotifRequest();
                 fcmPushNotifRequest.setTokenTo(userTokenResponse.getToken());
-                fcmPushNotifRequest.setData("Dodijeljena vam je nova ruta!");
+                fcmPushNotifRequest.setData("Nova ruta!", "Dodijeljena vam je nova ruta!");
 
                 firebaseApiService = FirebaseApiClient.getClient().create(FirebaseApiInterface.class);
                 Call<FCMResult> pushMessageCall = firebaseApiService.sendMessageToDevice(fcmPushNotifRequest);

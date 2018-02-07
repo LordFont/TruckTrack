@@ -29,7 +29,7 @@ public class TTFirebaseMessagingService extends FirebaseMessagingService {
         if (remoteMessage.getData().size() > 0) {
             Log.d(TAG, "Message data payload: " + remoteMessage.getData());
         }
-        if (remoteMessage.getNotification() != null) {
+        else if (remoteMessage.getNotification() != null) {
             Log.d(TAG, "MEssage Notification Body: " + remoteMessage.getNotification().getBody());
         }
         sendNotification(remoteMessage.toString());

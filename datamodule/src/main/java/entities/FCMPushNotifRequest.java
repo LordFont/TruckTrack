@@ -10,17 +10,20 @@ import org.json.JSONObject;
 
 public class FCMPushNotifRequest {
     private class msgData {
-        @SerializedName("message")
-        private String message;
+        @SerializedName("title")
+        private String title;
+        @SerializedName("body")
+        private String body;
 
-        public msgData(String message) {
-            this.message = message;
+        public msgData(String title, String body) {
+            this.title = title;
+            this.body = body;
         }
     }
 
     @SerializedName("to")
     private String tokenTo;
-    @SerializedName("data")
+    @SerializedName("notification")
     private msgData data;
 
     public FCMPushNotifRequest() {}
@@ -37,7 +40,7 @@ public class FCMPushNotifRequest {
         return data;
     }
 
-    public void setData(String message) {
-        this.data = new msgData(message);
+    public void setData(String title, String body) {
+        this.data = new msgData(title, body);
     }
 }
