@@ -1,12 +1,16 @@
 package hr.foi.air.webservice;
 
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import entities.DriverJobsResponse;
 import entities.DriverModel;
+import entities.GetFCMTokenResponse;
 import entities.RouteIdRequest;
 import entities.RouteModel;
+import entities.SetFCMTokenRequest;
 import entities.SortRequest;
 import entities.UserModel;
 import retrofit2.Call;
@@ -49,4 +53,10 @@ public interface ApiInterface {
 
     @POST("driver/sort")
     Call<List<DriverModel>> driverSort(@Body SortRequest body);
+
+    @GET("user/token/{id}")
+    Call<GetFCMTokenResponse> getUserFCMToken(@Path("id") String id);
+
+    @POST("user/token")
+    Call<Void> setUserFCMToken(@Body SetFCMTokenRequest body);
 }

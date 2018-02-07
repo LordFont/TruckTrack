@@ -2,9 +2,11 @@ package hr.foi.air.webservice.Firebase;
 
 import org.json.JSONObject;
 
-import entities.FCMResponse;
+import entities.FCMPushNotifRequest;
+import entities.FCMResult;
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.Headers;
 import retrofit2.http.POST;
 
 /**
@@ -12,7 +14,8 @@ import retrofit2.http.POST;
  */
 
 public interface FirebaseApiInterface {
+    @Headers("Authorization:key=AIzaSyBv8Vh-tVK_KUd0VgcuwZchAIDViyulw2Q")
     @POST("send")
-    Call<FCMResponse> sendMessageToDevice(@Body JSONObject fcmMessage);
+    Call<FCMResult> sendMessageToDevice(@Body FCMPushNotifRequest fcmMessage);
 }
 

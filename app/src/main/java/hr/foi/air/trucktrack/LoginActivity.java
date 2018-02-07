@@ -1,26 +1,35 @@
 package hr.foi.air.trucktrack;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 
 
+import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.net.ConnectivityManager;
 
+import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import entities.SetFCMTokenRequest;
 import entities.UserModel;
 import hr.foi.air.trucktrack.Singleton.Session;
 import hr.foi.air.webservice.ApiClient;
 import hr.foi.air.webservice.ApiInterface;
+import hr.foi.air.webservice.Firebase.FirebaseApiInterface;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -32,6 +41,7 @@ public class LoginActivity extends AppCompatActivity {
 
     EditText user, password;
     ApiInterface apiService;
+    FirebaseApiInterface firebaseApiService;
     TextView wrongUserPass;
     Intent intent;
 
@@ -55,6 +65,8 @@ public class LoginActivity extends AppCompatActivity {
         password.setTextSize(18);
         user.setTypeface(Typeface.DEFAULT);
         user.setTextSize(18);
+
+        final Activity self = this;
 
         signInButton.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -86,6 +98,29 @@ public class LoginActivity extends AppCompatActivity {
 
                             Session.Instance();
                             Session.Instance().setEmail(user.getText().toString());
+
+                            SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(self);
+                            String FCMToken = preferences.getString("FCM_TOKEN", "");
+                            SetFCMTokenRequest fcmTokenRequest;
+                            if (FCMToken != "") {
+                                if (((CheckBox)findViewById(R.id.cbIsDriver)).isChecked()) {
+                                    fcmTokenRequest = new SetFCMTokenRequest(FCMToken, 2);
+                                } else {
+                                    fcmTokenRequest = new SetFCMTokenRequest(FCMToken, 1);
+                                }
+                                Call<Void> setFCMCall = apiService.setUserFCMToken(fcmTokenRequest);
+                                setFCMCall.enqueue(new Callback<Void>() {
+                                    @Override
+                                    public void onResponse(Call<Void> call, Response<Void> response) {
+                                        Log.d("SetFCMOK", String.valueOf(response.code()));
+                                    }
+
+                                    @Override
+                                    public void onFailure(Call<Void> call, Throwable t) {
+                                        Log.d("SetFCMFAIL", t.toString());
+                                    }
+                                });
+                            }
 
                             startActivityForResult(intent, 1000);
                         } else {
