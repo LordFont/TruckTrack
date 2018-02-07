@@ -8,7 +8,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 
 public class FirebaseApiClient {
-    public static final String BASE_URL = "https://fcm.googleapis.com/fcm";
+    public static final String BASE_URL = "https://fcm.googleapis.com/fcm/";
     private static Retrofit retrofit = null;
 
     public static Retrofit getClient() {

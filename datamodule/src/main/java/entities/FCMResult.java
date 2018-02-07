@@ -1,31 +1,37 @@
 package entities;
 
+import com.google.gson.annotations.SerializedName;
+
 import org.json.JSONObject;
 
 /**
  * Created by roman on 2/5/18.
  */
 
-public class FCMResponse {
-    private int multicast_id;
+public class FCMResult {
+    @SerializedName("multicast_id")
+    private String multicast_id;
+    @SerializedName("success")
     private short success;
+    @SerializedName("failure")
     private short failure;
-    private JSONObject results;
+    @SerializedName("results")
+    private Object results;
 
-    public FCMResponse() {}
+    public FCMResult() {}
 
-    public FCMResponse(int multicast_id, short success, short failure, JSONObject results) {
+    public FCMResult(String multicast_id, short success, short failure, JSONObject results) {
         this.multicast_id = multicast_id;
         this.success = success;
         this.failure = failure;
         this.results = results;
     }
 
-    public int getMulticast_id() {
+    public String getMulticast_id() {
         return multicast_id;
     }
 
-    public void setMulticast_id(int multicast_id) {
+    public void setMulticast_id(String multicast_id) {
         this.multicast_id = multicast_id;
     }
 
@@ -45,7 +51,7 @@ public class FCMResponse {
         this.failure = failure;
     }
 
-    public JSONObject getResults() {
+    public Object getResults() {
         return results;
     }
 
