@@ -7,6 +7,8 @@ import android.util.Log;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.FirebaseInstanceIdService;
 
+import hr.foi.air.trucktrack.Singleton.Session;
+
 /**
  * Created by roman on 1/31/18.
  */

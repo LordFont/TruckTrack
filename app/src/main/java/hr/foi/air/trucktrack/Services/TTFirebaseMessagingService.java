@@ -14,6 +14,7 @@ import com.google.firebase.messaging.RemoteMessage;
 
 import hr.foi.air.trucktrack.DisponentHome;
 import hr.foi.air.trucktrack.DisponentJobsFragment;
+import hr.foi.air.trucktrack.DriverJobs;
 
 /**
  * Created by roman on 1/31/18.
@@ -35,7 +36,7 @@ public class TTFirebaseMessagingService extends FirebaseMessagingService {
     }
 
     private void sendNotification(String messageBody) {
-        Intent intent = new Intent(this, DisponentHome.class);
+        Intent intent = new Intent(this, DriverJobs.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
         intent.putExtra("body", messageBody);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_ONE_SHOT);
