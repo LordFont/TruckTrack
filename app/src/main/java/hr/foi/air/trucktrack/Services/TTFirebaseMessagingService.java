@@ -16,6 +16,7 @@ import java.util.Map;
 
 import hr.foi.air.trucktrack.DisponentHome;
 import hr.foi.air.trucktrack.DisponentJobsFragment;
+import hr.foi.air.trucktrack.DriverJobs;
 
 /**
  * Created by roman on 1/31/18.
@@ -38,9 +39,9 @@ public class TTFirebaseMessagingService extends FirebaseMessagingService {
     }
 
     private void sendNotification(String title, String body) {
-        Intent intent = new Intent(this, DisponentHome.class);
+        Intent intent = new Intent(this, DriverJobs.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-        intent.putExtra("body", body);
+        //intent.putExtra("body", body);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_ONE_SHOT);
         Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this)
