@@ -23,7 +23,7 @@ public class FCMPushNotifRequest {
 
     @SerializedName("to")
     private String tokenTo;
-    @SerializedName("notification")
+    @SerializedName("data")
     private msgData data;
 
     public FCMPushNotifRequest() {}
